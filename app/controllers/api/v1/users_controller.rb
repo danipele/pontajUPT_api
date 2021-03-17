@@ -21,12 +21,16 @@ module Api
       end
 
       def logout
-        session[:current_user_email] = nil
+        session[:current_user] = nil
         render json: {}
       end
 
       def reset_password
         ApplicationMailer.with(email: params[:email]).mailer.deliver_later
+      end
+
+      def authenticated_user
+        render json: User.first
       end
     end
   end

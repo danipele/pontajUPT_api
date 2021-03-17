@@ -5,6 +5,7 @@ Rails.application.routes.draw do
         post :login
         post :logout
         post :reset_password
+        get :authenticated_user
       end
     end
   end
