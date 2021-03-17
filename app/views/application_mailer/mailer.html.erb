@@ -8,6 +8,9 @@
   </head>
 
   <body>
-    <%= yield %>
+    <div>
+      <span>Noua ta parola este: <%= Faker::Internet.password %></span>
+      <span>Urmeaza acest link pentru a te conecta cu noua ta parola: <% 'localhost:3232/login' %> </span>
+    </div>
   </body>
 </html>

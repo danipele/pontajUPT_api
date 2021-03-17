@@ -3,6 +3,8 @@
 source 'https://rubygems.org'
 gem 'bootsnap', '>= 1.4.2', require: false
 gem 'byebug', platforms: %i[mri mingw x64_mingw]
+gem 'factory_bot_rails'
+gem 'faker'
 gem 'listen', '~> 3.2'
 gem 'overcommit'
 gem 'pg', '>= 0.18', '< 2.0'

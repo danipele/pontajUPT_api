@@ -4,6 +4,7 @@ Rails.application.routes.draw do
       resource :users do
         post :login
         post :logout
+        post :reset_password
       end
     end
   end

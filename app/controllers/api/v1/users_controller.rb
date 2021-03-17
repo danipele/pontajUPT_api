@@ -4,19 +4,29 @@ module Api
       def login
         email = params[:user][:email]
         password = params[:user][:password]
-        if email == 'a' && password == 'a'
-          session[:current_user_email] = email
-          render json: { success: 'true', type: 'admin' },
-                 status: :ok
-        else
-          render json: { success: 'false', message: 'Incorect!' },
-                 status: :ok
+
+        user = User.find_by(email: email)
+        unless user.present?
+          return render json: { success: 'false',
+                                message: 'Nu exista niciun cont cu acest email!' }
         end
+
+        if user.encrypted_password != password
+          return render json: { success: 'false',
+                                message: 'Parola incorecta!' }
+        end
+
+        session[:current_user] = user
+        render json: { success: 'true', type: 'admin' }
       end
 
       def logout
         session[:current_user_email] = nil
-        render json: {}, status: :ok
+        render json: {}
+      end
+
+      def reset_password
+        ApplicationMailer.with(email: params[:email]).mailer.deliver_later
       end
     end
   end
