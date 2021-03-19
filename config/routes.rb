@@ -8,6 +8,7 @@ Rails.application.routes.draw do
         get :authenticated_user
       end
       resource :courses
+      resource :projects
     end
   end
 end
