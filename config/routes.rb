@@ -7,6 +7,7 @@ Rails.application.routes.draw do
         post :reset_password
         get :authenticated_user
       end
+      resource :courses
     end
   end
 end

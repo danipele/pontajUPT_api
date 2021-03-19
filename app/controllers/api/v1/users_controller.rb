@@ -7,7 +7,7 @@ module Api
       end
 
       def authenticated_user
-        render json: User.first
+        render json: User.fourth
       end
     end
   end

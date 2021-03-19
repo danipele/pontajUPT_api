@@ -22,7 +22,7 @@ module Api
       end
 
       def destroy
-        session.delete(:user_id)
+        session.delete :user_id
 
         render json: {}
       end

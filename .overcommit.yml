@@ -44,6 +44,8 @@ PreCommit:
     enabled: true
     on_warn: fail # Treat all warnings as failures
     command: ['bundle', 'exec', 'rubocop']
+    exclude:
+      - '**/db/schema.rb'
   MergeConflicts:
     enabled: true
   BundleCheck:
