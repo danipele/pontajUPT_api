@@ -1,7 +1,7 @@
 module Api
   module V1
     class CoursesController < ApplicationController
-      def show
+      def index
         render json: Course.order('LOWER(name)')
       end
 
@@ -11,9 +11,13 @@ module Api
       end
 
       def update
-        course = Course.find(params[:course][:id])
+        course = Course.find(params[:id])
         course.update! course_params
         render json: Course.order('LOWER(name)')
+      end
+
+      def destroy
+        Course.destroy(params[:id])
       end
 
       def course_params

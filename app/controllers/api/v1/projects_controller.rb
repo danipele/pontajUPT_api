@@ -1,7 +1,7 @@
 module Api
   module V1
     class ProjectsController < ApplicationController
-      def show
+      def index
         render json: Project.order('LOWER(name)')
       end
 
@@ -11,9 +11,13 @@ module Api
       end
 
       def update
-        project = Project.find(params[:project][:id])
+        project = Project.find(params[:id])
         project.update! project_params
         render json: Project.order('LOWER(name)')
+      end
+
+      def destroy
+        Project.destroy(params[:id])
       end
 
       def project_params
