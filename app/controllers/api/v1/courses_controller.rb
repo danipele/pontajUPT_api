@@ -10,8 +10,14 @@ module Api
         render json: Course.order('LOWER(name)')
       end
 
+      def update
+        course = Course.find(params[:course][:id])
+        course.update! course_params
+        render json: Course.order('LOWER(name)')
+      end
+
       def course_params
-        params.require(:course).permit(:name, :student_year, :semester, :faculty, :description)
+        params.require(:course).permit(:id, :name, :student_year, :semester, :faculty, :description)
       end
     end
   end

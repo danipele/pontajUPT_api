@@ -10,8 +10,14 @@ module Api
         render json: Project.order('LOWER(name)')
       end
 
+      def update
+        project = Project.find(params[:project][:id])
+        project.update! project_params
+        render json: Project.order('LOWER(name)')
+      end
+
       def project_params
-        params.require(:project).permit(:name, :description)
+        params.require(:project).permit(:id, :name, :description)
       end
     end
   end
