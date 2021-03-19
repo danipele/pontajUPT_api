@@ -8,7 +8,13 @@ Rails.application.routes.draw do
         get :authenticated_user
       end
       resources :courses
+      resource :courses do
+        post :destroy_selected
+      end
       resources :projects
+      resource :projects do
+        post :destroy_selected
+      end
     end
   end
 end

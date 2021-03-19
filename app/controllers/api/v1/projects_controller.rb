@@ -20,6 +20,11 @@ module Api
         Project.destroy(params[:id])
       end
 
+      def destroy_selected
+        project_ids = params[:projects].map { |project| project[:id] }
+        Project.where(id: project_ids).destroy_all
+      end
+
       def project_params
         params.require(:project).permit(:id, :name, :description)
       end
