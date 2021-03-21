@@ -19,8 +19,9 @@ class ImportFile
       Course.create! name:         values[0],
                      student_year: values[1].to_i,
                      semester:     values[2].to_i,
-                     faculty:      values[3],
-                     description:  values[4]
+                     cycle:        values[3],
+                     faculty:      values[4],
+                     description:  values[5]
     end
 
     def process_project values

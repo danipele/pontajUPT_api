@@ -28,7 +28,8 @@ module Api
       end
 
       def download_template
-        file = DownloadExcelTemplate.call header:     ['Nume', 'An de studiu', 'Semestru', 'Facultate', 'Descriere'],
+        file = DownloadExcelTemplate.call header:     ['Nume', 'An de studiu', 'Semestru',
+                                                       'Ciclu', 'Facultate', 'Descriere'],
                                           sheet_name: 'Cursuri'
 
         send_file file, filename: 'Cursuri.xls', type: 'text/xls'
@@ -42,7 +43,7 @@ module Api
       end
 
       def course_params
-        params.require(:course).permit :id, :name, :student_year, :semester, :faculty, :description
+        params.require(:course).permit :id, :name, :student_year, :semester, :cycle, :faculty, :description
       end
     end
   end
