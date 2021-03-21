@@ -42,6 +42,8 @@ module Api
         render json: Course.order('LOWER(name)')
       end
 
+      private
+
       def course_params
         params.require(:course).permit :id, :name, :student_year, :semester, :cycle, :faculty, :description
       end

@@ -41,6 +41,8 @@ module Api
         render json: Project.order('LOWER(name)')
       end
 
+      private
+
       def project_params
         params.require(:project).permit :id, :name, :description
       end

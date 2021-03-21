@@ -28,18 +28,19 @@
     </content>
     <orderEntry type="jdk" jdkName="rbenv: 2.7.2" jdkType="RUBY_SDK" />
     <orderEntry type="sourceFolder" forTests="false" />
-    <orderEntry type="library" scope="PROVIDED" name="actioncable (v6.0.3.5, rbenv: 2.7.2) [gem]" level="application" />
-    <orderEntry type="library" scope="PROVIDED" name="actionmailbox (v6.0.3.5, rbenv: 2.7.2) [gem]" level="application" />
-    <orderEntry type="library" scope="PROVIDED" name="actionmailer (v6.0.3.5, rbenv: 2.7.2) [gem]" level="application" />
-    <orderEntry type="library" scope="PROVIDED" name="actionpack (v6.0.3.5, rbenv: 2.7.2) [gem]" level="application" />
-    <orderEntry type="library" scope="PROVIDED" name="actiontext (v6.0.3.5, rbenv: 2.7.2) [gem]" level="application" />
-    <orderEntry type="library" scope="PROVIDED" name="actionview (v6.0.3.5, rbenv: 2.7.2) [gem]" level="application" />
-    <orderEntry type="library" scope="PROVIDED" name="activejob (v6.0.3.5, rbenv: 2.7.2) [gem]" level="application" />
-    <orderEntry type="library" scope="PROVIDED" name="activemodel (v6.0.3.5, rbenv: 2.7.2) [gem]" level="application" />
-    <orderEntry type="library" scope="PROVIDED" name="activerecord (v6.0.3.5, rbenv: 2.7.2) [gem]" level="application" />
-    <orderEntry type="library" scope="PROVIDED" name="activestorage (v6.0.3.5, rbenv: 2.7.2) [gem]" level="application" />
-    <orderEntry type="library" scope="PROVIDED" name="activesupport (v6.0.3.5, rbenv: 2.7.2) [gem]" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="actioncable (v6.1.3, rbenv: 2.7.2) [gem]" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="actionmailbox (v6.1.3, rbenv: 2.7.2) [gem]" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="actionmailer (v6.1.3, rbenv: 2.7.2) [gem]" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="actionpack (v6.1.3, rbenv: 2.7.2) [gem]" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="actiontext (v6.1.3, rbenv: 2.7.2) [gem]" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="actionview (v6.1.3, rbenv: 2.7.2) [gem]" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="activejob (v6.1.3, rbenv: 2.7.2) [gem]" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="activemodel (v6.1.3, rbenv: 2.7.2) [gem]" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="activerecord (v6.1.3, rbenv: 2.7.2) [gem]" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="activestorage (v6.1.3, rbenv: 2.7.2) [gem]" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="activesupport (v6.1.3, rbenv: 2.7.2) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="ast (v2.4.2, rbenv: 2.7.2) [gem]" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="bcrypt (v3.1.16, rbenv: 2.7.2) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="binding_of_caller (v1.0.0, rbenv: 2.7.2) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="bootsnap (v1.7.2, rbenv: 2.7.2) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="builder (v3.2.4, rbenv: 2.7.2) [gem]" level="application" />
@@ -52,7 +53,7 @@
     <orderEntry type="library" scope="PROVIDED" name="debug_inspector (v1.0.0, rbenv: 2.7.2) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="diff-lcs (v1.4.4, rbenv: 2.7.2) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="erubi (v1.10.0, rbenv: 2.7.2) [gem]" level="application" />
-    <orderEntry type="library" scope="PROVIDED" name="factory_bot (v4.11.1, rbenv: 2.7.2) [gem]" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="factory_bot (v6.1.0, rbenv: 2.7.2) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="factory_bot_rails (v4.11.1, rbenv: 2.7.2) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="faker (v1.9.1, rbenv: 2.7.2) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="ffi (v1.15.0, rbenv: 2.7.2) [gem]" level="application" />
@@ -86,18 +87,18 @@
     <orderEntry type="library" scope="PROVIDED" name="rails (v6.0.3.5, rbenv: 2.7.2) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="rails-dom-testing (v2.0.3, rbenv: 2.7.2) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="rails-html-sanitizer (v1.3.0, rbenv: 2.7.2) [gem]" level="application" />
-    <orderEntry type="library" scope="PROVIDED" name="railties (v6.0.3.5, rbenv: 2.7.2) [gem]" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="railties (v6.1.3, rbenv: 2.7.2) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="rainbow (v3.0.0, rbenv: 2.7.2) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="rake (v13.0.3, rbenv: 2.7.2) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="rb-fsevent (v0.10.4, rbenv: 2.7.2) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="rb-inotify (v0.10.1, rbenv: 2.7.2) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="regexp_parser (v2.1.1, rbenv: 2.7.2) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="rexml (v3.2.4, rbenv: 2.7.2) [gem]" level="application" />
-    <orderEntry type="library" scope="PROVIDED" name="rspec-core (v3.5.4, rbenv: 2.7.2) [gem]" level="application" />
-    <orderEntry type="library" scope="PROVIDED" name="rspec-expectations (v3.5.0, rbenv: 2.7.2) [gem]" level="application" />
-    <orderEntry type="library" scope="PROVIDED" name="rspec-mocks (v3.5.0, rbenv: 2.7.2) [gem]" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="rspec-core (v3.10.1, rbenv: 2.7.2) [gem]" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="rspec-expectations (v3.10.1, rbenv: 2.7.2) [gem]" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="rspec-mocks (v3.10.2, rbenv: 2.7.2) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="rspec-rails (v3.5.2, rbenv: 2.7.2) [gem]" level="application" />
-    <orderEntry type="library" scope="PROVIDED" name="rspec-support (v3.5.0, rbenv: 2.7.2) [gem]" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="rspec-support (v3.10.2, rbenv: 2.7.2) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="rubocop (v1.0.0, rbenv: 2.7.2) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="rubocop-ast (v1.4.1, rbenv: 2.7.2) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="rubocop-performance (v1.5.1, rbenv: 2.7.2) [gem]" level="application" />
@@ -112,9 +113,8 @@
     <orderEntry type="library" scope="PROVIDED" name="sprockets (v4.0.2, rbenv: 2.7.2) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="sprockets-rails (v3.2.2, rbenv: 2.7.2) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="thor (v1.1.0, rbenv: 2.7.2) [gem]" level="application" />
-    <orderEntry type="library" scope="PROVIDED" name="thread_safe (v0.3.6, rbenv: 2.7.2) [gem]" level="application" />
-    <orderEntry type="library" scope="PROVIDED" name="tzinfo (v1.2.9, rbenv: 2.7.2) [gem]" level="application" />
-    <orderEntry type="library" scope="PROVIDED" name="unicode-display_width (v1.7.0, rbenv: 2.7.2) [gem]" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="tzinfo (v2.0.4, rbenv: 2.7.2) [gem]" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="unicode-display_width (v2.0.0, rbenv: 2.7.2) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="websocket-driver (v0.7.3, rbenv: 2.7.2) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="websocket-extensions (v0.1.5, rbenv: 2.7.2) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="zeitwerk (v2.4.2, rbenv: 2.7.2) [gem]" level="application" />
@@ -130,6 +130,7 @@
         <option value="active_record:migration" />
         <option value="active_record:model" />
         <option value="application_record" />
+        <option value="benchmark" />
         <option value="channel" />
         <option value="controller" />
         <option value="factory_bot:model" />
@@ -141,17 +142,20 @@
         <option value="migration" />
         <option value="model" />
         <option value="resource" />
+        <option value="rspec:channel" />
         <option value="rspec:controller" />
         <option value="rspec:feature" />
+        <option value="rspec:generator" />
         <option value="rspec:helper" />
         <option value="rspec:install" />
         <option value="rspec:integration" />
         <option value="rspec:job" />
+        <option value="rspec:mailbox" />
         <option value="rspec:mailer" />
         <option value="rspec:model" />
-        <option value="rspec:observer" />
         <option value="rspec:request" />
         <option value="rspec:scaffold" />
+        <option value="rspec:system" />
         <option value="rspec:view" />
         <option value="scaffold" />
         <option value="scaffold_controller" />
@@ -161,6 +165,7 @@
         <option value="test_unit:controller" />
         <option value="test_unit:generator" />
         <option value="test_unit:helper" />
+        <option value="test_unit:install" />
         <option value="test_unit:integration" />
         <option value="test_unit:job" />
         <option value="test_unit:mailbox" />
@@ -177,6 +182,7 @@
         <option value="active_record:migration" />
         <option value="active_record:model" />
         <option value="application_record" />
+        <option value="benchmark" />
         <option value="channel" />
         <option value="controller" />
         <option value="factory_bot:model" />
@@ -188,17 +194,20 @@
         <option value="migration" />
         <option value="model" />
         <option value="resource" />
+        <option value="rspec:channel" />
         <option value="rspec:controller" />
         <option value="rspec:feature" />
+        <option value="rspec:generator" />
         <option value="rspec:helper" />
         <option value="rspec:install" />
         <option value="rspec:integration" />
         <option value="rspec:job" />
+        <option value="rspec:mailbox" />
         <option value="rspec:mailer" />
         <option value="rspec:model" />
-        <option value="rspec:observer" />
         <option value="rspec:request" />
         <option value="rspec:scaffold" />
+        <option value="rspec:system" />
         <option value="rspec:view" />
         <option value="scaffold" />
         <option value="scaffold_controller" />
@@ -208,6 +217,7 @@
         <option value="test_unit:controller" />
         <option value="test_unit:generator" />
         <option value="test_unit:helper" />
+        <option value="test_unit:install" />
         <option value="test_unit:integration" />
         <option value="test_unit:job" />
         <option value="test_unit:mailbox" />
@@ -234,26 +244,22 @@
                   <RakeTaskImpl description="" fullCommand="action_mailbox:ingress:environment" id="environment" />
                 </subtasks>
               </RakeTaskImpl>
-              <RakeTaskImpl description="Copy over the migration" fullCommand="action_mailbox:install" id="install" />
-              <RakeTaskImpl description="" fullCommand="action_mailbox:copy_migrations" id="copy_migrations" />
+              <RakeTaskImpl description="Installs Action Mailbox and its dependencies" fullCommand="action_mailbox:install" id="install" />
               <RakeTaskImpl id="install">
                 <subtasks>
-                  <RakeTaskImpl description="" fullCommand="action_mailbox:install:migrations" id="migrations" />
+                  <RakeTaskImpl description="Copy migrations from action_mailbox to application" fullCommand="action_mailbox:install:migrations" id="migrations" />
                 </subtasks>
               </RakeTaskImpl>
-              <RakeTaskImpl description="" fullCommand="action_mailbox:run_installer" id="run_installer" />
             </subtasks>
           </RakeTaskImpl>
           <RakeTaskImpl id="action_text">
             <subtasks>
               <RakeTaskImpl description="Copy over the migration, stylesheet, and JavaScript files" fullCommand="action_text:install" id="install" />
-              <RakeTaskImpl description="" fullCommand="action_text:copy_migrations" id="copy_migrations" />
               <RakeTaskImpl id="install">
                 <subtasks>
-                  <RakeTaskImpl description="" fullCommand="action_text:install:migrations" id="migrations" />
+                  <RakeTaskImpl description="Copy migrations from action_text to application" fullCommand="action_text:install:migrations" id="migrations" />
                 </subtasks>
               </RakeTaskImpl>
-              <RakeTaskImpl description="" fullCommand="action_text:run_installer" id="run_installer" />
             </subtasks>
           </RakeTaskImpl>
           <RakeTaskImpl id="active_storage">
@@ -271,6 +277,11 @@
             <subtasks>
               <RakeTaskImpl description="Applies the template supplied by LOCATION=(/path/to/template) or URL" fullCommand="app:template" id="template" />
               <RakeTaskImpl description="Update configs and some other initially generated files (or use just update:configs or update:bin)" fullCommand="app:update" id="update" />
+              <RakeTaskImpl id="binstub">
+                <subtasks>
+                  <RakeTaskImpl description="" fullCommand="app:binstub:yarn" id="yarn" />
+                </subtasks>
+              </RakeTaskImpl>
               <RakeTaskImpl id="templates">
                 <subtasks>
                   <RakeTaskImpl description="" fullCommand="app:templates:copy" id="copy" />
@@ -288,8 +299,8 @@
           </RakeTaskImpl>
           <RakeTaskImpl id="db">
             <subtasks>
-              <RakeTaskImpl description="Creates the database from DATABASE_URL or config/database.yml for the current RAILS_ENV (use db:create:all to create all databases in the config). Without RAILS_ENV or when RAILS_ENV is development, it defaults to creating the development and test databases" fullCommand="db:create" id="create" />
-              <RakeTaskImpl description="Drops the database from DATABASE_URL or config/database.yml for the current RAILS_ENV (use db:drop:all to drop all databases in the config). Without RAILS_ENV or when RAILS_ENV is development, it defaults to dropping the development and test databases" fullCommand="db:drop" id="drop" />
+              <RakeTaskImpl description="Creates the database from DATABASE_URL or config/database.yml for the current RAILS_ENV (use db:create:all to create all databases in the config). Without RAILS_ENV or when RAILS_ENV is development, it defaults to creating the development and test databases, except when DATABASE_URL is present" fullCommand="db:create" id="create" />
+              <RakeTaskImpl description="Drops the database from DATABASE_URL or config/database.yml for the current RAILS_ENV (use db:drop:all to drop all databases in the config). Without RAILS_ENV or when RAILS_ENV is development, it defaults to dropping the development and test databases, except when DATABASE_URL is present" fullCommand="db:drop" id="drop" />
               <RakeTaskImpl id="environment">
                 <subtasks>
                   <RakeTaskImpl description="Set the environment value for the database" fullCommand="db:environment:set" id="set" />
@@ -304,14 +315,15 @@
               <RakeTaskImpl description="Migrate the database (options: VERSION=x, VERBOSE=false, SCOPE=blog)" fullCommand="db:migrate" id="migrate" />
               <RakeTaskImpl id="migrate">
                 <subtasks>
+                  <RakeTaskImpl description="Runs the &quot;down&quot; for a given migration VERSION" fullCommand="db:migrate:down" id="down" />
+                  <RakeTaskImpl description="Rolls back the database one migration and re-migrates up (options: STEP=x, VERSION=x)" fullCommand="db:migrate:redo" id="redo" />
                   <RakeTaskImpl description="Display status of migrations" fullCommand="db:migrate:status" id="status" />
-                  <RakeTaskImpl description="" fullCommand="db:migrate:down" id="down" />
-                  <RakeTaskImpl description="" fullCommand="db:migrate:redo" id="redo" />
+                  <RakeTaskImpl description="Runs the &quot;up&quot; for a given migration VERSION" fullCommand="db:migrate:up" id="up" />
                   <RakeTaskImpl description="" fullCommand="db:migrate:reset" id="reset" />
-                  <RakeTaskImpl description="" fullCommand="db:migrate:up" id="up" />
                 </subtasks>
               </RakeTaskImpl>
               <RakeTaskImpl description="Runs setup if database does not exist, or runs migrations if it does" fullCommand="db:prepare" id="prepare" />
+              <RakeTaskImpl description="Drops and recreates the database from db/schema.rb for the current environment and loads the seeds" fullCommand="db:reset" id="reset" />
               <RakeTaskImpl description="Rolls the schema back to the previous version (specify steps w/ STEP=n)" fullCommand="db:rollback" id="rollback" />
               <RakeTaskImpl id="schema">
                 <subtasks>
@@ -321,8 +333,8 @@
                       <RakeTaskImpl description="Creates a db/schema_cache.yml file" fullCommand="db:schema:cache:dump" id="dump" />
                     </subtasks>
                   </RakeTaskImpl>
-                  <RakeTaskImpl description="Creates a db/schema.rb file that is portable against any DB supported by Active Record" fullCommand="db:schema:dump" id="dump" />
-                  <RakeTaskImpl description="Loads a schema.rb file into the database" fullCommand="db:schema:load" id="load" />
+                  <RakeTaskImpl description="Creates a database schema file (either db/schema.rb or db/structure.sql, depending on `config.active_record.schema_format`)" fullCommand="db:schema:dump" id="dump" />
+                  <RakeTaskImpl description="Loads a database schema file (either db/schema.rb or db/structure.sql, depending on `config.active_record.schema_format`) into the database" fullCommand="db:schema:load" id="load" />
                   <RakeTaskImpl description="" fullCommand="db:schema:load_if_ruby" id="load_if_ruby" />
                 </subtasks>
               </RakeTaskImpl>
@@ -365,7 +377,6 @@
                   <RakeTaskImpl description="" fullCommand="db:purge:all" id="all" />
                 </subtasks>
               </RakeTaskImpl>
-              <RakeTaskImpl description="" fullCommand="db:reset" id="reset" />
               <RakeTaskImpl id="test">
                 <subtasks>
                   <RakeTaskImpl description="" fullCommand="db:test:load" id="load" />
@@ -390,7 +401,7 @@
           <RakeTaskImpl description="Report code statistics (KLOCs, etc) from the application or engine" fullCommand="stats" id="stats" />
           <RakeTaskImpl id="time">
             <subtasks>
-              <RakeTaskImpl description="List all time zones, list by two-letter country code (`rails time:zones[US]`), or list by UTC offset (`rails time:zones[-8]`)" fullCommand="time:zones[country_or_offset]" id="zones[country_or_offset]" />
+              <RakeTaskImpl description="List all time zones, list by two-letter country code (`bin/rails time:zones[US]`), or list by UTC offset (`bin/rails time:zones[-8]`)" fullCommand="time:zones[country_or_offset]" id="zones[country_or_offset]" />
               <RakeTaskImpl description="" fullCommand="time:zones" id="zones" />
               <RakeTaskImpl id="zones">
                 <subtasks>
@@ -438,22 +449,7 @@
             </subtasks>
           </RakeTaskImpl>
           <RakeTaskImpl description="" fullCommand="default" id="default" />
-          <RakeTaskImpl id="dev">
-            <subtasks>
-              <RakeTaskImpl description="" fullCommand="dev:cache" id="cache" />
-            </subtasks>
-          </RakeTaskImpl>
           <RakeTaskImpl description="" fullCommand="environment" id="environment" />
-          <RakeTaskImpl description="" fullCommand="initializers" id="initializers" />
-          <RakeTaskImpl description="" fullCommand="notes" id="notes" />
-          <RakeTaskImpl id="notes">
-            <subtasks>
-              <RakeTaskImpl description="" fullCommand="notes:custom" id="custom" />
-              <RakeTaskImpl description="" fullCommand="notes:fixme" id="fixme" />
-              <RakeTaskImpl description="" fullCommand="notes:optimize" id="optimize" />
-              <RakeTaskImpl description="" fullCommand="notes:todo" id="todo" />
-            </subtasks>
-          </RakeTaskImpl>
           <RakeTaskImpl id="railties">
             <subtasks>
               <RakeTaskImpl id="install">
@@ -463,7 +459,6 @@
               </RakeTaskImpl>
             </subtasks>
           </RakeTaskImpl>
-          <RakeTaskImpl description="" fullCommand="routes" id="routes" />
           <RakeTaskImpl id="spec">
             <subtasks>
               <RakeTaskImpl description="" fullCommand="spec:prepare" id="prepare" />
