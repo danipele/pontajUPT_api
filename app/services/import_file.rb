@@ -2,7 +2,7 @@ class ImportFile
   class << self
     def call path:, model:
       workbook = Spreadsheet.open path
-      worksheet = workbook.worksheet model == 'Curs' ? 'Cursuri' : 'Proiecte'
+      worksheet = workbook.worksheet model == 'Course' ? 'Cursuri' : 'Proiecte'
 
       worksheet.each 1 do |row|
         values = row.to_a
