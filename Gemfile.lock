@@ -198,7 +198,10 @@ GEM
       rubocop-ast (>= 1.1.0)
     rubocop-thread_safety (0.4.2)
       rubocop (>= 0.53.0)
+    ruby-ole (1.2.12.2)
     ruby-progressbar (1.11.0)
+    spreadsheet (1.2.8)
+      ruby-ole
     spring (2.1.1)
     spring-watcher-listen (2.0.1)
       listen (>= 2.7, < 4.0)
@@ -243,6 +246,7 @@ DEPENDENCIES
   rubocop-rails (= 2.5.2)
   rubocop-rspec
   rubocop-thread_safety
+  spreadsheet
   spring
   spring-watcher-listen (~> 2.0.0)
 

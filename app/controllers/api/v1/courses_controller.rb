@@ -11,13 +11,13 @@ module Api
       end
 
       def update
-        course = Course.find(params[:id])
+        course = Course.find params[:id]
         course.update! course_params
         render json: Course.order('LOWER(name)')
       end
 
       def destroy
-        Course.destroy(params[:id])
+        Course.destroy params[:id]
       end
 
       def destroy_selected
@@ -25,8 +25,14 @@ module Api
         Course.where(id: course_ids).destroy_all
       end
 
+      def download_template
+        file = DownloadExcelTemplate.call header: ['Nume', 'An de studiu', 'Semestru', 'Facultate', 'Descriere'],
+                                          sheet_name: 'Cursuri'
+        send_file file, filename: 'Cursuri.xls', type: 'text/xls'
+      end
+
       def course_params
-        params.require(:course).permit(:id, :name, :student_year, :semester, :faculty, :description)
+        params.require(:course).permit :id, :name, :student_year, :semester, :faculty, :description
       end
     end
   end

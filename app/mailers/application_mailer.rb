@@ -3,6 +3,6 @@ class ApplicationMailer < ActionMailer::Base
   layout 'mailer'
 
   def mailer
-    mail(to: params[:email], subject: 'Resetare parola')
+    mail to: params[:email], subject: 'Resetare parola'
   end
 end

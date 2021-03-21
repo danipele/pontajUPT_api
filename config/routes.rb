@@ -7,13 +7,15 @@ Rails.application.routes.draw do
         post :reset_password
         get :authenticated_user
       end
-      resources :courses
+      resources :courses, except: [:show]
       resource :courses do
         post :destroy_selected
+        get :download_template
       end
-      resources :projects
+      resources :projects, except: [:show]
       resource :projects do
         post :destroy_selected
+        get :download_template
       end
     end
   end

@@ -11,13 +11,13 @@ module Api
       end
 
       def update
-        project = Project.find(params[:id])
+        project = Project.find params[:id]
         project.update! project_params
         render json: Project.order('LOWER(name)')
       end
 
       def destroy
-        Project.destroy(params[:id])
+        Project.destroy params[:id]
       end
 
       def destroy_selected
@@ -25,8 +25,14 @@ module Api
         Project.where(id: project_ids).destroy_all
       end
 
+      def download_template
+        file = DownloadExcelTemplate.call header: %w[Nume Descriere],
+                                          sheet_name: 'Proiecte'
+        send_file file, filename: 'Proiecte.xls', type: 'text/xls'
+      end
+
       def project_params
-        params.require(:project).permit(:id, :name, :description)
+        params.require(:project).permit :id, :name, :description
       end
     end
   end
