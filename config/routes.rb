@@ -11,11 +11,13 @@ Rails.application.routes.draw do
       resource :courses do
         post :destroy_selected
         get :download_template
+        post :import_courses
       end
       resources :projects, except: [:show]
       resource :projects do
         post :destroy_selected
         get :download_template
+        post :import_projects
       end
     end
   end

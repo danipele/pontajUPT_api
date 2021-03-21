@@ -7,12 +7,14 @@ module Api
 
       def create
         Project.create! project_params
+
         render json: Project.order('LOWER(name)')
       end
 
       def update
         project = Project.find params[:id]
         project.update! project_params
+
         render json: Project.order('LOWER(name)')
       end
 
@@ -26,9 +28,17 @@ module Api
       end
 
       def download_template
-        file = DownloadExcelTemplate.call header: %w[Nume Descriere],
+        file = DownloadExcelTemplate.call header:     %w[Nume Descriere],
                                           sheet_name: 'Proiecte'
+
         send_file file, filename: 'Proiecte.xls', type: 'text/xls'
+      end
+
+      def import_projects
+        ImportFile.call path: params[:projects_file].path,
+                        model: 'Project'
+
+        render json: Project.order('LOWER(name)')
       end
 
       def project_params

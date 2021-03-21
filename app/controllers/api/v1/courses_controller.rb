@@ -7,12 +7,14 @@ module Api
 
       def create
         Course.create! course_params
+
         render json: Course.order('LOWER(name)')
       end
 
       def update
         course = Course.find params[:id]
         course.update! course_params
+
         render json: Course.order('LOWER(name)')
       end
 
@@ -26,9 +28,17 @@ module Api
       end
 
       def download_template
-        file = DownloadExcelTemplate.call header: ['Nume', 'An de studiu', 'Semestru', 'Facultate', 'Descriere'],
+        file = DownloadExcelTemplate.call header:     ['Nume', 'An de studiu', 'Semestru', 'Facultate', 'Descriere'],
                                           sheet_name: 'Cursuri'
+
         send_file file, filename: 'Cursuri.xls', type: 'text/xls'
+      end
+
+      def import_courses
+        ImportFile.call path:  params[:courses_file].path,
+                        model: 'Course'
+
+        render json: Course.order('LOWER(name)')
       end
 
       def course_params
