@@ -5,6 +5,6 @@ FactoryBot.define do
     semester { Faker::Number.between(1, 2) }
     cycle { %i[Licenta Master Doctorat].sample }
     faculty { Faker::University.name }
-    description { Faker::GameOfThrones.quote }
+    description { Faker::Game.genre }
   end
 end

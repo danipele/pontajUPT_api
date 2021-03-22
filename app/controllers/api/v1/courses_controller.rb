@@ -8,9 +8,13 @@ module Api
       end
 
       def create
-        current_user.courses.create course_params
+        course = Course.new course_params
+        course.user_id = current_user.id
 
-        render json: current_user.courses.order('LOWER(name)')
+        if course.save
+          course.add_course_hours
+          render json: current_user.courses.order('LOWER(name)')
+        end
       end
 
       def update

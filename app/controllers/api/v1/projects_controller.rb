@@ -8,9 +8,13 @@ module Api
       end
 
       def create
-        current_user.projects.create project_params
+        project = Project.new project_params
+        project.user_id = current_user.id
 
-        render json: current_user.projects.order('LOWER(name)')
+        if project.save
+          project.add_project_hours
+          render json: current_user.projects.order('LOWER(name)')
+        end
       end
 
       def update
