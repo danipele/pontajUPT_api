@@ -1,10 +1,6 @@
 module Api
   module V1
     class UsersController < ApplicationController
-      def show
-        @user = User.find params[:id]
-      end
-
       def create
         User.create! user_params
 
@@ -12,7 +8,7 @@ module Api
       end
 
       def authenticated_user
-        render json: User.fourth
+        render json: current_user
       end
 
       def reset_password

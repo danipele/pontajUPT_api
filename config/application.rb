@@ -26,14 +26,6 @@ module PontajUPTApi
 
     config.api_only = true
 
-    config.middleware.insert_before 0, Rack::Cors do
-      allow do
-        origins '*'
-        resource '*', headers: :any,
-                      methods: %i[get post put patch delete options],
-                      expose: %w[Authorization Accept-Ranges Content-Encoding Content-Length
-                                 Content-Range CurrentEnterpriseId]
-      end
-    end
+    config.autoload_paths << Rails.root.join('lib')
   end
 end

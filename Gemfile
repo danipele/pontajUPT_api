@@ -6,6 +6,7 @@ gem 'bcrypt'
 gem 'byebug', platforms: %i[mri mingw x64_mingw]
 gem 'factory_bot_rails'
 gem 'faker'
+gem 'jwt'
 gem 'listen'
 gem 'overcommit'
 gem 'pg', '>= 0.18'
