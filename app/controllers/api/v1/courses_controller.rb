@@ -4,20 +4,20 @@ module Api
       skip_before_action :authenticate_request, only: [:download_template]
 
       def index
-        render json: Course.order('LOWER(name)')
+        render json: current_user.courses.order('LOWER(name)')
       end
 
       def create
-        Course.create! course_params
+        current_user.courses.create course_params
 
-        render json: Course.order('LOWER(name)')
+        render json: current_user.courses.order('LOWER(name)')
       end
 
       def update
         course = Course.find params[:id]
         course.update! course_params
 
-        render json: Course.order('LOWER(name)')
+        render json: current_user.courses.order('LOWER(name)')
       end
 
       def destroy
@@ -39,9 +39,10 @@ module Api
 
       def import_courses
         ImportFile.call path:  params[:courses_file].path,
-                        model: 'Course'
+                        model: 'Course',
+                        user:  current_user
 
-        render json: Course.order('LOWER(name)')
+        render json: current_user.courses.order('LOWER(name)')
       end
 
       private

@@ -4,20 +4,20 @@ module Api
       skip_before_action :authenticate_request, only: [:download_template]
 
       def index
-        render json: Project.order('LOWER(name)')
+        render json: current_user.projects.order('LOWER(name)')
       end
 
       def create
-        Project.create! project_params
+        current_user.projects.create project_params
 
-        render json: Project.order('LOWER(name)')
+        render json: current_user.projects.order('LOWER(name)')
       end
 
       def update
         project = Project.find params[:id]
         project.update! project_params
 
-        render json: Project.order('LOWER(name)')
+        render json: current_user.projects.order('LOWER(name)')
       end
 
       def destroy
@@ -37,10 +37,11 @@ module Api
       end
 
       def import_projects
-        ImportFile.call path: params[:projects_file].path,
-                        model: 'Project'
+        ImportFile.call path:  params[:projects_file].path,
+                        model: 'Project',
+                        user:  current_user
 
-        render json: Project.order('LOWER(name)')
+        render json: current_user.projects.order('LOWER(name)')
       end
 
       private
