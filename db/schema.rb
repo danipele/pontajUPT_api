@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_03_21_205910) do
+ActiveRecord::Schema.define(version: 2021_03_17_170714) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -25,12 +25,13 @@ ActiveRecord::Schema.define(version: 2021_03_21_205910) do
   create_table "courses", force: :cascade do |t|
     t.string "name", null: false
     t.decimal "student_year", precision: 10, null: false
-    t.string "faculty", null: false
-    t.string "description"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
     t.decimal "semester", precision: 10, null: false
     t.string "cycle", null: false
+    t.string "faculty", null: false
+    t.string "description"
+    t.bigint "user_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
   end
 
   create_table "holidays", force: :cascade do |t|
@@ -56,6 +57,7 @@ ActiveRecord::Schema.define(version: 2021_03_21_205910) do
   create_table "projects", force: :cascade do |t|
     t.string "name", null: false
     t.string "description"
+    t.bigint "user_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
@@ -66,6 +68,7 @@ ActiveRecord::Schema.define(version: 2021_03_21_205910) do
     t.bigint "activity_id", null: false
     t.string "activity_type", null: false
     t.string "description", null: false
+    t.bigint "user_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["activity_id", "activity_type"], name: "activity_index"
@@ -82,5 +85,8 @@ ActiveRecord::Schema.define(version: 2021_03_21_205910) do
   end
 
   add_foreign_key "course_hours", "courses"
+  add_foreign_key "courses", "users"
   add_foreign_key "project_hours", "projects"
+  add_foreign_key "projects", "users"
+  add_foreign_key "timelines", "users"
 end

@@ -6,10 +6,12 @@ class CreateTimelinesTable < ActiveRecord::Migration[6.0]
       t.bigint :activity_id, null: false
       t.string :activity_type, null: false
       t.string :description, null: false
+      t.bigint :user_id, null: false
 
       t.timestamps
     end
 
     add_index :timelines, %i[activity_id activity_type], name: 'activity_index'
+    add_foreign_key :timelines, :users, column: :user_id, primary_key: :id
   end
 end
