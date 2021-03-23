@@ -69,6 +69,7 @@ ActiveRecord::Schema.define(version: 2021_03_17_170714) do
     t.string "activity_type", null: false
     t.string "description", null: false
     t.bigint "user_id", null: false
+    t.boolean "all_day", default: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["activity_id", "activity_type"], name: "activity_index"

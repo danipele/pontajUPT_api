@@ -15,6 +15,8 @@ class ImportFile
       end
     end
 
+    private
+
     def process_course values, user
       user.courses.create name:         values[0],
                           student_year: values[1].to_i,

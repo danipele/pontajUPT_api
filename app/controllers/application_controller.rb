@@ -12,8 +12,11 @@ class ApplicationController < ActionController::API
     decoded_token = JsonWebToken.decode authorization_header.split(' ').last
     return render json: { error: 'Not Authorized' }, status: :unauthorized unless decoded_token.present?
 
-    user = User.find decoded_token[:user_id]
-    return render json: { error: 'Invalid token' }, status: :not_acceptable unless user.present?
+    begin
+      user = User.find decoded_token[:user_id]
+    rescue
+      return render json: { error: 'Invalid token' }, status: :not_found
+    end
 
     @current_user = user
   end
