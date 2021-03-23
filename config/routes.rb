@@ -24,6 +24,11 @@ Rails.application.routes.draw do
         get :download_template
         post :import_projects
       end
+
+      resource :timelines do
+        post :for_day
+        post :for_week
+      end
     end
   end
 end

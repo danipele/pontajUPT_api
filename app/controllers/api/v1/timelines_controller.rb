@@ -5,6 +5,22 @@ module Api
         render json: current_user.timelines
       end
 
+      def for_day
+        date = Date.strptime params[:date], '%a %b %d %Y'
+        timelines = current_user.timelines.filter { |timeline| timeline.start_date.to_date == date }
+
+        render json: timelines
+      end
+
+      def for_week
+        date = Date.strptime params[:date], '%a %b %d %Y'
+        timelines = current_user.timelines.filter do |timeline|
+          timeline.start_date.to_date.at_beginning_of_week == date.at_beginning_of_week
+        end
+
+        render json: timelines
+      end
+
       def create
         timeline = params[:timeline]
         activity = get_activity_for_timeline
