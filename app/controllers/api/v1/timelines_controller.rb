@@ -22,34 +22,33 @@ module Api
       end
 
       def create
-        timeline = params[:timeline]
+        event = params[:timeline]
         activity = get_activity_for_timeline
 
         if activity
-          activity.timelines.create start_date:  timeline[:start_date],
-                                    end_date:    timeline[:end_date],
-                                    description: timeline[:description],
-                                    user:        current_user,
-                                    all_day:     timeline[:all_day]
-        end
+          timeline = activity.timelines.create start_date:  event[:start_date],
+                                               end_date:    event[:end_date],
+                                               description: event[:description],
+                                               user:        current_user
 
-        render json: {}
+          render json: timeline
+        end
       end
 
       private
 
       def timeline_params
-      params.require(:timeline).permit :start_date, :end_date, :all_day, :activity, :subactivity, :entity, :description
+      params.require(:timeline).permit :start_date, :end_date, :activity, :subactivity, :entity, :description
       end
 
       def get_activity_for_timeline
         case params[:activity]
         when 'Curs'
-          CourseHour.find_by type:   params[:subactivity],
-                             course: params[:entity]
+          CourseHour.find_by type:      params[:subactivity],
+                             course_id: params[:entity]
         when 'Proiect'
-          ProjectHour.find_by type:    params[:subactivity],
-                              project: params[:entity]
+          ProjectHour.find_by type:       params[:subactivity],
+                              project_id: params[:entity]
         when 'Alta activitate'
           OtherActivity.find_by name: params[:subactivity]
         when 'Concediu'

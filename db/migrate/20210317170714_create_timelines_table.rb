@@ -7,7 +7,6 @@ class CreateTimelinesTable < ActiveRecord::Migration[6.0]
       t.string :activity_type, null: false
       t.string :description, null: false
       t.bigint :user_id, null: false
-      t.boolean :all_day, default: false
 
       t.timestamps
     end
