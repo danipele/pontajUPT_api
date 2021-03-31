@@ -37,6 +37,24 @@ module Api
         render json: create_response(timeline)
       end
 
+      def destroy
+        Timeline.destroy params[:id]
+      end
+
+      def update
+        timeline = Timeline.find(params[:id])
+        activity = activity_for_timeline
+
+        return render json: {} unless activity
+
+        timeline.update! start_date: params[:start_date],
+                         end_date: params[:end_date],
+                         description: params[:description],
+                         activity: activity
+
+        render json: create_response(timeline)
+      end
+
       private
 
       def timeline_params
