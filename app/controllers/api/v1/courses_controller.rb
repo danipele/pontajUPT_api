@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Api
   module V1
     class CoursesController < ApplicationController
@@ -11,10 +13,10 @@ module Api
         course = Course.new course_params
         course.user_id = current_user.id
 
-        if course.save
-          course.add_course_hours
-          render json: current_user.courses.order('LOWER(name)')
-        end
+        return render json: {} unless course.save
+
+        course.add_course_hours
+        render json: current_user.courses.order('LOWER(name)')
       end
 
       def update
@@ -34,17 +36,17 @@ module Api
       end
 
       def download_template
-        file = DownloadExcelTemplate.call header:     ['Nume', 'An de studiu', 'Semestru',
-                                                       'Ciclu', 'Facultate', 'Descriere'],
+        file = DownloadExcelTemplate.call header: ['Nume', 'An de studiu', 'Semestru',
+                                                   'Ciclu', 'Facultate', 'Descriere'],
                                           sheet_name: 'Cursuri'
 
         send_file file, filename: 'Cursuri.xls', type: 'text/xls'
       end
 
       def import_courses
-        ImportFile.call path:  params[:courses_file].path,
+        ImportFile.call path: params[:courses_file].path,
                         model: 'Course',
-                        user:  current_user
+                        user: current_user
 
         render json: current_user.courses.order('LOWER(name)')
       end

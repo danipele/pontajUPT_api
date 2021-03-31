@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Api
   module V1
     class ProjectsController < ApplicationController
@@ -11,10 +13,10 @@ module Api
         project = Project.new project_params
         project.user_id = current_user.id
 
-        if project.save
-          project.add_project_hours
-          render json: current_user.projects.order('LOWER(name)')
-        end
+        return render json: {} unless project.save
+
+        project.add_project_hours
+        render json: current_user.projects.order('LOWER(name)')
       end
 
       def update
@@ -34,16 +36,16 @@ module Api
       end
 
       def download_template
-        file = DownloadExcelTemplate.call header:     %w[Nume Descriere],
+        file = DownloadExcelTemplate.call header: %w[Nume Descriere],
                                           sheet_name: 'Proiecte'
 
         send_file file, filename: 'Proiecte.xls', type: 'text/xls'
       end
 
       def import_projects
-        ImportFile.call path:  params[:projects_file].path,
+        ImportFile.call path: params[:projects_file].path,
                         model: 'Project',
-                        user:  current_user
+                        user: current_user
 
         render json: current_user.projects.order('LOWER(name)')
       end

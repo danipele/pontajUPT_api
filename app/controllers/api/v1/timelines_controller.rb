@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Api
   module V1
     class TimelinesController < ApplicationController
@@ -23,16 +25,16 @@ module Api
 
       def create
         event = params[:timeline]
-        activity = get_activity_for_timeline
+        activity = activity_for_timeline
 
-        if activity
-          timeline = activity.timelines.create start_date:  event[:start_date],
-                                               end_date:    event[:end_date],
-                                               description: event[:description],
-                                               user:        current_user
+        return render json: {} unless activity
 
-          render json: create_response(timeline)
-        end
+        timeline = activity.timelines.create start_date: event[:start_date],
+                                             end_date: event[:end_date],
+                                             description: event[:description],
+                                             user: current_user
+
+        render json: create_response(timeline)
       end
 
       private
@@ -41,36 +43,38 @@ module Api
         params.require(:timeline).permit :start_date, :end_date, :activity, :subactivity, :entity, :description
       end
 
-      def get_activity_for_timeline
+      def activity_for_timeline
         case params[:activity]
-        when 'Curs'
-          CourseHour.find_by type:      params[:subactivity],
+        when 'Activitate didactica'
+          CourseHour.find_by type: params[:subactivity],
                              course_id: params[:entity]
         when 'Proiect'
-          ProjectHour.find_by type:       params[:subactivity],
+          ProjectHour.find_by type: params[:subactivity],
                               project_id: params[:entity]
         when 'Alta activitate'
           OtherActivity.find_by name: params[:subactivity]
         when 'Concediu'
           Holiday.find_by name: params[:subactivity]
-        else
-          nil
         end
       end
 
-      def create_response timeline
+      def create_response(timeline)
         response = timeline.attributes
 
         if timeline.activity.instance_of? CourseHour
-          response['activity'], response['subactivity'], response['entity'] =
-            'Curs', timeline.activity.type, Course.find(timeline.activity.course_id)
+          response['activity'] = 'Activitate didactica'
+          response['subactivity'] = timeline.activity.type
+          response['entity'] = Course.find(timeline.activity.course_id)
         elsif timeline.activity.instance_of? ProjectHour
-          response['activity'], response['subactivity'], response['entity'] =
-            'Proiect', timeline.activity.type, Project.find(timeline.activity.project_id)
+          response['activity'] = 'Proiect'
+          response['subactivity'] = timeline.activity.type
+          response['entity'] = Project.find(timeline.activity.project_id)
         elsif timeline.activity.instance_of? OtherActivity
-          response['activity'], response['subactivity'] = 'Alta activitate', timeline.activity.name
+          response['activity'] = 'Alta activitate'
+          response['subactivity'] = timeline.activity.name
         elsif timeline.activity.instance_of? Holiday
-          response['activity'], response['subactivity'] = 'Concediu', timeline.activity.name
+          response['activity'] = 'Concediu'
+          response['subactivity'] = timeline.activity.name
         end
 
         response

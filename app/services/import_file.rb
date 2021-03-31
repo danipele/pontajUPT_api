@@ -1,6 +1,8 @@
+# frozen_string_literal: true
+
 class ImportFile
   class << self
-    def call path:, model:, user:
+    def call(path:, model:, user:)
       workbook = Spreadsheet.open path
       worksheet = workbook.worksheet model == 'Course' ? 'Cursuri' : 'Proiecte'
 
@@ -17,17 +19,17 @@ class ImportFile
 
     private
 
-    def process_course values, user
-      user.courses.create name:         values[0],
+    def process_course(values, user)
+      user.courses.create name: values[0],
                           student_year: values[1].to_i,
-                          semester:     values[2].to_i,
-                          cycle:        values[3],
-                          faculty:      values[4],
-                          description:  values[5]
+                          semester: values[2].to_i,
+                          cycle: values[3],
+                          faculty: values[4],
+                          description: values[5]
     end
 
-    def process_project values, user
-      user.projects.create name:        values[0],
+    def process_project(values, user)
+      user.projects.create name: values[0],
                            description: values[1]
     end
   end

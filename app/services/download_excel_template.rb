@@ -1,6 +1,8 @@
+# frozen_string_literal: true
+
 class DownloadExcelTemplate
   class << self
-    def call header:, sheet_name:
+    def call(header:, sheet_name:)
       workbook = Spreadsheet::Workbook.new
       worksheet = workbook.create_worksheet name: sheet_name
 

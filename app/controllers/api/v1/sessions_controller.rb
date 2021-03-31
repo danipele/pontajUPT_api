@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Api
   module V1
     class SessionsController < ApplicationController
@@ -20,7 +22,7 @@ module Api
 
         auth_token = JsonWebToken.encode user_id: user.id
 
-        render json: { success:    true,
+        render json: { success: true,
                        auth_token: auth_token }
       end
 
