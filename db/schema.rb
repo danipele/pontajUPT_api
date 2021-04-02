@@ -17,7 +17,7 @@ ActiveRecord::Schema.define(version: 2021_03_17_170714) do
 
   create_table "course_hours", force: :cascade do |t|
     t.string "type", null: false
-    t.bigint "course_id", null: false
+    t.bigint "course_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
@@ -49,7 +49,7 @@ ActiveRecord::Schema.define(version: 2021_03_17_170714) do
 
   create_table "project_hours", force: :cascade do |t|
     t.string "type", null: false
-    t.bigint "project_id", null: false
+    t.bigint "project_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end

@@ -1,5 +1,5 @@
 class Course < ApplicationRecord
-  has_many :course_hours, foreign_key: :course_id, primary_key: :id, inverse_of: :course, dependent: :destroy
+  has_many :course_hours, foreign_key: :course_id, primary_key: :id, inverse_of: :course, dependent: :nullify
   belongs_to :user, foreign_key: :user_id, primary_key: :id, inverse_of: :courses
 
   def add_course_hours

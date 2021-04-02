@@ -82,11 +82,11 @@ module Api
         if timeline.activity.instance_of? CourseHour
           response['activity'] = 'Activitate didactica'
           response['subactivity'] = timeline.activity.type
-          response['entity'] = Course.find(timeline.activity.course_id)
+          response['entity'] = Course.find_by(id: timeline.activity.course_id)
         elsif timeline.activity.instance_of? ProjectHour
           response['activity'] = 'Proiect'
           response['subactivity'] = timeline.activity.type
-          response['entity'] = Project.find(timeline.activity.project_id)
+          response['entity'] = Project.find_by(id: timeline.activity.project_id)
         elsif timeline.activity.instance_of? OtherActivity
           response['activity'] = 'Alta activitate'
           response['subactivity'] = timeline.activity.name

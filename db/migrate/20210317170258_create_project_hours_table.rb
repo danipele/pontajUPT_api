@@ -2,7 +2,7 @@ class CreateProjectHoursTable < ActiveRecord::Migration[6.0]
   def change
     create_table :project_hours do |t|
       t.string :type, null: false
-      t.bigint :project_id, null: false
+      t.bigint :project_id
 
       t.timestamps
     end
