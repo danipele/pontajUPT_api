@@ -36,8 +36,8 @@ module Api
       end
 
       def download_template
-        file = DownloadExcelTemplate.call header: %w[Nume Descriere],
-                                          sheet_name: 'Proiecte'
+        file = Tempfile.new.path
+        template_workbook.write file
 
         send_file file, filename: 'Proiecte.xls', type: 'text/xls'
       end
@@ -50,10 +50,27 @@ module Api
         render json: current_user.projects.order('LOWER(name)')
       end
 
+      def export_projects
+        file = Tempfile.new.path
+        filled_excel.write file
+
+        send_file file, filename: 'Proiecte.xls', type: 'text/xls'
+      end
+
       private
 
       def project_params
         params.require(:project).permit :id, :name, :description
+      end
+
+      def template_workbook
+        CreateExcelTemplate.call header: %w[Nume Descriere],
+                                 sheet_name: 'Proiecte'
+      end
+
+      def filled_excel
+        FillProjectsExcel.call workbook: template_workbook,
+                               projects: params[:projects]
       end
     end
   end

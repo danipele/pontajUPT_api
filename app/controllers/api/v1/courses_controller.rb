@@ -36,10 +36,8 @@ module Api
       end
 
       def download_template
-        file = DownloadExcelTemplate.call header: ['Nume', 'An de studiu', 'Semestru',
-                                                   'Ciclu(Licenta, Master, Doctorat)',
-                                                   'Facultate', 'Descriere'],
-                                          sheet_name: 'Cursuri'
+        file = Tempfile.new.path
+        template_workbook.write file
 
         send_file file, filename: 'Cursuri.xls', type: 'text/xls'
       end
@@ -52,10 +50,29 @@ module Api
         render json: current_user.courses.order('LOWER(name)')
       end
 
+      def export_courses
+        file = Tempfile.new.path
+        filled_excel.write file
+
+        send_file file, filename: 'Cursuri.xls', type: 'text/xls'
+      end
+
       private
 
       def course_params
         params.require(:course).permit :id, :name, :student_year, :semester, :cycle, :faculty, :description
+      end
+
+      def template_workbook
+        CreateExcelTemplate.call header: ['Nume', 'An de studiu', 'Semestru',
+                                          'Ciclu(Licenta, Master, Doctorat)',
+                                          'Facultate', 'Descriere'],
+                                 sheet_name: 'Cursuri'
+      end
+
+      def filled_excel
+        FillCoursesExcel.call workbook: template_workbook,
+                              courses: params[:courses]
       end
     end
   end

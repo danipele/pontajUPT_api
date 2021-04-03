@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class DownloadExcelTemplate
+class CreateExcelTemplate
   class << self
     def call(header:, sheet_name:)
       workbook = Spreadsheet::Workbook.new
@@ -11,9 +11,7 @@ class DownloadExcelTemplate
       header_format = Spreadsheet::Format.new weight: :bold
       worksheet.row(0).default_format = header_format
 
-      output_path = Tempfile.new.path
-      workbook.write output_path
-      output_path
+      workbook
     end
 
     private
