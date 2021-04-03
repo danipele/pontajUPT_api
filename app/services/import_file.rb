@@ -23,7 +23,7 @@ class ImportFile
       user.courses.create name: values[0],
                           student_year: values[1].to_i,
                           semester: values[2].to_i,
-                          cycle: values[3],
+                          cycle: values[3].downcase.capitalize,
                           faculty: values[4],
                           description: values[5]
     end

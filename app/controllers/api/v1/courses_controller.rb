@@ -37,7 +37,8 @@ module Api
 
       def download_template
         file = DownloadExcelTemplate.call header: ['Nume', 'An de studiu', 'Semestru',
-                                                   'Ciclu', 'Facultate', 'Descriere'],
+                                                   'Ciclu(Licenta, Master, Doctorat)',
+                                                   'Facultate', 'Descriere'],
                                           sheet_name: 'Cursuri'
 
         send_file file, filename: 'Cursuri.xls', type: 'text/xls'

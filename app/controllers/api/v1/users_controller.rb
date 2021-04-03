@@ -19,6 +19,11 @@ module Api
         ApplicationMailer.with(email: params[:email]).mailer.deliver_later
       end
 
+      def update
+        current_user.update first_name: params[:user][:first_name],
+                            last_name: params[:user][:last_name]
+      end
+
       private
 
       def user_params
