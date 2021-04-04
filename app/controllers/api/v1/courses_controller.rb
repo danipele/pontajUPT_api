@@ -3,8 +3,6 @@
 module Api
   module V1
     class CoursesController < ApplicationController
-      skip_before_action :authenticate_request, only: [:download_template]
-
       def index
         render json: current_user.courses.order('LOWER(name)')
       end

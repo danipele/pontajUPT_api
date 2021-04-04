@@ -3,8 +3,6 @@
 module Api
   module V1
     class ProjectsController < ApplicationController
-      skip_before_action :authenticate_request, only: [:download_template]
-
       def index
         render json: current_user.projects.order('LOWER(name)')
       end

@@ -17,14 +17,14 @@ Rails.application.routes.draw do
 
       resource :courses do
         post :destroy_selected
-        get :download_template
+        post :download_template
         post :import_courses
         post :export_courses
       end
 
       resource :projects do
         post :destroy_selected
-        get :download_template
+        post :download_template
         post :import_projects
         post :export_projects
       end
