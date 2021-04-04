@@ -4,37 +4,23 @@ module Api
   module V1
     class TimelinesController < ApplicationController
       def index
-        render json: current_user.timelines
-      end
+        timelines = TimelinesSorter.call params: params,
+                                         user: current_user
 
-      def for_day
-        date = Date.strptime params[:date], '%a %b %d %Y'
-        timelines = current_user.timelines.filter { |timeline| timeline.start_date.to_date == date }
-
-        render json: timelines.map { |timeline| create_response(timeline) }
-      end
-
-      def for_week
-        date = Date.strptime params[:date], '%a %b %d %Y'
-        timelines = current_user.timelines.filter do |timeline|
-          timeline.start_date.to_date.at_beginning_of_week == date.at_beginning_of_week
-        end
-
-        render json: timelines.map { |timeline| create_response(timeline) }
+        render json: timelines.map { |timeline| TimelineResponse.call timeline: timeline }
       end
 
       def create
         event = params[:timeline]
-        activity = activity_for_timeline
+        activity = TimelineActivity activity: params[:activity],
+                                    subactivity: params[:subactivity],
+                                    entity: params[:entity]
 
         return render json: {} unless activity
 
-        timeline = activity.timelines.create start_date: event[:start_date],
-                                             end_date: event[:end_date],
-                                             description: event[:description],
-                                             user: current_user
+        timeline = create_timeline event
 
-        render json: create_response(timeline)
+        render json: TimelineResponse.call(timeline: timeline)
       end
 
       def destroy
@@ -43,16 +29,15 @@ module Api
 
       def update
         timeline = Timeline.find(params[:id])
-        activity = activity_for_timeline
+        activity = TimelineActivity activity: params[:activity],
+                                    subactivity: params[:subactivity],
+                                    entity: params[:entity]
 
         return render json: {} unless activity
 
-        timeline.update! start_date: params[:start_date],
-                         end_date: params[:end_date],
-                         description: params[:description],
-                         activity: activity
+        update_timeline timeline, activity
 
-        render json: create_response(timeline)
+        render json: TimelineResponse.call(timeline: timeline)
       end
 
       private
@@ -61,41 +46,18 @@ module Api
         params.require(:timeline).permit :start_date, :end_date, :activity, :subactivity, :entity, :description
       end
 
-      def activity_for_timeline
-        case params[:activity]
-        when 'Activitate didactica'
-          CourseHour.find_by type: params[:subactivity],
-                             course_id: params[:entity]
-        when 'Proiect'
-          ProjectHour.find_by type: params[:subactivity],
-                              project_id: params[:entity]
-        when 'Alta activitate'
-          OtherActivity.find_by name: params[:subactivity]
-        when 'Concediu'
-          Holiday.find_by name: params[:subactivity]
-        end
+      def create_timeline(event)
+        activity.timelines.create start_date: event[:start_date],
+                                  end_date: event[:end_date],
+                                  description: event[:description],
+                                  user: current_user
       end
 
-      def create_response(timeline)
-        response = timeline.attributes
-
-        if timeline.activity.instance_of? CourseHour
-          response['activity'] = 'Activitate didactica'
-          response['subactivity'] = timeline.activity.type
-          response['entity'] = Course.find_by(id: timeline.activity.course_id)
-        elsif timeline.activity.instance_of? ProjectHour
-          response['activity'] = 'Proiect'
-          response['subactivity'] = timeline.activity.type
-          response['entity'] = Project.find_by(id: timeline.activity.project_id)
-        elsif timeline.activity.instance_of? OtherActivity
-          response['activity'] = 'Alta activitate'
-          response['subactivity'] = timeline.activity.name
-        elsif timeline.activity.instance_of? Holiday
-          response['activity'] = 'Concediu'
-          response['subactivity'] = timeline.activity.name
-        end
-
-        response
+      def update_timeline(timeline, activity)
+        timeline.update! start_date: params[:start_date],
+                         end_date: params[:end_date],
+                         description: params[:description],
+                         activity: activity
       end
     end
   end
