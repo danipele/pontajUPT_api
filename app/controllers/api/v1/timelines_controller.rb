@@ -4,21 +4,21 @@ module Api
   module V1
     class TimelinesController < ApplicationController
       def index
-        timelines = TimelinesSorter.call params: params,
-                                         user: current_user
+        timelines = TimelinesFiltering.call params: params,
+                                            user: current_user
 
         render json: timelines.map { |timeline| TimelineResponse.call timeline: timeline }
       end
 
       def create
         event = params[:timeline]
-        activity = TimelineActivity activity: params[:activity],
-                                    subactivity: params[:subactivity],
-                                    entity: params[:entity]
+        activity = TimelineActivity.call activity: params[:activity],
+                                         subactivity: params[:subactivity],
+                                         entity: params[:entity]
 
         return render json: {} unless activity
 
-        timeline = create_timeline event
+        timeline = create_timeline activity, event
 
         render json: TimelineResponse.call(timeline: timeline)
       end
@@ -29,9 +29,9 @@ module Api
 
       def update
         timeline = Timeline.find(params[:id])
-        activity = TimelineActivity activity: params[:activity],
-                                    subactivity: params[:subactivity],
-                                    entity: params[:entity]
+        activity = TimelineActivity.call activity: params[:activity],
+                                         subactivity: params[:subactivity],
+                                         entity: params[:entity]
 
         return render json: {} unless activity
 
@@ -46,7 +46,7 @@ module Api
         params.require(:timeline).permit :start_date, :end_date, :activity, :subactivity, :entity, :description
       end
 
-      def create_timeline(event)
+      def create_timeline(activity, event)
         activity.timelines.create start_date: event[:start_date],
                                   end_date: event[:end_date],
                                   description: event[:description],

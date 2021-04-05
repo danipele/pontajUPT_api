@@ -1,22 +1,24 @@
 # frozen_string_literal: true
 
-class TimelinesSorter
+class TimelinesFiltering
   class << self
     def call(params:, user:)
-      timelines = if params[:for] == 'day'
-                    for_day params[:date], user
-                  else
-                    for_week params[:date], user
-                  end
-
-      timelines = sort timelines, params[:sort] if params[:sort]
-
-      return timelines.reverse if params[:direction] == 'desc'
+      timelines = timelines_for params[:for], params[:date], user
+      timelines = sort timelines, params[:sort] unless params[:sort].blank?
+      return timelines.reverse! if params[:direction] == 'desc'
 
       timelines
     end
 
     private
+
+    def timelines_for(view, date, user)
+      if view == 'day'
+        for_day date, user
+      else
+        for_week date, user
+      end
+    end
 
     def for_day(date_string, user)
       date = Date.strptime date_string, '%a %b %d %Y'
