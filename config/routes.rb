@@ -30,8 +30,7 @@ Rails.application.routes.draw do
       end
 
       resource :timelines do
-        post :for_day
-        post :for_week
+        post :destroy_selected
       end
     end
   end

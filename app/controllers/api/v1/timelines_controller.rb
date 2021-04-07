@@ -40,6 +40,11 @@ module Api
         render json: TimelineResponse.call(timeline: timeline)
       end
 
+      def destroy_selected
+        timeline_ids = params[:timelines].map { |timeline| timeline[:id] }
+        Timeline.where(id: timeline_ids).destroy_all
+      end
+
       private
 
       def timeline_params

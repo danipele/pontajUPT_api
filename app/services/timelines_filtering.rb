@@ -29,10 +29,11 @@ class TimelinesFiltering
       @activity = params[:activity]
       @start_date_filter = params[:start_date_filter]
       @end_date_filter = params[:end_date_filter]
+      @all = params[:all]
     end
 
     def fill_timelines(user)
-      @timelines = @start_date_filter.blank? ? timelines_for(user) : Timeline.where(user_id: user.id)
+      @timelines = @start_date_filter.blank? && @all == 'false' ? timelines_for(user) : Timeline.where(user_id: user.id)
     end
 
     def timelines_for(user)
@@ -95,7 +96,7 @@ class TimelinesFiltering
         when Holiday, OtherActivity
           activity.name == @subactivity
         when CourseHour, ProjectHour
-          activity.type == activity
+          activity.type == @subactivity
         end
       end
     end
