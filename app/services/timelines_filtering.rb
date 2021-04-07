@@ -10,15 +10,17 @@ class TimelinesFiltering
       subactivity_filter unless @subactivity.blank?
       activity_filter unless @activity.blank?
       date_filter unless @start_date_filter.blank?
+      courses_filter unless @course == '-1'
+      projects_filter unless @project == '-1'
       return timelines.to_a.reverse! if @direction == 'desc'
 
-      timelines
+      @timelines
     end
 
     private
 
-    attr_reader :for, :date, :sort, :direction, :subactivity,
-                :activity, :start_date_filter, :end_date_filter, :timelines
+    attr_reader :for, :date, :sort, :direction, :subactivity, :course, :project,
+                :activity, :start_date_filter, :end_date_filter, :timelines, :all
 
     def attributes(params)
       @for = params[:for]
@@ -30,10 +32,12 @@ class TimelinesFiltering
       @start_date_filter = params[:start_date_filter]
       @end_date_filter = params[:end_date_filter]
       @all = params[:all]
+      @course = params[:course]
+      @project = params[:project]
     end
 
     def fill_timelines(user)
-      @timelines = @start_date_filter.blank? && @all == 'false' ? timelines_for(user) : Timeline.where(user_id: user.id)
+      @timelines = !@start_date_filter.blank? || @all == 'true' ? Timeline.where(user_id: user.id) : timelines_for(user)
     end
 
     def timelines_for(user)
@@ -114,6 +118,18 @@ class TimelinesFiltering
         else
           timeline.start_date.to_date == start_date
         end
+      end
+    end
+
+    def courses_filter
+      @timelines = @timelines.select do |timeline|
+        timeline.activity.is_a?(CourseHour) && timeline.activity.course&.id == @course.to_i
+      end
+    end
+
+    def projects_filter
+      @timelines = @timelines.select do |timeline|
+        timeline.activity.is_a?(ProjectHour) && timeline.activity.project.id == @project.to_i
       end
     end
   end
