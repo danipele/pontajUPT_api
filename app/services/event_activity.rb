@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class TimelineActivity
+class EventActivity
   class << self
     def call(activity:, subactivity:, entity:)
       case activity

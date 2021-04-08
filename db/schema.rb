@@ -34,6 +34,18 @@ ActiveRecord::Schema.define(version: 2021_03_17_170714) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
+  create_table "events", force: :cascade do |t|
+    t.datetime "start_date", null: false
+    t.datetime "end_date", null: false
+    t.bigint "activity_id", null: false
+    t.string "activity_type", null: false
+    t.string "description", null: false
+    t.bigint "user_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["activity_id", "activity_type"], name: "activity_index"
+  end
+
   create_table "holidays", force: :cascade do |t|
     t.string "name", null: false
     t.datetime "created_at", precision: 6, null: false
@@ -62,18 +74,6 @@ ActiveRecord::Schema.define(version: 2021_03_17_170714) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
-  create_table "timelines", force: :cascade do |t|
-    t.datetime "start_date", null: false
-    t.datetime "end_date", null: false
-    t.bigint "activity_id", null: false
-    t.string "activity_type", null: false
-    t.string "description", null: false
-    t.bigint "user_id", null: false
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.index ["activity_id", "activity_type"], name: "activity_index"
-  end
-
   create_table "users", force: :cascade do |t|
     t.string "email", null: false
     t.string "password_digest", null: false
@@ -86,7 +86,7 @@ ActiveRecord::Schema.define(version: 2021_03_17_170714) do
 
   add_foreign_key "course_hours", "courses"
   add_foreign_key "courses", "users"
+  add_foreign_key "events", "users"
   add_foreign_key "project_hours", "projects"
   add_foreign_key "projects", "users"
-  add_foreign_key "timelines", "users"
 end

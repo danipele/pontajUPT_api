@@ -6,7 +6,7 @@ class User < ApplicationRecord
 
   has_many :courses, foreign_key: :user_id, primary_key: :id, inverse_of: :user
   has_many :projects, foreign_key: :user_id, primary_key: :id, inverse_of: :user
-  has_many :timelines, foreign_key: :user_id, primary_key: :id, inverse_of: :user
+  has_many :events, foreign_key: :user_id, primary_key: :id, inverse_of: :user
 
   def downcase_email
     self.email = email.downcase

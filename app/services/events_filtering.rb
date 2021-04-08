@@ -1,26 +1,26 @@
 # frozen_string_literal: true
 
-class TimelinesFiltering
+class EventsFiltering
   class << self
     def call(params:, user:)
       attributes params
-      fill_timelines user
+      fill_events user
 
-      sort_timelines unless @sort.blank?
+      sort_events unless @sort.blank?
       subactivity_filter unless @subactivity.blank?
       activity_filter unless @activity.blank?
       date_filter unless @start_date_filter.blank?
       courses_filter unless @course == '-1'
       projects_filter unless @project == '-1'
-      return timelines.to_a.reverse! if @direction == 'desc'
+      return @events.to_a.reverse! if @direction == 'desc'
 
-      @timelines
+      @events
     end
 
     private
 
     attr_reader :for, :date, :sort, :direction, :subactivity, :course, :project,
-                :activity, :start_date_filter, :end_date_filter, :timelines, :all
+                :activity, :start_date_filter, :end_date_filter, :events, :all
 
     def attributes(params)
       @for = params[:for]
@@ -36,11 +36,11 @@ class TimelinesFiltering
       @project = params[:project]
     end
 
-    def fill_timelines(user)
-      @timelines = !@start_date_filter.blank? || @all == 'true' ? Timeline.where(user_id: user.id) : timelines_for(user)
+    def fill_events(user)
+      @events = !@start_date_filter.blank? || @all == 'true' ? Event.where(user_id: user.id) : events_for(user)
     end
 
-    def timelines_for(user)
+    def events_for(user)
       if @for == 'day'
         for_day user
       else
@@ -50,17 +50,17 @@ class TimelinesFiltering
 
     def for_day(user)
       date = Date.strptime @date, '%a %b %d %Y'
-      user.timelines.filter { |timeline| timeline.start_date.to_date == date }
+      user.events.filter { |event| event.start_date.to_date == date }
     end
 
     def for_week(user)
       date = Date.strptime @date, '%a %b %d %Y'
-      user.timelines.filter do |timeline|
-        timeline.start_date.to_date.at_beginning_of_week == date.at_beginning_of_week
+      user.events.filter do |event|
+        event.start_date.to_date.at_beginning_of_week == date.at_beginning_of_week
       end
     end
 
-    def sort_timelines
+    def sort_events
       case @sort
       when 'subactivity'
         sorted_by_subactivity
@@ -72,8 +72,8 @@ class TimelinesFiltering
     end
 
     def sorted_by_subactivity
-      @timelines = @timelines.sort_by do |timeline|
-        activity = timeline.activity
+      @events = @events.sort_by do |event|
+        activity = event.activity
 
         case activity
         when Holiday, OtherActivity
@@ -85,16 +85,16 @@ class TimelinesFiltering
     end
 
     def sorted_by_activity
-      @timelines = @timelines.sort_by { |timeline| timeline.activity.display_name }
+      @events = @events.sort_by { |event| event.activity.display_name }
     end
 
     def sorted_by_date
-      @timelines = @timelines.sort_by(&:start_date)
+      @events = @events.sort_by(&:start_date)
     end
 
     def subactivity_filter
-      @timelines = @timelines.select do |timeline|
-        activity = timeline.activity
+      @events = @events.select do |event|
+        activity = event.activity
 
         case activity
         when Holiday, OtherActivity
@@ -106,30 +106,30 @@ class TimelinesFiltering
     end
 
     def activity_filter
-      @timelines = @timelines.select { |timeline| timeline.activity.display_name == @activity }
+      @events = @events.select { |event| event.activity.display_name == @activity }
     end
 
     def date_filter
       start_date = Date.strptime @start_date_filter, '%a %b %d %Y'
       end_date = Date.strptime @end_date_filter, '%a %b %d %Y' unless @end_date_filter.blank?
-      @timelines = @timelines.select do |timeline|
+      @events = @events.select do |event|
         if end_date.present?
-          timeline.start_date.to_date >= start_date && timeline.start_date.to_date <= end_date
+          event.start_date.to_date >= start_date && event.start_date.to_date <= end_date
         else
-          timeline.start_date.to_date == start_date
+          event.start_date.to_date == start_date
         end
       end
     end
 
     def courses_filter
-      @timelines = @timelines.select do |timeline|
-        timeline.activity.is_a?(CourseHour) && timeline.activity.course&.id == @course.to_i
+      @events = @events.select do |event|
+        event.activity.is_a?(CourseHour) && event.activity.course&.id == @course.to_i
       end
     end
 
     def projects_filter
-      @timelines = @timelines.select do |timeline|
-        timeline.activity.is_a?(ProjectHour) && timeline.activity.project.id == @project.to_i
+      @events = @events.select do |event|
+        event.activity.is_a?(ProjectHour) && event.activity.project.id == @project.to_i
       end
     end
   end

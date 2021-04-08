@@ -8,7 +8,7 @@ Rails.application.routes.draw do
 
       resources :courses, except: [:show]
       resources :projects, except: [:show]
-      resources :timelines
+      resources :events
 
       resource :users do
         post :reset_password
@@ -29,7 +29,7 @@ Rails.application.routes.draw do
         post :export_projects
       end
 
-      resource :timelines do
+      resource :events do
         post :destroy_selected
       end
     end
