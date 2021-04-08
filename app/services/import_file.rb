@@ -20,17 +20,22 @@ class ImportFile
     private
 
     def process_course(values, user)
-      user.courses.create name: values[0],
-                          student_year: values[1].to_i,
-                          semester: values[2].to_i,
-                          cycle: values[3].downcase.capitalize,
-                          faculty: values[4],
-                          description: values[5]
+      course = user.courses.create name: values[0],
+                                   student_year: values[1].to_i,
+                                   semester: values[2].to_i,
+                                   cycle: values[3].downcase.capitalize,
+                                   faculty: values[4],
+                                   description: values[5]
+
+      course.add_course_hours
     end
 
     def process_project(values, user)
       user.projects.create name: values[0],
-                           description: values[1]
+                           hours_per_month: values[1].blank? ? nil : values[1].to_i,
+                           restricted_start_hour: values[2].blank? ? nil : values[2].to_i,
+                           restricted_end_hour: values[3].blank? ? nil : values[3].to_i,
+                           description: values[4]
     end
   end
 end

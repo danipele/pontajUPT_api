@@ -13,7 +13,6 @@ module Api
 
         return render json: {} unless project.save
 
-        project.add_project_hours
         render json: current_user.projects.order('LOWER(name)')
       end
 
@@ -58,11 +57,13 @@ module Api
       private
 
       def project_params
-        params.require(:project).permit :id, :name, :description
+        params.require(:project).permit :id, :name, :description, :hours_per_month,
+                                        :restricted_start_hour, :restricted_end_hour
       end
 
       def template_workbook
-        CreateExcelTemplate.call header: %w[Nume Descriere],
+        CreateExcelTemplate.call header: ['Nume', 'Ore pe luna', 'Restrictie ora de inceput',
+                                          'Restrictie ora de sfarsit', 'Descriere'],
                                  sheet_name: 'Proiecte'
       end
 

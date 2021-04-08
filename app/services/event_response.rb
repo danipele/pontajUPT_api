@@ -4,9 +4,7 @@ class EventResponse
   class << self
     def call(event:)
       response = event.attributes
-
       fill_activity response, event
-
       response
     end
 
@@ -16,8 +14,8 @@ class EventResponse
       case event.activity
       when CourseHour
         fill_course_hour response, event
-      when ProjectHour
-        fill_project_hour response, event
+      when Project
+        fill_project response, event
       when OtherActivity
         fill_other_activity response, event
       when Holiday
@@ -31,10 +29,9 @@ class EventResponse
       response['entity'] = Course.find_by(id: event.activity.course_id)
     end
 
-    def fill_project_hour(response, event)
+    def fill_project(response, event)
       response['activity'] = 'Proiect'
-      response['subactivity'] = event.activity.type
-      response['entity'] = Project.find_by(id: event.activity.project_id)
+      response['entity'] = Project.find_by(id: event.activity.id)
     end
 
     def fill_other_activity(response, event)

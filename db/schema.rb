@@ -59,17 +59,13 @@ ActiveRecord::Schema.define(version: 2021_03_17_170714) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
-  create_table "project_hours", force: :cascade do |t|
-    t.string "type", null: false
-    t.bigint "project_id"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-  end
-
   create_table "projects", force: :cascade do |t|
     t.string "name", null: false
     t.string "description"
     t.bigint "user_id", null: false
+    t.decimal "hours_per_month", precision: 10
+    t.decimal "restricted_start_hour", precision: 10
+    t.decimal "restricted_end_hour", precision: 10
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
@@ -87,6 +83,5 @@ ActiveRecord::Schema.define(version: 2021_03_17_170714) do
   add_foreign_key "course_hours", "courses"
   add_foreign_key "courses", "users"
   add_foreign_key "events", "users"
-  add_foreign_key "project_hours", "projects"
   add_foreign_key "projects", "users"
 end

@@ -7,7 +7,7 @@ class EventActivity
       when 'Activitate didactica'
         course_hour subactivity, entity
       when 'Proiect'
-        project_hour subactivity, entity
+        project entity
       when 'Alta activitate'
         other_activity subactivity
       when 'Concediu'
@@ -22,9 +22,8 @@ class EventActivity
                          course_id: entity
     end
 
-    def project_hour(subactivity, entity)
-      ProjectHour.find_by type: subactivity,
-                          project_id: entity
+    def project(entity)
+      Project.find_by id: entity
     end
 
     def other_activity(subactivity)

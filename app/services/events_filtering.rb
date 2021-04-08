@@ -7,11 +7,7 @@ class EventsFiltering
       fill_events user
 
       sort_events unless @sort.blank?
-      subactivity_filter unless @subactivity.blank?
-      activity_filter unless @activity.blank?
-      date_filter unless @start_date_filter.blank?
-      courses_filter unless @course == '-1'
-      projects_filter unless @project == '-1'
+      filter_events
       return @events.to_a.reverse! if @direction == 'desc'
 
       @events
@@ -27,6 +23,9 @@ class EventsFiltering
       @date = params[:date]
       @sort = params[:sort]
       @direction = params[:direction]
+    end
+
+    def filter_attributes(params)
       @subactivity = params[:subactivity]
       @activity = params[:activity]
       @start_date_filter = params[:start_date_filter]
@@ -34,6 +33,14 @@ class EventsFiltering
       @all = params[:all]
       @course = params[:course]
       @project = params[:project]
+    end
+
+    def filter_events
+      subactivity_filter unless @subactivity.blank?
+      activity_filter unless @activity.blank?
+      date_filter unless @start_date_filter.blank?
+      courses_filter unless @course == '-1'
+      projects_filter unless @project == '-1'
     end
 
     def fill_events(user)
@@ -75,12 +82,18 @@ class EventsFiltering
       @events = @events.sort_by do |event|
         activity = event.activity
 
-        case activity
-        when Holiday, OtherActivity
-          activity.name
-        when CourseHour, ProjectHour
-          activity.type
-        end
+        event_subactivity activity
+      end
+    end
+
+    def event_subactivity(activity)
+      case activity
+      when CourseHour
+        activity.type
+      when Project
+        'Project'
+      else
+        activity.name
       end
     end
 
@@ -93,15 +106,16 @@ class EventsFiltering
     end
 
     def subactivity_filter
+      return projects if @subactivity == 'Proiect'
+
       @events = @events.select do |event|
         activity = event.activity
 
-        case activity
-        when Holiday, OtherActivity
-          activity.name == @subactivity
-        when CourseHour, ProjectHour
-          activity.type == @subactivity
-        end
+        event.activity != Project && if activity.is_a? CourseHour
+                                       activity.type == @subactivity
+                                     else
+                                       activity.name == @subactivity
+                                     end
       end
     end
 
@@ -129,8 +143,12 @@ class EventsFiltering
 
     def projects_filter
       @events = @events.select do |event|
-        event.activity.is_a?(ProjectHour) && event.activity.project.id == @project.to_i
+        event.activity.is_a?(Project) && event.activity.id == @project.to_i
       end
+    end
+
+    def projects
+      @events = @events.select { |event| event.activity.is_a? Project }
     end
   end
 end

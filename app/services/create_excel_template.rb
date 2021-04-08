@@ -18,16 +18,22 @@ class CreateExcelTemplate
 
     def set_columns_width(worksheet, length)
       worksheet.column(0).width = 30
+      worksheet.column(1).width = 15
 
-      if length == 2
-        worksheet.column(1).width = 50
-      else
-        worksheet.column(1).width = 10
-        worksheet.column(2).width = 10
-        worksheet.column(3).width = 30
-        worksheet.column(4).width = 30
-        worksheet.column(5).width = 50
-      end
+      length == 5 ? project_widths(worksheet) : course_widths(worksheet)
+    end
+
+    def project_widths(worksheet)
+      worksheet.column(2).width = 20
+      worksheet.column(3).width = 20
+      worksheet.column(4).width = 50
+    end
+
+    def course_widths(worksheet)
+      worksheet.column(2).width = 10
+      worksheet.column(3).width = 30
+      worksheet.column(4).width = 30
+      worksheet.column(5).width = 50
     end
   end
 end
