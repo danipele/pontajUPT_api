@@ -23,6 +23,7 @@ class EventsFiltering
       @date = params[:date]
       @sort = params[:sort]
       @direction = params[:direction]
+      filter_attributes params
     end
 
     def filter_attributes(params)
