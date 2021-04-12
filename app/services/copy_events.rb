@@ -3,24 +3,24 @@
 class CopyEvents
   class << self
     def call(from_date:, to_date:, user:, period:)
-      events = events_from from_date, period
+      events = events_from from_date, period, user
 
       events.each do |event|
         start_date = update_date event.start_date, to_date, from_date, period
         end_date = update_date event.end_date, to_date, from_date, period
 
-        create_event(event, start_date, end_date, user) if Event.in_period(start_date, end_date).empty?
+        create_event(event, start_date, end_date, user) if user.events.in_period(start_date, end_date).empty?
       end
     end
 
     private
 
-    def events_from(from_date, period)
+    def events_from(from_date, period, user)
       case period
       when 'daily'
-        Event.from_date from_date
+        user.events.from_date from_date
       when 'weekly'
-        Event.from_week from_date
+        user.events.from_week from_date
       end
     end
 

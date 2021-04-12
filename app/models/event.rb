@@ -4,8 +4,9 @@ class Event < ApplicationRecord
 
   scope :in_period, lambda { |start_date, end_date|
     where('start_date::timestamp >= ? and start_date::timestamp < ? or
-           end_date::timestamp > ? and end_date::timestamp <= ?',
-          start_date, end_date, start_date, end_date)
+           end_date::timestamp > ? and end_date::timestamp <= ? or
+           start_date::timestamp <= ? and end_date::timestamp >= ?',
+          start_date, end_date, start_date, end_date, start_date, end_date)
   }
 
   scope :from_date, ->(date) { where('start_date::timestamp >= ? and end_date::timestamp <= ?', date, date + 1.day) }

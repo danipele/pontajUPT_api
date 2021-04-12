@@ -45,7 +45,7 @@ class EventsFiltering
     end
 
     def fill_events(user)
-      @events = !@start_date_filter.blank? || @all == 'true' ? Event.where(user_id: user.id) : events_for(user)
+      @events = !@start_date_filter.blank? || @all == 'true' ? user.events : events_for(user)
     end
 
     def events_for(user)
@@ -57,12 +57,14 @@ class EventsFiltering
     end
 
     def for_day(user)
-      date = Date.strptime @date, '%a %b %d %Y'
+      date = @date.to_time.in_time_zone('Bucharest').to_date
+
       user.events.filter { |event| event.start_date.to_date == date }
     end
 
     def for_week(user)
-      date = Date.strptime @date, '%a %b %d %Y'
+      date = @date.to_time.in_time_zone('Bucharest').to_date
+
       user.events.filter do |event|
         event.start_date.to_date.at_beginning_of_week == date.at_beginning_of_week
       end

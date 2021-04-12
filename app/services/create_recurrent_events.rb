@@ -86,7 +86,7 @@ class CreateRecurrentEvents
     def should_create_event?(start_date, end_date)
       return false if !@weekend_too && (start_date.saturday? || start_date.sunday?)
 
-      Event.in_period(start_date, end_date).empty?
+      @user.events.in_period(start_date, end_date).empty?
     end
   end
 end

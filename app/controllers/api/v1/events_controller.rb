@@ -4,10 +4,7 @@ module Api
   module V1
     class EventsController < ApplicationController
       def index
-        events = EventsFiltering.call params: params,
-                                      user: current_user
-
-        render json: events.map { |event| EventResponse.call event: event }
+        filter_events params
       end
 
       def create
@@ -16,10 +13,11 @@ module Api
 
         return render json: {} unless activity
 
-        event = create_event activity, event_from_fe
+        create_event activity, event_from_fe
         create_recurrent_events activity unless params[:recurrent].blank?
 
-        render json: EventResponse.call(event: event)
+        params[:filter][:date]
+        filter_events params[:filter]
       end
 
       def destroy
@@ -34,7 +32,7 @@ module Api
 
         update_event event, activity
 
-        render json: EventResponse.call(event: event)
+        filter_events params[:filter]
       end
 
       def destroy_selected
@@ -72,7 +70,7 @@ module Api
       def create_recurrent_events(activity)
         service_params = {
           recurrent: params[:recurrent],
-          recurrent_date: params[:recurrent_date],
+          recurrent_date: params[:recurrent_date].to_time.in_time_zone('Bucharest'),
           weekends_too: params[:weekends_too],
           event: params[:event],
           activity: activity,
@@ -85,6 +83,13 @@ module Api
         EventActivity.call activity: params[:activity],
                            subactivity: params[:subactivity],
                            entity: params[:entity]
+      end
+
+      def filter_events(params)
+        events = EventsFiltering.call params: params,
+                                      user: current_user
+
+        render json: events.map { |event| EventResponse.call event: event }
       end
     end
   end
