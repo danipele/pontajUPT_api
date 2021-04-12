@@ -7,4 +7,7 @@ class Event < ApplicationRecord
            end_date::timestamp > ? and end_date::timestamp <= ?',
           start_date, end_date, start_date, end_date)
   }
+
+  scope :from_date, ->(date) { where('start_date::timestamp >= ? and end_date::timestamp <= ?', date, date + 1.day) }
+  scope :from_week, ->(date) { where('start_date::timestamp >= ? and end_date::timestamp <= ?', date, date + 1.week) }
 end

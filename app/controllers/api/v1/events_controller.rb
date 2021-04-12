@@ -42,6 +42,13 @@ module Api
         Event.where(id: event_ids).destroy_all
       end
 
+      def copy_events
+        CopyEvents.call from_date: params[:date].to_time.in_time_zone('Bucharest'),
+                        to_date: params[:copy_date].to_time.in_time_zone('Bucharest'),
+                        user: current_user,
+                        period: params[:mode]
+      end
+
       private
 
       def event_params
@@ -65,7 +72,7 @@ module Api
       def create_recurrent_events(activity)
         service_params = {
           recurrent: params[:recurrent],
-          recurrent_date: params[:recurrent_date].to_time.in_time_zone('Bucharest'),
+          recurrent_date: params[:recurrent_date],
           weekends_too: params[:weekends_too],
           event: params[:event],
           activity: activity,
