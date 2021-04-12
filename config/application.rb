@@ -27,5 +27,7 @@ module PontajUPTApi
     config.api_only = true
 
     config.autoload_paths << Rails.root.join('lib')
+
+    config.time_zone = 'Bucharest'
   end
 end

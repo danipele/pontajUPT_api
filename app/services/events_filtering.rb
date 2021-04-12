@@ -40,8 +40,8 @@ class EventsFiltering
       subactivity_filter unless @subactivity.blank?
       activity_filter unless @activity.blank?
       date_filter unless @start_date_filter.blank?
-      courses_filter unless @course == '-1'
-      projects_filter unless @project == '-1'
+      courses_filter unless @course.blank?
+      projects_filter unless @project.blank?
     end
 
     def fill_events(user)
