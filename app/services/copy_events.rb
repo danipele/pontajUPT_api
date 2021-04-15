@@ -2,14 +2,17 @@
 
 class CopyEvents
   class << self
-    def call(from_date:, to_date:, user:, period:)
+    def call(from_date:, to_date:, user:, period:, move:)
       events = events_from from_date, period, user
 
       events.each do |event|
         start_date = update_date event.start_date, to_date, from_date, period
         end_date = update_date event.end_date, to_date, from_date, period
 
-        create_event(event, start_date, end_date, user) if user.events.in_period(start_date, end_date).empty?
+        if user.events.in_period(start_date, end_date).empty?
+          create_event(event, start_date, end_date, user)
+          event.destroy if move
+        end
       end
     end
 

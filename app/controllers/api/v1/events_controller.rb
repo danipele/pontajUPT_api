@@ -16,7 +16,6 @@ module Api
         create_event activity, event_from_fe
         create_recurrent_events activity unless params[:recurrent].blank?
 
-        params[:filter][:date]
         filter_events params[:filter]
       end
 
@@ -44,7 +43,10 @@ module Api
         CopyEvents.call from_date: params[:date].to_time.in_time_zone('Bucharest'),
                         to_date: params[:copy_date].to_time.in_time_zone('Bucharest'),
                         user: current_user,
-                        period: params[:mode]
+                        period: params[:mode],
+                        move: params[:move]
+
+        filter_events params[:filter]
       end
 
       private
