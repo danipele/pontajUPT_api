@@ -45,7 +45,11 @@ class EventsFiltering
     end
 
     def fill_events(user)
-      @events = !@start_date_filter.blank? || @all == 'true' ? user.events.sort_by(&:start_date) : events_for(user)
+      @events = if !@start_date_filter.blank? || ActiveModel::Type::Boolean.new.cast(@all)
+                  user.events.sort_by(&:start_date)
+                else
+                  events_for(user)
+                end
     end
 
     def events_for(user)
@@ -127,8 +131,11 @@ class EventsFiltering
     end
 
     def date_filter
-      start_date = Date.strptime @start_date_filter, '%a %b %d %Y'
-      end_date = Date.strptime @end_date_filter, '%a %b %d %Y' unless @end_date_filter.blank?
+      # start_date = Date.strptime @start_date_filter, '%a %b %d %Y'
+      # end_date = Date.strptime @end_date_filter, '%a %b %d %Y' unless @end_date_filter.blank?
+
+      start_date = @start_date_filter.to_date
+      end_date = @end_date_filter.to_date unless @end_date_filter.blank?
       @events = @events.select do |event|
         if end_date.present?
           event.start_date.to_date >= start_date && event.start_date.to_date <= end_date

@@ -16,7 +16,7 @@ module Api
         create_event activity, event_from_fe
         create_recurrent_events activity unless params[:recurrent].blank?
 
-        filter_events params[:filter]
+        filter_events filter_params
       end
 
       def destroy
@@ -92,6 +92,15 @@ module Api
                                       user: current_user
 
         render json: events.map { |event| EventResponse.call event: event }
+      end
+
+      def filter_params
+        filter_params = params[:filter]
+
+        start = filter_params[:start_date_filter]
+        filter_params[:start_date_filter] = start.to_time.in_time_zone('Bucharest').to_s unless start.blank?
+
+        filter_params
       end
     end
   end

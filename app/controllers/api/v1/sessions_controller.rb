@@ -10,26 +10,36 @@ module Api
         password = params[:session][:password]
 
         user = User.find_by email: email
-        unless user.present?
-          return render json: { success: false,
-                                message: 'Nu exista niciun cont cu acest email!' }
-        end
+        return no_account unless user.present?
+        return incorrect_password unless user.authenticate password
 
-        unless user.authenticate password
-          return render json: { success: false,
-                                message: 'Parola incorecta!' }
-        end
-
-        auth_token = JsonWebToken.encode user_id: user.id
-
-        render json: { success: true,
-                       auth_token: auth_token }
+        success_response user
       end
 
       def destroy
         @current_user = nil
 
         render json: {}
+      end
+
+      private
+
+      def no_account
+        render json: { success: false,
+                       message: 'Nu exista niciun cont cu acest email!' }
+      end
+
+      def incorrect_password
+        render json: { success: false,
+                       message: 'Parola incorecta!' }
+      end
+
+      def success_response(user)
+        auth_token = JsonWebToken.encode user_id: user.id
+
+        render json: { success: true,
+                       auth_token: auth_token,
+                       user: user }
       end
     end
   end
