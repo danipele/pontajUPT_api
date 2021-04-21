@@ -7,17 +7,23 @@ class ImportFile
       worksheet = workbook.worksheet model == 'Course' ? 'Cursuri' : 'Proiecte'
 
       worksheet.each 1 do |row|
-        values = row.to_a
-
-        if model == 'Course'
-          process_course values, user
-        else
-          process_project values, user
-        end
+        process_entity row, model, user
       end
+
+      worksheet.rows.count - 1
     end
 
     private
+
+    def process_entity(row, model, user)
+      values = row.to_a
+
+      if model == 'Course'
+        process_course values, user
+      else
+        process_project values, user
+      end
+    end
 
     def process_course(values, user)
       course = user.courses.create name: values[0],

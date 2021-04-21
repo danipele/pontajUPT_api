@@ -8,6 +8,8 @@ class CreateRecurrentEvents
       start_date = @event[:start_date].to_time
       end_date = @event[:end_date].to_time
       create_events start_date, end_date
+
+      @created
     end
 
     private
@@ -21,6 +23,7 @@ class CreateRecurrentEvents
       @weekend_too = params[:weekends_too]
       @event = params[:event]
       @recurrent = params[:recurrent]
+      @created = 0
     end
 
     def create_events(start_date, end_date)
@@ -81,6 +84,7 @@ class CreateRecurrentEvents
                               end_date: end_date,
                               description: description,
                               user: @user
+      @created += 1
     end
 
     def should_create_event?(start_date, end_date)

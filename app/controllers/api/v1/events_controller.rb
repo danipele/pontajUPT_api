@@ -14,9 +14,9 @@ module Api
         return render json: {} unless activity
 
         create_event activity, event_from_fe
-        create_recurrent_events activity unless params[:recurrent].blank?
+        successfully = create_recurrent_events activity unless params[:recurrent].blank?
 
-        filter_events filter_params
+        filter_events filter_params, successfully
       end
 
       def destroy
@@ -40,13 +40,13 @@ module Api
       end
 
       def copy_events
-        CopyEvents.call from_date: params[:date].to_time.in_time_zone('Bucharest'),
-                        to_date: params[:copy_date].to_time.in_time_zone('Bucharest'),
-                        user: current_user,
-                        period: params[:mode],
-                        move: params[:move]
+        successfully = CopyEvents.call from_date: from_date,
+                                       to_date: to_date,
+                                       user: current_user,
+                                       period: params[:mode],
+                                       move: params[:move]
 
-        filter_events params[:filter]
+        filter_events params[:filter], successfully
       end
 
       private
@@ -87,11 +87,14 @@ module Api
                            entity: params[:entity]
       end
 
-      def filter_events(params)
+      def filter_events(params, successfully = nil)
         events = EventsFiltering.call params: params,
                                       user: current_user
 
-        render json: events.map { |event| EventResponse.call event: event }
+        json_events = events.map { |event| EventResponse.call event: event }
+        return render json: json_events unless successfully
+
+        render json: { events: json_events, successfully: successfully }
       end
 
       def filter_params
@@ -101,6 +104,14 @@ module Api
         filter_params[:start_date_filter] = start.to_time.in_time_zone('Bucharest').to_s unless start.blank?
 
         filter_params
+      end
+
+      def from_date
+        params[:date].to_time.in_time_zone('Bucharest')
+      end
+
+      def to_date
+        params[:copy_date].to_time.in_time_zone('Bucharest')
       end
     end
   end

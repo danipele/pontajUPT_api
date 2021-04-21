@@ -40,11 +40,11 @@ module Api
       end
 
       def import_projects
-        ImportFile.call path: params[:projects_file].path,
-                        model: 'Project',
-                        user: current_user
+        rows = ImportFile.call path: params[:projects_file].path,
+                               model: 'Project',
+                               user: current_user
 
-        render json: current_user.projects.order('LOWER(name)')
+        render json: { projects: current_user.projects.order('LOWER(name)'), added: rows }
       end
 
       def export_projects

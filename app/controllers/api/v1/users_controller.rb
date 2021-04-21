@@ -3,7 +3,7 @@
 module Api
   module V1
     class UsersController < ApplicationController
-      skip_before_action :authenticate_request, only: [:create]
+      skip_before_action :authenticate_request, only: %i[create reset_password]
 
       def create
         User.create! user_params
@@ -22,6 +22,8 @@ module Api
       def update
         current_user.update first_name: params[:user][:first_name],
                             last_name: params[:user][:last_name]
+
+        render json: current_user
       end
 
       private
