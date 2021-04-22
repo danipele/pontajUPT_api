@@ -52,14 +52,15 @@ module Api
       private
 
       def event_params
-        params.require(:event).permit :start_date, :end_date, :activity, :subactivity, :entity, :description
+        params.require(:event).permit :start_date, :end_date, :activity, :subactivity, :entity, :description, :type
       end
 
       def create_event(activity, event)
         activity.events.create start_date: event[:start_date],
                                end_date: event[:end_date],
                                description: event[:description],
-                               user: current_user
+                               user: current_user,
+                               type: event[:type]
       end
 
       def update_event(event, activity)

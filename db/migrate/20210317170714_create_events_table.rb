@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class CreateEventsTable < ActiveRecord::Migration[6.0]
   def change
     create_table :events do |t|
@@ -7,6 +9,7 @@ class CreateEventsTable < ActiveRecord::Migration[6.0]
       t.string :activity_type, null: false
       t.string :description, null: false
       t.bigint :user_id, null: false
+      t.string :type
 
       t.timestamps
     end

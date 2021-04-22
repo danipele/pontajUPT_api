@@ -24,5 +24,7 @@ Holiday.create name: 'Concediu crestere copil'
 Holiday.create name: 'Concediu de maternitate'
 Holiday.create name: 'Absente nemotivate'
 
-User.create email: 'a@a.com', password: 'wertyuio', first_name: 'dani', last_name: 'pele',
+User.create email: 'angajat@email.com', password: 'wertyuio', first_name: 'dani', last_name: 'pele',
             type: 'Angajat'
+User.create email: 'colaborator@email.com', password: 'wertyuio', first_name: 'dani', last_name: 'pele',
+            type: 'Colaborator'
