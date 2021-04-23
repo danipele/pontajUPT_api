@@ -11,7 +11,7 @@ class CopyEvents
         end_date = update_date event.end_date, to_date, from_date, period
         next unless user.events.in_period(start_date, end_date).empty?
 
-        handle_event event, start_date, end_date, user, move
+        handle_event event.id, start_date, user, move
       end
 
       @successfully
@@ -41,10 +41,11 @@ class CopyEvents
                                    user: user
     end
 
-    def handle_event(event, start_date, end_date, user, move)
-      create_event(event, start_date, end_date, user)
+    def handle_event(event_id, start_date, user, move)
+      @successfully += CopyEvent.call event_id: event_id,
+                                      start_date: start_date,
+                                      user: user
       event.destroy if move
-      @successfully += 1
     end
   end
 end

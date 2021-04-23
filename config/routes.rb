@@ -32,6 +32,7 @@ Rails.application.routes.draw do
       resource :events do
         post :destroy_selected
         post :copy_events
+        post :copy_event
       end
     end
   end

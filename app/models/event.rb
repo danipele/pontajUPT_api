@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+COLLABORATOR_EVENTS = ['Curs', 'Seminar', 'Laborator', 'Ora de proiect'].freeze
+
 class Event < ApplicationRecord
   @inheritance_column = :not_type
 

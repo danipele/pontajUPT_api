@@ -49,6 +49,14 @@ module Api
         filter_events params[:filter], successfully
       end
 
+      def copy_event
+        successfully = CopyEvent.call event_id: params[:event_id],
+                                      start_date: params[:date],
+                                      user: current_user
+
+        filter_events params[:filter], successfully
+      end
+
       private
 
       def event_params
