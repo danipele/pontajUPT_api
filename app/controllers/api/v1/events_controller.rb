@@ -13,8 +13,8 @@ module Api
 
         return render json: {} unless activity
 
-        create_event activity, event_from_fe
-        successfully = create_recurrent_events activity unless params[:recurrent].blank?
+        event = create_event activity, event_from_fe
+        successfully = create_recurrent_events event unless params[:recurrent].blank?
 
         filter_events filter_params, successfully
       end
@@ -78,13 +78,12 @@ module Api
                       activity: activity
       end
 
-      def create_recurrent_events(activity)
+      def create_recurrent_events(event)
         service_params = {
           recurrent: params[:recurrent],
           recurrent_date: params[:recurrent_date].to_time.in_time_zone('Bucharest'),
           weekends_too: params[:weekends_too],
-          event: params[:event],
-          activity: activity,
+          event: event,
           user: current_user
         }
         CreateRecurrentEvents.call service_params

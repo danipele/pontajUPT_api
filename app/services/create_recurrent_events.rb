@@ -5,8 +5,8 @@ class CreateRecurrentEvents
     def call(params)
       params params
 
-      start_date = @event[:start_date].to_time
-      end_date = @event[:end_date].to_time
+      start_date = @event.start_date
+      end_date = @event.end_date
       create_events start_date, end_date
 
       @created
@@ -14,10 +14,9 @@ class CreateRecurrentEvents
 
     private
 
-    attr_accessor :activity, :user, :add, :recurrent_date, :weekends_too, :event
+    attr_accessor :user, :recurrent_date, :weekends_too, :event, :reccurent, :created
 
     def params(params)
-      @activity = params[:activity]
       @user = params[:user]
       @recurrent_date = params[:recurrent_date]
       @weekend_too = params[:weekends_too]
@@ -43,7 +42,7 @@ class CreateRecurrentEvents
       loop do
         start_date += 1.year
         end_date += 1.year
-        create_event start_date, end_date, @event[:description] if should_create_event? start_date, end_date
+        @created += copy_event start_date if should_create_event? start_date, end_date
         break if start_date.year == @recurrent_date.year
       end
     end
@@ -52,7 +51,7 @@ class CreateRecurrentEvents
       loop do
         start_date += 1.month
         end_date += 1.month
-        create_event start_date, end_date, @event[:description] if should_create_event? start_date, end_date
+        @created += copy_event start_date if should_create_event? start_date, end_date
         break if start_date.year == @recurrent_date.year && start_date.month == @recurrent_date.month
       end
     end
@@ -61,7 +60,7 @@ class CreateRecurrentEvents
       loop do
         start_date += 7.day
         end_date += 7.day
-        create_event start_date, end_date, @event[:description] if should_create_event? start_date, end_date
+        @created += copy_event start_date if should_create_event? start_date, end_date
         break if start_date.year == @recurrent_date.year &&
                  start_date.month == @recurrent_date.month &&
                  start_date.day == @recurrent_date.day
@@ -72,19 +71,17 @@ class CreateRecurrentEvents
       loop do
         start_date += 1.day
         end_date += 1.day
-        create_event start_date, end_date, @event[:description] if should_create_event? start_date, end_date
+        @created += copy_event start_date if should_create_event? start_date, end_date
         break if start_date.year == @recurrent_date.year &&
                  start_date.month == @recurrent_date.month &&
                  start_date.day == @recurrent_date.day
       end
     end
 
-    def create_event(start_date, end_date, description)
-      @activity.events.create start_date: start_date,
-                              end_date: end_date,
-                              description: description,
-                              user: @user
-      @created += 1
+    def copy_event(start_date)
+      CopyEvent.call event_id: @event.id,
+                     start_date: start_date,
+                     user: @user
     end
 
     def should_create_event?(start_date, end_date)
