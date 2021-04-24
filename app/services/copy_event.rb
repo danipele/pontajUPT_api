@@ -9,7 +9,11 @@ class CopyEvent
 
       copy_event = create_copy_event event, start_date, diff
 
-      handle_copy_event copy_event, diff
+      if copy_event.activity.is_a? Holiday
+        save_holiday_event copy_event
+      else
+        handle_copy_event copy_event, diff
+      end
     end
 
     private
@@ -21,9 +25,17 @@ class CopyEvent
         copy_event.save!
         @user.events << copy_event
         1
+      elsif weekend(copy_event)
+        return 0 if copy_event.activity.is_a?(OtherActivity)
+
+        save_course_hour_pay copy_event
       else
         handle_basic_and_hour_pay diff, copy_event
       end
+    end
+
+    def weekend(copy_event)
+      copy_event.start_date.saturday? || copy_event.start_date.sunday?
     end
 
     def create_copy_event(event, start_date, diff)
@@ -110,6 +122,13 @@ class CopyEvent
       return 0 unless COLLABORATOR_EVENTS.include? copy_event.activity.type
 
       copy_event.type = 'plata cu ora'
+      copy_event.save!
+      @user.events << copy_event
+      1
+    end
+
+    def save_holiday_event(copy_event)
+      copy_event.type = 'concediu'
       copy_event.save!
       @user.events << copy_event
       1

@@ -34,13 +34,6 @@ class CopyEvents
       date.change(year: to_date.year, month: to_date.month, day: to_date.day)
     end
 
-    def create_event(event, start_date, end_date, user)
-      event.activity.events.create start_date: start_date,
-                                   end_date: end_date,
-                                   description: event.description,
-                                   user: user
-    end
-
     def handle_event(event_id, start_date, user, move)
       @successfully += CopyEvent.call event_id: event_id,
                                       start_date: start_date,
