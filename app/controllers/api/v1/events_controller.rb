@@ -57,6 +57,14 @@ module Api
         filter_events params[:filter], successfully
       end
 
+      def project_hours
+        hours = MonthlyHoursForProject.call user: current_user,
+                                            project_id: params[:project],
+                                            date: params[:date].to_time.in_time_zone('Bucharest').to_date
+
+        render json: hours
+      end
+
       private
 
       def event_params

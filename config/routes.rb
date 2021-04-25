@@ -34,6 +34,7 @@ Rails.application.routes.draw do
         post :destroy_selected
         post :copy_events
         post :copy_event
+        post :project_hours
       end
     end
   end
