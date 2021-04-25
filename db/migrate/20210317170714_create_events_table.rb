@@ -5,8 +5,8 @@ class CreateEventsTable < ActiveRecord::Migration[6.0]
     create_table :events do |t|
       t.timestamp :start_date, null: false
       t.timestamp :end_date, null: false
-      t.bigint :activity_id, null: false
-      t.string :activity_type, null: false
+      t.bigint :activity_id
+      t.string :activity_type
       t.string :description, null: false
       t.bigint :user_id, null: false
       t.string :type
