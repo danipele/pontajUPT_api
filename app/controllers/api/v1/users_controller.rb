@@ -26,6 +26,14 @@ module Api
         render json: current_user
       end
 
+      def add_holidays
+        successfully = AddHolidaysForEmployees.call start_date: params[:start_date].to_time,
+                                                    end_date: params[:end_date].to_time,
+                                                    description: params[:description]
+
+        render json: successfully
+      end
+
       private
 
       def user_params

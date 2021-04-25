@@ -11,9 +11,10 @@ class CopyEvents
         end_date = update_date event.end_date, to_date, from_date, period
         next unless user.events.in_period(start_date, end_date).empty?
 
-        handle_event event.id, start_date, user, move
+        handle_event event, start_date, user, move
       end
 
+      user.events.reload
       @successfully
     end
 
@@ -34,11 +35,11 @@ class CopyEvents
       date.change(year: to_date.year, month: to_date.month, day: to_date.day)
     end
 
-    def handle_event(event_id, start_date, user, move)
-      @successfully += CopyEvent.call event_id: event_id,
+    def handle_event(event, start_date, user, move)
+      @successfully += CopyEvent.call event_id: event.id,
                                       start_date: start_date,
                                       user: user
-      event.destroy if move
+      event.destroy! if move
     end
   end
 end

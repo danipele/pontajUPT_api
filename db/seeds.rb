@@ -28,3 +28,5 @@ User.create email: 'angajat@email.com', password: 'wertyuio', first_name: 'dani'
             type: 'Angajat'
 User.create email: 'colaborator@email.com', password: 'wertyuio', first_name: 'dani', last_name: 'pele',
             type: 'Colaborator'
+User.create email: 'admin@email.com', password: 'wertyuio', first_name: 'dani', last_name: 'pele',
+            type: 'Admin'

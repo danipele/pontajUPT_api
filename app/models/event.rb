@@ -17,4 +17,11 @@ class Event < ApplicationRecord
 
   scope :from_date, ->(date) { where('start_date::timestamp >= ? and end_date::timestamp <= ?', date, date + 1.day) }
   scope :from_week, ->(date) { where('start_date::timestamp >= ? and end_date::timestamp <= ?', date, date + 1.week) }
+
+  scope :should_delete_for_holiday, lambda { |date|
+    where('start_date::Date = ? and type != ?', date, 'proiect')
+  }
+  scope :should_delete_holidays_for_holiday, lambda { |date|
+    where('start_date::Date = ? and type = ?', date, 'concediu')
+  }
 end

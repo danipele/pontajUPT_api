@@ -13,6 +13,7 @@ Rails.application.routes.draw do
       resource :users do
         post :reset_password
         get :authenticated_user
+        post :add_holidays
       end
 
       resource :courses do
