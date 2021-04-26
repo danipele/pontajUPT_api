@@ -35,6 +35,8 @@ class CreateRecurrentEvents
         weekly_events start_date, end_date
       when 'Zilnic'
         daily_events start_date, end_date
+      when 'La doua saptamani'
+        every_other_week start_date, end_date
       end
     end
 
@@ -71,6 +73,17 @@ class CreateRecurrentEvents
       loop do
         start_date += 1.day
         end_date += 1.day
+        @created += copy_event start_date if should_create_event? start_date, end_date
+        break if start_date.year == @recurrent_date.year &&
+                 start_date.month == @recurrent_date.month &&
+                 start_date.day == @recurrent_date.day
+      end
+    end
+
+    def every_other_week(start_date, end_date)
+      loop do
+        start_date += 14.day
+        end_date += 14.day
         @created += copy_event start_date if should_create_event? start_date, end_date
         break if start_date.year == @recurrent_date.year &&
                  start_date.month == @recurrent_date.month &&
