@@ -3,6 +3,8 @@
 module Api
   module V1
     class SessionsController < ApplicationController
+      include Constants
+
       skip_before_action :authenticate_request, only: [:create]
 
       def create
@@ -26,12 +28,12 @@ module Api
 
       def no_account
         render json: { success: false,
-                       message: 'Nu exista niciun cont cu acest email!' }
+                       message: NO_ACCOUNT_MESSAGE }
       end
 
       def incorrect_password
         render json: { success: false,
-                       message: 'Parola incorecta!' }
+                       message: INCORRECT_PASSWORD_MESSAGE }
       end
 
       def success_response(user)

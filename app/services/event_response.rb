@@ -2,6 +2,8 @@
 
 class EventResponse
   class << self
+    include Constants
+
     def call(event:)
       response = event.attributes
       fill_activity response, event
@@ -24,24 +26,24 @@ class EventResponse
     end
 
     def fill_course_hour(response, event)
-      response['activity'] = 'Activitate didactica'
-      response['subactivity'] = event.activity.type
-      response['entity'] = Course.find_by(id: event.activity.course_id)
+      response[ACTIVITY] = COURSE_HOUR
+      response[SUBACTIVITY] = event.activity.type
+      response[ENTITY] = Course.find_by(id: event.activity.course_id)
     end
 
     def fill_project(response, event)
-      response['activity'] = 'Proiect'
-      response['entity'] = Project.find_by(id: event.activity.id)
+      response[ACTIVITY] = PROJECT
+      response[ENTITY] = Project.find_by(id: event.activity.id)
     end
 
     def fill_other_activity(response, event)
-      response['activity'] = 'Alta activitate'
-      response['subactivity'] = event.activity.name
+      response[ACTIVITY] = OTHER_ACTIVITY
+      response[SUBACTIVITY] = event.activity.name
     end
 
     def fill_holiday(response, event)
-      response['activity'] = 'Concediu'
-      response['subactivity'] = event.activity.name
+      response[ACTIVITY] = Holiday
+      response[SUBACTIVITY] = event.activity.name
     end
   end
 end

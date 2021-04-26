@@ -2,13 +2,15 @@
 
 class EventsFiltering
   class << self
+    include Constants
+
     def call(params:, user:)
       attributes params
       fill_events user
 
       sort_events unless @sort.blank?
       filter_events
-      return @events.to_a.reverse! if @direction == 'desc'
+      return @events.to_a.reverse! if @direction == DESC
 
       @events
     end
@@ -53,21 +55,22 @@ class EventsFiltering
     end
 
     def events_for(user)
-      if @for == 'day'
+      case @for
+      when DAY
         for_day user
-      else
+      when WEEK
         for_week user
       end
     end
 
     def for_day(user)
-      date = @date.to_time.in_time_zone('Bucharest').to_date
+      date = @date.to_time.in_time_zone(BUCHAREST_TIMEZONE).to_date
 
       user.events.filter { |event| event.start_date.to_date == date }.sort_by(&:start_date)
     end
 
     def for_week(user)
-      date = @date.to_time.in_time_zone('Bucharest').to_date
+      date = @date.to_time.in_time_zone(BUCHAREST_TIMEZONE).to_date
 
       user.events.filter do |event|
         event.start_date.to_date.at_beginning_of_week == date.at_beginning_of_week
@@ -76,11 +79,11 @@ class EventsFiltering
 
     def sort_events
       case @sort
-      when 'subactivity'
+      when SUBACTIVITY
         sorted_by_subactivity
-      when 'activity'
+      when ACTIVITY
         sorted_by_activity
-      when 'date'
+      when DATE
         sorted_by_date
       end
     end
@@ -98,7 +101,7 @@ class EventsFiltering
       when CourseHour
         activity.type
       when Project
-        'Project'
+        PROJECT
       else
         activity.name
       end
@@ -113,7 +116,7 @@ class EventsFiltering
     end
 
     def subactivity_filter
-      return projects if @subactivity == 'Proiect'
+      return projects if @subactivity == PROJECT
 
       @events = @events.select do |event|
         activity = event.activity
@@ -131,9 +134,6 @@ class EventsFiltering
     end
 
     def date_filter
-      # start_date = Date.strptime @start_date_filter, '%a %b %d %Y'
-      # end_date = Date.strptime @end_date_filter, '%a %b %d %Y' unless @end_date_filter.blank?
-
       start_date = @start_date_filter.to_date
       end_date = @end_date_filter.to_date unless @end_date_filter.blank?
       @events = @events.select do |event|

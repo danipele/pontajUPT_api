@@ -3,6 +3,8 @@
 module Api
   module V1
     class EventsController < ApplicationController
+      include Constants
+
       def index
         filter_events params
       end
@@ -60,7 +62,7 @@ module Api
       def project_hours
         hours = MonthlyHoursForProject.call user: current_user,
                                             project_id: params[:project],
-                                            date: params[:date].to_time.in_time_zone('Bucharest').to_date
+                                            date: params[:date].to_time.in_time_zone(BUCHAREST_TIMEZONE).to_date
 
         render json: hours
       end
@@ -89,7 +91,7 @@ module Api
       def create_recurrent_events(event)
         service_params = {
           recurrent: params[:recurrent],
-          recurrent_date: params[:recurrent_date].to_time.in_time_zone('Bucharest'),
+          recurrent_date: params[:recurrent_date].to_time.in_time_zone(BUCHAREST_TIMEZONE),
           weekends_too: params[:weekends_too],
           event: event,
           user: current_user
@@ -117,17 +119,17 @@ module Api
         filter_params = params[:filter]
 
         start = filter_params[:start_date_filter]
-        filter_params[:start_date_filter] = start.to_time.in_time_zone('Bucharest').to_s unless start.blank?
+        filter_params[:start_date_filter] = start.to_time.in_time_zone(BUCHAREST_TIMEZONE).to_s unless start.blank?
 
         filter_params
       end
 
       def from_date
-        params[:date].to_time.in_time_zone('Bucharest')
+        params[:date].to_time.in_time_zone(BUCHAREST_TIMEZONE)
       end
 
       def to_date
-        params[:copy_date].to_time.in_time_zone('Bucharest')
+        params[:copy_date].to_time.in_time_zone(BUCHAREST_TIMEZONE)
       end
     end
   end

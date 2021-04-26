@@ -2,9 +2,11 @@
 
 class ImportFile
   class << self
+    include Constants
+
     def call(path:, model:, user:)
       workbook = Spreadsheet.open path
-      worksheet = workbook.worksheet model == 'Course' ? 'Cursuri' : 'Proiecte'
+      worksheet = workbook.worksheet model == COURSE_MODEL ? COURSES_SHEET_NAME : PROJECTS_SHEET_NAME
 
       worksheet.each 1 do |row|
         process_entity row, model, user
@@ -18,7 +20,7 @@ class ImportFile
     def process_entity(row, model, user)
       values = row.to_a
 
-      if model == 'Course'
+      if model == COURSE_MODEL
         process_course values, user
       else
         process_project values, user

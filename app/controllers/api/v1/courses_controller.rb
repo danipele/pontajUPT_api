@@ -3,8 +3,10 @@
 module Api
   module V1
     class CoursesController < ApplicationController
+      include Constants
+
       def index
-        render json: current_user.courses.order('LOWER(name)')
+        render json: current_user.courses.order(ORDER_COURSES_PROJECTS)
       end
 
       def create
@@ -14,14 +16,14 @@ module Api
         return render json: {} unless course.save
 
         course.add_course_hours
-        render json: current_user.courses.order('LOWER(name)')
+        render json: current_user.courses.order(ORDER_COURSES_PROJECTS)
       end
 
       def update
         course = Course.find params[:id]
         course.update! course_params
 
-        render json: current_user.courses.order('LOWER(name)')
+        render json: current_user.courses.order(ORDER_COURSES_PROJECTS)
       end
 
       def destroy
@@ -37,22 +39,22 @@ module Api
         file = Tempfile.new.path
         template_workbook.write file
 
-        send_file file, filename: 'Cursuri.xls', type: 'text/xls'
+        send_file file, filename: COURSES_FILE_NAME, type: XLS_TYPE
       end
 
       def import_courses
         rows = ImportFile.call path: params[:courses_file].path,
-                               model: 'Course',
+                               model: COURSE_MODEL,
                                user: current_user
 
-        render json: { courses: current_user.courses.order('LOWER(name)'), added: rows }
+        render json: { courses: current_user.courses.order(ORDER_COURSES_PROJECTS), added: rows }
       end
 
       def export_courses
         file = Tempfile.new.path
         filled_excel.write file
 
-        send_file file, filename: 'Cursuri.xls', type: 'text/xls'
+        send_file file, filename: COURSES_FILE_NAME, type: XLS_TYPE
       end
 
       private
@@ -62,10 +64,8 @@ module Api
       end
 
       def template_workbook
-        CreateExcelTemplate.call header: ['Nume', 'An de studiu', 'Semestru',
-                                          'Ciclu(Licenta, Master, Doctorat)',
-                                          'Facultate', 'Descriere'],
-                                 sheet_name: 'Cursuri'
+        CreateExcelTemplate.call header: COURSE_HEADERS,
+                                 sheet_name: COURSES_SHEET_NAME
       end
 
       def filled_excel

@@ -2,7 +2,10 @@
 
 class CreateRecurrentEvents
   class << self
+    include Constants
+
     def call(params)
+      binding.pry
       params params
 
       start_date = @event.start_date
@@ -14,7 +17,7 @@ class CreateRecurrentEvents
 
     private
 
-    attr_accessor :user, :recurrent_date, :weekends_too, :event, :reccurent, :created
+    attr_accessor :user, :recurrent_date, :weekends_too, :event, :recurrent, :created
 
     def params(params)
       @user = params[:user]
@@ -27,15 +30,15 @@ class CreateRecurrentEvents
 
     def create_events(start_date, end_date)
       case @recurrent
-      when 'Anual'
+      when YEARLY_RO
         yearly_events start_date, end_date
-      when 'Lunar'
+      when MONTHLY_RO
         monthly_events start_date, end_date
-      when 'Saptamanal'
+      when WEEKLY_RO
         weekly_events start_date, end_date
-      when 'Zilnic'
+      when DAILY_RO
         daily_events start_date, end_date
-      when 'La doua saptamani'
+      when EVERY_OTHER_WEEK_RO
         every_other_week start_date, end_date
       end
     end

@@ -2,15 +2,17 @@
 
 class EventActivity
   class << self
+    include Constants
+
     def call(activity:, subactivity:, entity:)
       case activity
-      when 'Activitate didactica'
+      when COURSE_HOUR
         course_hour subactivity, entity
-      when 'Proiect'
+      when PROJECT
         project entity
-      when 'Alta activitate'
+      when OTHER_ACTIVITY
         other_activity subactivity
-      when 'Concediu'
+      when HOLIDAY
         holiday subactivity
       end
     end

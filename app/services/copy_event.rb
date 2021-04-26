@@ -2,6 +2,8 @@
 
 class CopyEvent
   class << self
+    include Constants
+
     def call(event_id:, start_date:, user:)
       @user = user
       event = @user.events.find event_id
@@ -21,7 +23,7 @@ class CopyEvent
     attr_reader :user
 
     def handle_copy_event(copy_event, diff)
-      if copy_event.type == 'proiect'
+      if copy_event.type == PROJECT_TYPE
         copy_event.save!
         @user.events << copy_event
         1
@@ -58,7 +60,7 @@ class CopyEvent
     end
 
     def basic_hours(date)
-      date_events = @user.events.filter { |event| event.start_date.to_date == date && event.type == 'norma de baza' }
+      date_events = @user.events.filter { |event| event.start_date.to_date == date && event.type == BASIC_NORM }
 
       date_events.inject(0) do |sum, event|
         sum + (event.end_date.hour.zero? ? 24 : event.end_date.hour) - event.start_date.hour
@@ -66,7 +68,7 @@ class CopyEvent
     end
 
     def save_only_basic_event(copy_event)
-      copy_event.type = 'norma de baza'
+      copy_event.type = BASIC_NORM
       copy_event.save!
       @user.events << copy_event
       1
@@ -98,21 +100,21 @@ class CopyEvent
 
     def save_basic_event(copy_event, remove)
       copy_event.end_date -= remove.hour
-      copy_event.type = 'norma de baza'
+      copy_event.type = BASIC_NORM
       copy_event.save!
       @user.events << copy_event
     end
 
     def save_hour_pay_event(copy_event, add)
       copy_event.start_date += add.hour
-      copy_event.type = 'plata cu ora'
+      copy_event.type = HOURLY_PAYMENT
       copy_event.save!
       @user.events << copy_event
     end
 
     def handle_other_activity_event(copy_event, remove)
       copy_event.end_date -= remove.hour
-      copy_event.type = 'norma de baza'
+      copy_event.type = BASIC_NORM
       copy_event.save!
       @user.events << copy_event
       1
@@ -121,14 +123,14 @@ class CopyEvent
     def save_course_hour_pay(copy_event)
       return 0 unless COLLABORATOR_EVENTS.include? copy_event.activity.type
 
-      copy_event.type = 'plata cu ora'
+      copy_event.type = HOURLY_PAYMENT
       copy_event.save!
       @user.events << copy_event
       1
     end
 
     def save_holiday_event(copy_event)
-      copy_event.type = 'concediu'
+      copy_event.type = HOLIDAY_TYPE
       copy_event.save!
       @user.events << copy_event
       1

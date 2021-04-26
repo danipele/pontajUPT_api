@@ -1,8 +1,8 @@
 # frozen_string_literal: true
 
-COLLABORATOR_EVENTS = ['Curs', 'Seminar', 'Laborator', 'Ora de proiect'].freeze
-
 class Event < ApplicationRecord
+  include Constants
+
   @inheritance_column = :not_type
 
   belongs_to :activity, polymorphic: true, primary_key: :id, inverse_of: :events
@@ -19,9 +19,9 @@ class Event < ApplicationRecord
   scope :from_week, ->(date) { where('start_date::timestamp >= ? and end_date::timestamp <= ?', date, date + 1.week) }
 
   scope :should_delete_for_holiday, lambda { |date|
-    where('start_date::Date = ? and type != ?', date, 'proiect')
+    where('start_date::Date = ? and type != ?', date, PROJECT_TYPE)
   }
   scope :should_delete_holidays_for_holiday, lambda { |date|
-    where('start_date::Date = ? and type = ?', date, 'concediu')
+    where('start_date::Date = ? and type = ?', date, HOLIDAY_TYPE)
   }
 end

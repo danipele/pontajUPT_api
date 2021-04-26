@@ -1,28 +1,23 @@
-# This file should contain all the record creation needed to seed the database with its default values.
-# The data can then be loaded with the rails db:seed command (or created alongside the database with db:setup).
-#
-# Examples:
-#
-#   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
-#   Character.create(name: 'Luke', movie: movies.first)
-OtherActivity.create name: 'Indrumare doctoranzi'
-OtherActivity.create name: 'Implicare neremunerată în problematica societății'
-OtherActivity.create name: 'Gestiune cooperari'
-OtherActivity.create name: 'Zile delegatie (Deplasare interna)'
-OtherActivity.create name: 'Zile delegatie (Deplasare externa)'
-OtherActivity.create name: 'Plecati cu bursa'
-OtherActivity.create name: 'Alte activitati'
-OtherActivity.create name: 'Documentare pentru cercetare'
-OtherActivity.create name: 'Documentare oportunitati de finantare proiecte'
-OtherActivity.create name: 'Elaborare proiecte de cercetare'
-OtherActivity.create name: 'Executie proiecte de cercetare'
+# frozen_string_literal: true
 
-Holiday.create name: 'Concediu medical'
-Holiday.create name: 'Concediu de odihna'
-Holiday.create name: 'Concediu fara salariu'
-Holiday.create name: 'Concediu crestere copil'
-Holiday.create name: 'Concediu de maternitate'
-Holiday.create name: 'Absente nemotivate'
+OtherActivity.create name: Constants::DOCTORAL_STUDENTS_GUIDANCE
+OtherActivity.create name: Constants::UNPAID_INVOLVEMENT_IN_SOCIETY
+OtherActivity.create name: Constants::COOPERATION_MANAGEMENT
+OtherActivity.create name: Constants::INTERNAL_DELEGATION_DAYS
+OtherActivity.create name: Constants::EXTERNAL_DELEGATION_DAYS
+OtherActivity.create name: Constants::DEPARTURE_WITH_SCHOLARSHIP
+OtherActivity.create name: Constants::OTHER_ACTIVITIES
+OtherActivity.create name: Constants::RESEARCH_DOCUMENTATION
+OtherActivity.create name: Constants::PROJECT_FINANCING_OPPORTUNITIES_DOCUMENTATION
+OtherActivity.create name: Constants::RESEARCH_PROJECTS_ELABORATION
+OtherActivity.create name: Constants::RESEARCH_PROJECTS_EXECUTION
+
+Holiday.create name: Constants::SICK_LEAVE
+Holiday.create name: Constants::VACATION
+Holiday.create name: Constants::UNPAID_LEAVE
+Holiday.create name: Constants::CHILD_GROWTH_LEAVE
+Holiday.create name: Constants::MATERNITY_LEAVE
+Holiday.create name: Constants::UNMOTIVATED_ABSENCES
 
 User.create email: 'angajat@email.com', password: 'wertyuio', first_name: 'dani', last_name: 'pele',
             type: 'Angajat'

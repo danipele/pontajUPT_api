@@ -2,10 +2,12 @@
 
 class AddHolidaysForEmployees
   class << self
+    include Constants
+
     def call(start_date:, end_date:, description:)
       @created = 0
       while start_date <= end_date
-        date = start_date.in_time_zone('Bucharest').to_date
+        date = start_date.in_time_zone(BUCHAREST_TIMEZONE).to_date
         if date.saturday? || date.sunday?
           start_date += 1.day
           next
@@ -20,7 +22,7 @@ class AddHolidaysForEmployees
     private
 
     def handle_holiday_events(start_date, description)
-      activity = Holiday.find_by_name 'Concediu de odihna'
+      activity = Holiday.find_by_name VACATION
       next_date = add_holiday_events start_date, activity, description
       @created += 1
 
@@ -28,20 +30,20 @@ class AddHolidaysForEmployees
     end
 
     def remove_events_for(start_date, user)
-      date = start_date.in_time_zone('Bucharest').to_date
+      date = start_date.in_time_zone(BUCHAREST_TIMEZONE).to_date
       user.events.should_delete_for_holiday(date).destroy_all
       user.events.should_delete_holidays_for_holiday(start_date).destroy_all
     end
 
     def add_holiday_events(start_date, activity, description)
       event_end_date = start_date + 1.day
-      User.where(type: 'Angajat').each do |user|
+      User.where(type: EMPLOYEE_TYPE).each do |user|
         remove_events_for start_date, user
         user.events.create! start_date: start_date,
                             end_date: event_end_date,
                             activity: activity,
                             description: description,
-                            type: 'concediu'
+                            type: HOLIDAY_TYPE
       end
 
       event_end_date

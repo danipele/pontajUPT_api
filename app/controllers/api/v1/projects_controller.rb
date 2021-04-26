@@ -3,8 +3,10 @@
 module Api
   module V1
     class ProjectsController < ApplicationController
+      include Constants
+
       def index
-        render json: current_user.projects.order('LOWER(name)')
+        render json: current_user.projects.order(ORDER_COURSES_PROJECTS)
       end
 
       def create
@@ -13,14 +15,14 @@ module Api
 
         return render json: {} unless project.save
 
-        render json: current_user.projects.order('LOWER(name)')
+        render json: current_user.projects.order(ORDER_COURSES_PROJECTS)
       end
 
       def update
         project = Project.find params[:id]
         project.update! project_params
 
-        render json: current_user.projects.order('LOWER(name)')
+        render json: current_user.projects.order(ORDER_COURSES_PROJECTS)
       end
 
       def destroy
@@ -36,22 +38,22 @@ module Api
         file = Tempfile.new.path
         template_workbook.write file
 
-        send_file file, filename: 'Proiecte.xls', type: 'text/xls'
+        send_file file, filename: PROJECTS_FILE_NAME, type: XLS_TYPE
       end
 
       def import_projects
         rows = ImportFile.call path: params[:projects_file].path,
-                               model: 'Project',
+                               model: PROJECT_MODEL,
                                user: current_user
 
-        render json: { projects: current_user.projects.order('LOWER(name)'), added: rows }
+        render json: { projects: current_user.projects.order(ORDER_COURSES_PROJECTS), added: rows }
       end
 
       def export_projects
         file = Tempfile.new.path
         filled_excel.write file
 
-        send_file file, filename: 'Proiecte.xls', type: 'text/xls'
+        send_file file, filename: PROJECTS_FILE_NAME, type: XLS_TYPE
       end
 
       private
@@ -62,9 +64,8 @@ module Api
       end
 
       def template_workbook
-        CreateExcelTemplate.call header: ['Nume', 'Ore pe luna', 'Restrictie ora de inceput',
-                                          'Restrictie ora de sfarsit', 'Descriere'],
-                                 sheet_name: 'Proiecte'
+        CreateExcelTemplate.call header: PROJECT_HEADERS,
+                                 sheet_name: PROJECTS_SHEET_NAME
       end
 
       def filled_excel

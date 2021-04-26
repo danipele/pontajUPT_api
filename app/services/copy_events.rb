@@ -2,6 +2,8 @@
 
 class CopyEvents
   class << self
+    include Constants
+
     def call(from_date:, to_date:, user:, period:, move:)
       attributes from_date, user, period, move
       events = events_from
@@ -26,15 +28,15 @@ class CopyEvents
 
     def events_from
       case @period
-      when 'daily'
+      when DAILY
         @user.events.from_date @from_date
-      when 'weekly'
+      when WEEKLY
         @user.events.from_week @from_date
       end
     end
 
     def update_date(date, to_date)
-      to_date += (date.day - @from_date.day).day if @period == 'weekly'
+      to_date += (date.day - @from_date.day).day if @period == WEEKLY
 
       date.change(year: to_date.year, month: to_date.month, day: to_date.day)
     end
@@ -44,7 +46,7 @@ class CopyEvents
         start_date = update_date event.start_date, to_date
         end_date = update_date event.end_date, to_date
         events_in_period = @user.events.in_period(start_date, end_date)
-        next if !events_in_period.empty? && (events_in_period[0].type != 'concediu' || event.type != 'proiect')
+        next if !events_in_period.empty? && (events_in_period[0].type != HOLIDAY_TYPE || event.type != PROJECT_TYPE)
 
         handle_event event, start_date
       end
