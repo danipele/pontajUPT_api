@@ -31,7 +31,7 @@ class CreateExcelTemplate
 
     def course_widths(worksheet)
       worksheet.column(2).width = 10
-      worksheet.column(3).width = 30
+      worksheet.column(3).width = 40
       worksheet.column(4).width = 30
       worksheet.column(5).width = 50
     end

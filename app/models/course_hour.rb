@@ -8,7 +8,7 @@ class CourseHour < ApplicationRecord
   belongs_to :course, foreign_key: :course_id, primary_key: :id, inverse_of: :course_hours
   has_many :events, as: :activity
 
-  def display_name
+  def name_id
     COURSE_HOUR
   end
 end

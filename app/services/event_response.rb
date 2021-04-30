@@ -42,7 +42,7 @@ class EventResponse
     end
 
     def fill_holiday(response, event)
-      response[ACTIVITY] = Holiday
+      response[ACTIVITY] = HOLIDAYS
       response[SUBACTIVITY] = event.activity.name
     end
   end

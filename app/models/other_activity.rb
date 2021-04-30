@@ -5,7 +5,7 @@ class OtherActivity < ApplicationRecord
 
   has_many :events, as: :activity
 
-  def display_name
+  def name_id
     OTHER_ACTIVITY
   end
 end

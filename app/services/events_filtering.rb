@@ -64,13 +64,13 @@ class EventsFiltering
     end
 
     def for_day(user)
-      date = @date.to_time.in_time_zone(BUCHAREST_TIMEZONE).to_date
+      date = @date.to_time.in_time_zone(LOCAL_TIMEZONE).to_date
 
       user.events.filter { |event| event.start_date.to_date == date }.sort_by(&:start_date)
     end
 
     def for_week(user)
-      date = @date.to_time.in_time_zone(BUCHAREST_TIMEZONE).to_date
+      date = @date.to_time.in_time_zone(LOCAL_TIMEZONE).to_date
 
       user.events.filter do |event|
         event.start_date.to_date.at_beginning_of_week == date.at_beginning_of_week
@@ -108,7 +108,7 @@ class EventsFiltering
     end
 
     def sorted_by_activity
-      @events = @events.sort_by { |event| event.activity.display_name }
+      @events = @events.sort_by { |event| event.activity.name_id }
     end
 
     def sorted_by_date
@@ -130,7 +130,7 @@ class EventsFiltering
     end
 
     def activity_filter
-      @events = @events.select { |event| event.activity.display_name == @activity }
+      @events = @events.select { |event| event.activity.name_id == @activity }
     end
 
     def date_filter

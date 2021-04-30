@@ -5,7 +5,6 @@ class CreateRecurrentEvents
     include Constants
 
     def call(params)
-      binding.pry
       params params
 
       start_date = @event.start_date
@@ -30,15 +29,15 @@ class CreateRecurrentEvents
 
     def create_events(start_date, end_date)
       case @recurrent
-      when YEARLY_RO
+      when YEARLY
         yearly_events start_date, end_date
-      when MONTHLY_RO
+      when MONTHLY
         monthly_events start_date, end_date
-      when WEEKLY_RO
+      when WEEKLY
         weekly_events start_date, end_date
-      when DAILY_RO
+      when DAILY
         daily_events start_date, end_date
-      when EVERY_OTHER_WEEK_RO
+      when EVERY_OTHER_WEEK
         every_other_week start_date, end_date
       end
     end

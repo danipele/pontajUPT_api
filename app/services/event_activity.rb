@@ -12,7 +12,7 @@ class EventActivity
         project entity
       when OTHER_ACTIVITY
         other_activity subactivity
-      when HOLIDAY
+      when HOLIDAYS
         holiday subactivity
       end
     end

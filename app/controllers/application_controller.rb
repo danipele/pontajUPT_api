@@ -3,7 +3,7 @@
 class ApplicationController < ActionController::API
   include Constants
 
-  before_action :authenticate_request
+  before_action :authenticate_request, :set_locale
 
   attr_reader :current_user
 
@@ -23,5 +23,9 @@ class ApplicationController < ActionController::API
     end
 
     @current_user = user
+  end
+
+  def set_locale
+    I18n.locale = params[:locale]&.to_sym || :en
   end
 end

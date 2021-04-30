@@ -5,7 +5,7 @@ class Holiday < ApplicationRecord
 
   has_many :events, as: :activity
 
-  def display_name
-    HOLIDAY
+  def name_id
+    HOLIDAYS
   end
 end

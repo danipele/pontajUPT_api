@@ -20,8 +20,8 @@ Holiday.create name: Constants::MATERNITY_LEAVE
 Holiday.create name: Constants::UNMOTIVATED_ABSENCES
 
 User.create email: 'angajat@email.com', password: 'wertyuio', first_name: 'dani', last_name: 'pele',
-            type: 'Angajat'
+            type: 'employee'
 User.create email: 'colaborator@email.com', password: 'wertyuio', first_name: 'dani', last_name: 'pele',
-            type: 'Colaborator'
+            type: 'collaborator'
 User.create email: 'admin@email.com', password: 'wertyuio', first_name: 'dani', last_name: 'pele',
-            type: 'Admin'
+            type: 'admin'

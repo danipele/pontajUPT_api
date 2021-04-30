@@ -7,7 +7,7 @@ class AddHolidaysForEmployees
     def call(start_date:, end_date:, description:)
       @created = 0
       while start_date <= end_date
-        date = start_date.in_time_zone(BUCHAREST_TIMEZONE).to_date
+        date = start_date.in_time_zone(LOCAL_TIMEZONE).to_date
         if date.saturday? || date.sunday?
           start_date += 1.day
           next
@@ -30,7 +30,7 @@ class AddHolidaysForEmployees
     end
 
     def remove_events_for(start_date, user)
-      date = start_date.in_time_zone(BUCHAREST_TIMEZONE).to_date
+      date = start_date.in_time_zone(LOCAL_TIMEZONE).to_date
       user.events.should_delete_for_holiday(date).destroy_all
       user.events.should_delete_holidays_for_holiday(start_date).destroy_all
     end

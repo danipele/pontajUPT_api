@@ -31,7 +31,7 @@ class ImportFile
       course = user.courses.create name: values[0],
                                    student_year: values[1].to_i,
                                    semester: values[2].to_i,
-                                   cycle: values[3].downcase.capitalize,
+                                   cycle: cycle_value(values[3].to_i),
                                    faculty: values[4],
                                    description: values[5]
 
@@ -44,6 +44,17 @@ class ImportFile
                            restricted_start_hour: values[2].blank? ? nil : values[2].to_i,
                            restricted_end_hour: values[3].blank? ? nil : values[3].to_i,
                            description: values[4]
+    end
+
+    def cycle_value(cycle)
+      case cycle
+      when 1
+        'bachelor'
+      when 2
+        'master'
+      when 3
+        'phd'
+      end
     end
   end
 end

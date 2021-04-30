@@ -3,42 +3,37 @@
 module Constants
   # General
   XLS_TYPE = 'text/xls'
-  BUCHAREST_TIMEZONE = 'Bucharest'
+  LOCAL_TIMEZONE = 'Bucharest'
 
   # Authenticate
   AUTHORIZATION_HEADER = 'Authorization'
-  NOT_AUTHORIZED = 'Not Authorized'
-  INVALID_TOKEN = 'Invalid token'
+  NOT_AUTHORIZED = I18n.t 'authenticate.not_authorized'
+  INVALID_TOKEN = I18n.t 'authenticate.invalid_token'
 
   # Mailer
   DEFAULT_EMAIL = 'peledanyel@gmail.com'
   LAYOUT_MAILER = 'mailer'
-  RESET_PASSWORD = 'Resetare parola'
+  RESET_PASSWORD = I18n.t 'mailer.reset_password'
 
   # Sessions
-  NO_ACCOUNT_MESSAGE = 'Nu exista niciun cont cu acest email!'
-  INCORRECT_PASSWORD_MESSAGE = 'Parola incorecta!'
+  NO_ACCOUNT_MESSAGE = I18n.t 'session.no_account_message'
+  INCORRECT_PASSWORD_MESSAGE = I18n.t 'session.incorrect_password_message'
 
   # Users
-  EMPLOYEE_TYPE = 'Angajat'
-  USER_TYPES = %w[Angajat Colaborator].freeze
+  EMPLOYEE_TYPE = 'employee'
+  USER_TYPES = %w[employee collaborator].freeze
 
   # Events
-  COLLABORATOR_EVENTS = ['Curs', 'Seminar', 'Laborator', 'Ora de proiect'].freeze
-  PROJECT_TYPE = 'proiect'
-  HOLIDAY_TYPE = 'concediu'
-  BASIC_NORM = 'norma de baza'
-  HOURLY_PAYMENT = 'plata cu ora'
+  COLLABORATOR_EVENTS = %w[course seminar laboratory projectHour].freeze
+  PROJECT_TYPE = 'project'
+  HOLIDAY_TYPE = 'holidays'
+  BASIC_NORM = 'basic norm'
+  HOURLY_PAYMENT = 'hourly payment'
   DAILY = 'daily'
   WEEKLY = 'weekly'
-  EVERY_OTHER_WEEK = 'every other week'
+  EVERY_OTHER_WEEK = 'everyOtherWeek'
   MONTHLY = 'monthly'
   YEARLY = 'yearly'
-  DAILY_RO = 'Zilnic'
-  WEEKLY_RO = 'Saptamanal'
-  EVERY_OTHER_WEEK_RO = 'La doua saptamani'
-  MONTHLY_RO = 'Lunar'
-  YEARLY_RO = 'Anual'
   ACTIVITY = 'activity'
   SUBACTIVITY = 'subactivity'
   ENTITY = 'entity'
@@ -51,48 +46,55 @@ module Constants
   ORDER_COURSES_PROJECTS = 'LOWER(name)'
 
   # Courses
-  COURSES_FILE_NAME = 'Cursuri.xls'
+  COURSES_FILE_NAME = I18n.t 'course.filename'
   COURSE_MODEL = 'Course'
-  COURSE_HEADERS = ['Nume', 'An de studiu', 'Semestru', 'Ciclu(Licenta, Master, Doctorat)',
-                    'Facultate', 'Descriere'].freeze
-  COURSES_SHEET_NAME = 'Cursuri'
-  COURSE = 'Curs'
-  SEMINAR = 'Seminar'
-  LABORATORY = 'Laborator'
-  PROJECT_HOUR = 'Ora de proiect'
-  EVALUATION = 'Evaluare'
-  CONSULTATIONS = 'Consultatii'
-  TEACHING_ACTIVITY_PREPARATION = 'Pregatire pentru activitatea didactica'
-  COURSE_HOUR = 'Activitate didactica'
+  COURSE_HEADERS = [I18n.t('course.headers.name'),
+                    I18n.t('course.headers.year_of_study'),
+                    I18n.t('course.headers.semester'),
+                    I18n.t('course.headers.cycle'),
+                    I18n.t('course.headers.faculty'),
+                    I18n.t('course.headers.description')].freeze
+  COURSES_SHEET_NAME = I18n.t 'course.sheet_name'
+  COURSE = 'course'
+  SEMINAR = 'seminar'
+  LABORATORY = 'laboratory'
+  PROJECT_HOUR = 'projectHour'
+  EVALUATION = 'evaluation'
+  CONSULTATIONS = 'consultations'
+  TEACHING_ACTIVITY_PREPARATION = 'teachingActivityPreparation'
+  COURSE_HOUR = 'courseHour'
 
   # Projects
-  PROJECTS_FILE_NAME = 'Proiecte.xls'
+  PROJECTS_FILE_NAME = I18n.t 'project.filename'
   PROJECT_MODEL = 'Project'
-  PROJECT_HEADERS = ['Nume', 'Ore pe luna', 'Restrictie ora de inceput',
-                     'Restrictie ora de sfarsit', 'Descriere'].freeze
-  PROJECTS_SHEET_NAME = 'Proiecte'
-  PROJECT = 'Proiect'
+  PROJECT_HEADERS = [I18n.t('project.headers.name'),
+                     I18n.t('project.headers.hours_per_month'),
+                     I18n.t('project.headers.start_hour_restriction'),
+                     I18n.t('project.headers.end_hour_restriction'),
+                     I18n.t('project.headers.description')].freeze
+  PROJECTS_SHEET_NAME = I18n.t 'project.sheet_name'
+  PROJECT = 'project'
 
   # Other Activities
-  OTHER_ACTIVITY = 'Alta activitate'
-  DOCTORAL_STUDENTS_GUIDANCE = 'Indrumare doctoranzi'
-  UNPAID_INVOLVEMENT_IN_SOCIETY = 'Implicare neremunerată în problematica societății'
-  COOPERATION_MANAGEMENT = 'Gestiune cooperari'
-  INTERNAL_DELEGATION_DAYS = 'Zile delegatie (Deplasare interna)'
-  EXTERNAL_DELEGATION_DAYS = 'Zile delegatie (Deplasare externa)'
-  DEPARTURE_WITH_SCHOLARSHIP = 'Plecati cu bursa'
-  OTHER_ACTIVITIES = 'Alte activitati'
-  RESEARCH_DOCUMENTATION = 'Documentare pentru cercetare'
-  PROJECT_FINANCING_OPPORTUNITIES_DOCUMENTATION = 'Documentare oportunitati de finantare proiecte'
-  RESEARCH_PROJECTS_ELABORATION = 'Elaborare proiecte de cercetare'
-  RESEARCH_PROJECTS_EXECUTION = 'Executarea proiecte de cercetare'
+  OTHER_ACTIVITY = 'otherActivity'
+  DOCTORAL_STUDENTS_GUIDANCE = 'doctoralStudentsGuidance'
+  UNPAID_INVOLVEMENT_IN_SOCIETY = 'unpaidInvolvementInSociety'
+  COOPERATION_MANAGEMENT = 'cooperationManagement'
+  INTERNAL_DELEGATION_DAYS = 'internalDelegationDays'
+  EXTERNAL_DELEGATION_DAYS = 'externalDelegationDays'
+  DEPARTURE_WITH_SCHOLARSHIP = 'departureWithScholarship'
+  OTHER_ACTIVITIES = 'otherActivities'
+  RESEARCH_DOCUMENTATION = 'researchDocumentation'
+  PROJECT_FINANCING_OPPORTUNITIES_DOCUMENTATION = 'projectFinancingOpportunitiesDocumentation'
+  RESEARCH_PROJECTS_ELABORATION = 'researchProjectsElaboration'
+  RESEARCH_PROJECTS_EXECUTION = 'researchProjectsExecution'
 
   # Holidays
-  HOLIDAY = 'Concediu'
-  VACATION = 'Concediu de odihna'
-  SICK_LEAVE = 'Concediu medical'
-  UNPAID_LEAVE = 'Concediu fara salariu'
-  CHILD_GROWTH_LEAVE = 'Concediu crestere copil'
-  MATERNITY_LEAVE = 'Concediu de maternitate'
-  UNMOTIVATED_ABSENCES = 'Absente nemotivate'
+  HOLIDAYS = 'holidays'
+  VACATION = 'vacation'
+  SICK_LEAVE = 'sickLeave'
+  UNPAID_LEAVE = 'unpaidLeave'
+  CHILD_GROWTH_LEAVE = 'childGrowthLeave'
+  MATERNITY_LEAVE = 'maternityLeave'
+  UNMOTIVATED_ABSENCES = 'unmotivatedAbsences'
 end

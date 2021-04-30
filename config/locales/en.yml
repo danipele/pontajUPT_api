@@ -1,33 +1,28 @@
-# Files in the config/locales directory are used for internationalization
-# and are automatically loaded by Rails. If you want to use locales other
-# than English, add the necessary files in this directory.
-#
-# To use the locales, use `I18n.t`:
-#
-#     I18n.t 'hello'
-#
-# In views, this is aliased to just `t`:
-#
-#     <%= t('hello') %>
-#
-# To use a different locale, set it with `I18n.locale`:
-#
-#     I18n.locale = :es
-#
-# This would use the information in config/locales/es.yml.
-#
-# The following keys must be escaped otherwise they will not be retrieved by
-# the default I18n backend:
-#
-# true, false, on, off, yes, no
-#
-# Instead, surround them with single quotes.
-#
-# en:
-#   'true': 'foo'
-#
-# To learn more, please read the Rails Internationalization guide
-# available at https://guides.rubyonrails.org/i18n.html.
-
 en:
-  hello: "Hello world"
+  course:
+    filename: 'Courses.xls'
+    headers:
+      name: 'Name'
+      year_of_study: 'Year of study'
+      semester: 'Semester'
+      cycle: 'Cycle(1 = Bachelor, 2 = Master, 3 = PhD)'
+      faculty: 'Faculty'
+      description: 'Description'
+    sheet_name: 'Courses'
+  project:
+    filename: 'Projects.xls'
+    headers:
+      name: 'Name'
+      hours_per_month: 'Hours per month'
+      start_hour_restriction: 'Start hour restriction'
+      end_hour_restriction: 'End hour restriction'
+      description: 'Description'
+    sheet_name: 'Projects'
+  session:
+    no_account_message: 'There is no account associated with this email!'
+    incorrect_password_message: 'Incorrect password!'
+  authenticate:
+    not_authorized: 'Not Authorized!'
+    invalid_token: 'Invalid token!'
+  mailer:
+    reset_password: 'Reset password'

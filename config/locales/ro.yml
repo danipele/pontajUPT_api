@@ -1,0 +1,28 @@
+ro:
+  course:
+    filename: 'Cursuri.xls'
+    headers:
+      name: 'Nume'
+      year_of_study: 'An de studiu'
+      semester: 'Semestru'
+      cycle: 'Ciclu(1 = Licenta, 2 = Master, 3 = Doctorat)'
+      faculty: 'Facultate'
+      description: 'Descriere'
+    sheet_name: 'Cursuri'
+  project:
+    filename: 'Proiecte.xls'
+    headers:
+      name: 'Nume'
+      hours_per_month: 'Ore pe luna'
+      start_hour_restriction: 'Restrictie ora de inceput'
+      end_hour_restriction: 'Restrictie ora de sfarsit'
+      description: 'Descriere'
+    sheet_name: 'Proiecte'
+  session:
+    no_account_message: 'Nu exista niciun cont cu acest email!'
+    incorrect_password_message: 'Parola incorecta!'
+  authenticate:
+    not_authorized: 'Neautorizat!'
+    invalid_token: 'Token invalid!'
+  mailer:
+    reset_password: 'Resetare parola'
