@@ -7,6 +7,6 @@ class ApplicationMailer < ActionMailer::Base
   layout LAYOUT_MAILER
 
   def mailer
-    mail to: params[:email], subject: RESET_PASSWORD
+    mail to: params[:email], subject: I18n.t('mailer.reset_password')
   end
 end

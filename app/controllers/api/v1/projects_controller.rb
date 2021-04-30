@@ -38,7 +38,7 @@ module Api
         file = Tempfile.new.path
         template_workbook.write file
 
-        send_file file, filename: PROJECTS_FILE_NAME, type: XLS_TYPE
+        send_file file, filename: I18n.t('project.filename'), type: XLS_TYPE
       end
 
       def import_projects
@@ -46,14 +46,16 @@ module Api
                                model: PROJECT_MODEL,
                                user: current_user
 
-        render json: { projects: current_user.projects.order(ORDER_COURSES_PROJECTS), added: rows }
+        render json: { success: true, projects: current_user.projects.order(ORDER_COURSES_PROJECTS), added: rows }
+      rescue StandardError
+        render json: { success: false, message: I18n.t('message.no_sheet', sheet_name: I18n.t('project.sheet_name')) }
       end
 
       def export_projects
         file = Tempfile.new.path
         filled_excel.write file
 
-        send_file file, filename: PROJECTS_FILE_NAME, type: XLS_TYPE
+        send_file file, filename: I18n.t('project.filename'), type: XLS_TYPE
       end
 
       private
@@ -64,8 +66,12 @@ module Api
       end
 
       def template_workbook
-        CreateExcelTemplate.call header: PROJECT_HEADERS,
-                                 sheet_name: PROJECTS_SHEET_NAME
+        CreateExcelTemplate.call header: [I18n.t('project.headers.name'),
+                                          I18n.t('project.headers.hours_per_month'),
+                                          I18n.t('project.headers.start_hour_restriction'),
+                                          I18n.t('project.headers.end_hour_restriction'),
+                                          I18n.t('project.headers.description')],
+                                 sheet_name: I18n.t('project.sheet_name')
       end
 
       def filled_excel

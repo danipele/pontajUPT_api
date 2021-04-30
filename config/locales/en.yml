@@ -26,3 +26,5 @@ en:
     invalid_token: 'Invalid token!'
   mailer:
     reset_password: 'Reset password'
+  message:
+    no_sheet: 'The file has no worksheet %{sheet_name}'

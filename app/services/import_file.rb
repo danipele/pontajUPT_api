@@ -6,7 +6,9 @@ class ImportFile
 
     def call(path:, model:, user:)
       workbook = Spreadsheet.open path
-      worksheet = workbook.worksheet model == COURSE_MODEL ? COURSES_SHEET_NAME : PROJECTS_SHEET_NAME
+      worksheet = workbook.worksheet model == COURSE_MODEL ? I18n.t('course.sheet_name') : I18n.t('project.sheet_name')
+
+      raise StandardError unless worksheet
 
       worksheet.each 1 do |row|
         process_entity row, model, user

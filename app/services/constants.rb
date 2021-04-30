@@ -7,17 +7,10 @@ module Constants
 
   # Authenticate
   AUTHORIZATION_HEADER = 'Authorization'
-  NOT_AUTHORIZED = I18n.t 'authenticate.not_authorized'
-  INVALID_TOKEN = I18n.t 'authenticate.invalid_token'
 
   # Mailer
   DEFAULT_EMAIL = 'peledanyel@gmail.com'
   LAYOUT_MAILER = 'mailer'
-  RESET_PASSWORD = I18n.t 'mailer.reset_password'
-
-  # Sessions
-  NO_ACCOUNT_MESSAGE = I18n.t 'session.no_account_message'
-  INCORRECT_PASSWORD_MESSAGE = I18n.t 'session.incorrect_password_message'
 
   # Users
   EMPLOYEE_TYPE = 'employee'
@@ -46,15 +39,7 @@ module Constants
   ORDER_COURSES_PROJECTS = 'LOWER(name)'
 
   # Courses
-  COURSES_FILE_NAME = I18n.t 'course.filename'
   COURSE_MODEL = 'Course'
-  COURSE_HEADERS = [I18n.t('course.headers.name'),
-                    I18n.t('course.headers.year_of_study'),
-                    I18n.t('course.headers.semester'),
-                    I18n.t('course.headers.cycle'),
-                    I18n.t('course.headers.faculty'),
-                    I18n.t('course.headers.description')].freeze
-  COURSES_SHEET_NAME = I18n.t 'course.sheet_name'
   COURSE = 'course'
   SEMINAR = 'seminar'
   LABORATORY = 'laboratory'
@@ -65,14 +50,7 @@ module Constants
   COURSE_HOUR = 'courseHour'
 
   # Projects
-  PROJECTS_FILE_NAME = I18n.t 'project.filename'
   PROJECT_MODEL = 'Project'
-  PROJECT_HEADERS = [I18n.t('project.headers.name'),
-                     I18n.t('project.headers.hours_per_month'),
-                     I18n.t('project.headers.start_hour_restriction'),
-                     I18n.t('project.headers.end_hour_restriction'),
-                     I18n.t('project.headers.description')].freeze
-  PROJECTS_SHEET_NAME = I18n.t 'project.sheet_name'
   PROJECT = 'project'
 
   # Other Activities

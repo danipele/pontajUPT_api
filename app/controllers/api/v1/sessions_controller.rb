@@ -28,12 +28,12 @@ module Api
 
       def no_account
         render json: { success: false,
-                       message: NO_ACCOUNT_MESSAGE }
+                       message: I18n.t('session.no_account_message') }
       end
 
       def incorrect_password
         render json: { success: false,
-                       message: INCORRECT_PASSWORD_MESSAGE }
+                       message: I18n.t('session.incorrect_password_message') }
       end
 
       def success_response(user)

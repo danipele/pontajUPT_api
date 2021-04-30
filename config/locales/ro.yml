@@ -26,3 +26,5 @@ ro:
     invalid_token: 'Token invalid!'
   mailer:
     reset_password: 'Resetare parola'
+  message:
+    no_sheet: 'Fisierul nu contine nicio fila %{sheet_name}'
