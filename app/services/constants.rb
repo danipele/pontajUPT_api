@@ -56,7 +56,6 @@ module Constants
   # Other Activities
   OTHER_ACTIVITY = 'otherActivity'
   DOCTORAL_STUDENTS_GUIDANCE = 'doctoralStudentsGuidance'
-  UNPAID_INVOLVEMENT_IN_SOCIETY = 'unpaidInvolvementInSociety'
   COOPERATION_MANAGEMENT = 'cooperationManagement'
   INTERNAL_DELEGATION_DAYS = 'internalDelegationDays'
   EXTERNAL_DELEGATION_DAYS = 'externalDelegationDays'
@@ -65,7 +64,6 @@ module Constants
   RESEARCH_DOCUMENTATION = 'researchDocumentation'
   PROJECT_FINANCING_OPPORTUNITIES_DOCUMENTATION = 'projectFinancingOpportunitiesDocumentation'
   RESEARCH_PROJECTS_ELABORATION = 'researchProjectsElaboration'
-  RESEARCH_PROJECTS_EXECUTION = 'researchProjectsExecution'
 
   # Holidays
   HOLIDAYS = 'holidays'
