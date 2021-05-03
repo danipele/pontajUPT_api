@@ -28,3 +28,14 @@ en:
     reset_password: 'Reset password'
   message:
     no_sheet: 'The file has no worksheet %{sheet_name}'
+  report:
+    university_name: 'Politehnica University of Timișoara'
+    signature: 'Signature'
+    project_report:
+      sheet_name: 'Research timekeeping'
+      project_title: 'Project title'
+      financing_contract: 'Financing contract'
+      title: 'INDIVIDUAL SHEET OF PRESENCE - EVIDENCE OF NUMBER OF WORKING HOURS (TIMEKEEPING)'
+      total_working_hours: 'Total working hours'
+      project_manager: 'Project manager'
+      drafted: 'Drafted'

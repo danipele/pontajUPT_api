@@ -18,7 +18,7 @@ module Api
         event = create_event activity, event_from_fe
         successfully = create_recurrent_events event unless params[:recurrent].blank?
 
-        filter_events filter_params, successfully & + 1
+        filter_events filter_params, successfully
       end
 
       def destroy
@@ -65,6 +65,13 @@ module Api
                                             date: params[:date].to_time.in_time_zone(LOCAL_TIMEZONE).to_date
 
         render json: hours
+      end
+
+      def download_report
+        file = Tempfile.new.path
+        download_report_service.write file
+
+        send_file file, filename: report_name, type: XLS_TYPE
       end
 
       private
@@ -130,6 +137,21 @@ module Api
 
       def to_date
         params[:copy_date].to_time.in_time_zone(LOCAL_TIMEZONE)
+      end
+
+      def download_report_service
+        DownloadReport.call(type: params[:type],
+                            date: params[:date],
+                            project: params[:project].to_i,
+                            user: current_user)
+      end
+
+      def report_name
+        date = params[:date].to_time.in_time_zone(LOCAL_TIMEZONE)
+        case params[:type]
+        when PROJECT_REPORT
+          "#{current_user.last_name} #{current_user.first_name}_#{I18n.l(date, format: '%B')} #{date.year}"
+        end
       end
     end
   end

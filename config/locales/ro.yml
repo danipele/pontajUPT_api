@@ -28,3 +28,16 @@ ro:
     reset_password: 'Resetare parola'
   message:
     no_sheet: 'Fisierul nu contine nicio fila %{sheet_name}'
+  report:
+    university_name: 'Universitatea Politehnica Timișoara'
+    signature: 'Semnatura'
+    project_report:
+      sheet_name: 'Pontaj cercetare'
+      project_title: 'Titlul proiectului'
+      financing_contract: 'Contract de finantare'
+      title: 'FOAIE INDIVIDUALĂ DE PREZENȚĂ - EVIDENȚA NUMĂRULUI DE ORE LUCRATE (PONTAJ)'
+      total_working_hours: 'Total ore lucrate'
+      project_manager: 'Manager proiect'
+      drafted: 'Intocmit'
+  date:
+    month_names: ['', 'Ianuarie', 'Februarie', 'Martie', 'Aprilie', 'Mai', 'Iunie', 'Iulie', 'August', 'Septembrie', 'Octombrie', 'Noiembrie', 'Decembrie']

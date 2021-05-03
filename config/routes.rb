@@ -35,6 +35,7 @@ Rails.application.routes.draw do
         post :copy_events
         post :copy_event
         post :project_hours
+        post :download_report
       end
     end
   end

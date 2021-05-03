@@ -73,4 +73,7 @@ module Constants
   CHILD_GROWTH_LEAVE = 'childGrowthLeave'
   MATERNITY_LEAVE = 'maternityLeave'
   UNMOTIVATED_ABSENCES = 'unmotivatedAbsences'
+
+  # Reports
+  PROJECT_REPORT = 'projectReport'
 end
