@@ -9,6 +9,14 @@ en:
       faculty: 'Faculty'
       description: 'Description'
     sheet_name: 'Courses'
+    subactivities:
+      course: 'Course'
+      seminar: 'Seminar'
+      laboratory: 'Laboratory'
+      project: 'Project'
+      evaluation: 'Evaluation'
+      consultations: 'Consultations'
+      teachingActivityPreparation: 'Teaching activity preparation'
   project:
     filename: 'Projects.xls'
     headers:
@@ -31,6 +39,7 @@ en:
   report:
     university_name: 'Politehnica University of Timișoara'
     signature: 'Signature'
+    department: 'Department of nume_departament'
     project_report:
       sheet_name: 'Research timekeeping'
       project_title: 'Project title'
@@ -39,3 +48,30 @@ en:
       total_working_hours: 'Total working hours'
       project_manager: 'Project manager'
       drafted: 'Drafted'
+    teacher_report:
+      title: 'TEACHER TIMEKEEPING'
+      header:
+        period: 'Days/Weeks'
+        name: 'Teacher last name and first name'
+        didactic_degree: 'Didactic degree'
+        hours: 'hours'
+        observations: 'Observations'
+        total_hours: 'TOTAL hours'
+      period: 'Period'
+      monthly_name: 'Timekeeping_teachers'
+  other_activities:
+    doctoralStudentsGuidance: 'Doctoral students guidance'
+    researchDocumentation: 'Research documentation'
+    projectFinancingOpportunitiesDocumentation: 'Project financing opportunities documentation'
+    researchProjectsElaboration: 'Research projects elaboration'
+    cooperationManagement: 'Cooperation management'
+    delegationDays: 'Delegation days'
+    otherActivities: 'Other activities'
+    departureWithScholarship: 'Departure with scholarship'
+  holidays:
+    vacation: 'Vacation'
+    sickLeave: 'Sick leave'
+    unpaidLeave: 'Unpaid leave'
+    childGrowthLeave: 'Child growth leave'
+    maternityLeave: 'maternity leave'
+    unmotivatedAbsences: 'Unmotivated absences'

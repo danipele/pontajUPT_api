@@ -143,6 +143,7 @@ module Api
         DownloadReport.call(type: params[:type],
                             date: params[:date],
                             project: params[:project].to_i,
+                            period: params[:period],
                             user: current_user)
       end
 
@@ -151,8 +152,17 @@ module Api
         case params[:type]
         when PROJECT_REPORT
           "#{current_user.last_name} #{current_user.first_name}_#{I18n.l(date, format: '%B')} #{date.year}"
+        when TEACHER_REPORT
+          params[:period] == MONTHLY ? monthly_teacher_report_name(date) : weekly_teacher_report_name
         end
       end
+
+      def monthly_teacher_report_name(date)
+        "#{current_user.last_name}_#{current_user.first_name}_#{I18n.t 'report.teacher_report.monthly_name'}_" \
+          "1-#{date.end_of_month.day}_#{I18n.l(date, format: '%B')}-#{date.year}"
+      end
+
+      def weekly_teacher_report_name; end
     end
   end
 end

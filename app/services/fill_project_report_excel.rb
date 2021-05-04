@@ -28,10 +28,14 @@ class FillProjectReportExcel
     end
 
     def worksheet_format
-      @worksheet.default_format = Spreadsheet::Format.new horizontal_align: :centre, vertical_align: :middle
+      @worksheet.default_format = Spreadsheet::Format.new horizontal_align: :centre, vertical_align: :middle,
+                                                          text_wrap: true
 
       @worksheet.column(0).width = 20
       @worksheet.column(@end_of_month_day + 1).width = 20
+      (1...@end_of_month_day).each do |col|
+        @worksheet.column(col).width = 7
+      end
     end
 
     def fill_headers

@@ -9,6 +9,14 @@ ro:
       faculty: 'Facultate'
       description: 'Descriere'
     sheet_name: 'Cursuri'
+    subactivities:
+      course: 'Curs'
+      seminar: 'Seminar'
+      laboratory: 'Lucrari'
+      project: 'Proiecte'
+      evaluation: 'Evaluare'
+      consultations: 'Consultatii'
+      teachingActivityPreparation: 'Pregatire pentru activitatea didactica'
   project:
     filename: 'Proiecte.xls'
     headers:
@@ -31,6 +39,7 @@ ro:
   report:
     university_name: 'Universitatea Politehnica Timișoara'
     signature: 'Semnatura'
+    department: 'Departamentul de nume_departament'
     project_report:
       sheet_name: 'Pontaj cercetare'
       project_title: 'Titlul proiectului'
@@ -39,5 +48,32 @@ ro:
       total_working_hours: 'Total ore lucrate'
       project_manager: 'Manager proiect'
       drafted: 'Intocmit'
+    teacher_report:
+      title: 'PONTAJUL CADRELOR DIDACTICE'
+      header:
+        period: 'Zile/Saptamani'
+        name: 'Nume si prenume cadru didactic'
+        didactic_degree: 'Grad didactic'
+        hours: 'ore'
+        observations: 'Observatii'
+        total_hours: 'TOTAL ore'
+      period: 'Perioada'
+      monthly_name: 'Pontaj_cadre_didactice'
+  other_activities:
+    doctoralStudentsGuidance: 'Indrumare doctoranzi'
+    researchDocumentation: 'Documentare pentru cercetare'
+    projectFinancingOpportunitiesDocumentation: 'Documentare oportunitati de finantare proiecte'
+    researchProjectsElaboration: 'Elaborare proiecte de cercetare'
+    cooperationManagement: 'Gestiune cooperari'
+    delegationDays: 'Zile delegatie'
+    otherActivities: 'Alte activitati'
+    departureWithScholarship: 'Plecati cu bursa'
+  holidays:
+    vacation: 'Concediu de odihna'
+    sickLeave: 'Concediu medical'
+    unpaidLeave: 'Concediu fara salariu'
+    childGrowthLeave: 'Concediu crestere copil'
+    maternityLeave: 'Concediu de maternitate'
+    unmotivatedAbsences: 'Absente nemotivate'
   date:
-    month_names: ['', 'Ianuarie', 'Februarie', 'Martie', 'Aprilie', 'Mai', 'Iunie', 'Iulie', 'August', 'Septembrie', 'Octombrie', 'Noiembrie', 'Decembrie']
+    month_names: [ '', 'Ianuarie', 'Februarie', 'Martie', 'Aprilie', 'Mai', 'Iunie', 'Iulie', 'August', 'Septembrie', 'Octombrie', 'Noiembrie', 'Decembrie' ]

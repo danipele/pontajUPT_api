@@ -76,4 +76,5 @@ module Constants
 
   # Reports
   PROJECT_REPORT = 'projectReport'
+  TEACHER_REPORT = 'teacherReport'
 end
