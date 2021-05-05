@@ -7,6 +7,7 @@ class EventsFiltering
     def call(params:, user:)
       attributes params
       fill_events user
+      return [] if @events.blank?
 
       sort_events unless @sort.blank?
       filter_events
