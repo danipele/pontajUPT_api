@@ -6,7 +6,6 @@ class DownloadReport
 
     def call(type:, date:, project:, period:, user:)
       @workbook = Spreadsheet::Workbook.new
-      @worksheet = @workbook.create_worksheet name: I18n.t('report.project_report.sheet_name')
 
       fill_report type, date.to_time.in_time_zone(LOCAL_TIMEZONE).to_date, project, period, user
 
@@ -15,7 +14,7 @@ class DownloadReport
 
     private
 
-    attr_reader :workbook, :worksheet
+    attr_reader :workbook
 
     def fill_report(type, date, project, period, user)
       case type
@@ -27,9 +26,10 @@ class DownloadReport
     end
 
     def call_project_service(date, project, user)
+      worksheet = @workbook.create_worksheet name: I18n.t('report.project_report.sheet_name')
       FillProjectReportExcel.call date: date,
                                   project_id: project,
-                                  worksheet: @worksheet,
+                                  worksheet: worksheet,
                                   user: user
     end
 
@@ -37,16 +37,21 @@ class DownloadReport
       if period == 'monthly'
         monthly_teacher_report date, user
       else
-        weekly_teacher_report
+        weekly_teacher_report date, user
       end
     end
 
     def monthly_teacher_report(date, user)
+      worksheet = @workbook.create_worksheet
       FillMonthlyTeacherReport.call date: date,
-                                    worksheet: @worksheet,
+                                    worksheet: worksheet,
                                     user: user
     end
 
-    def weekly_teacher_report; end
+    def weekly_teacher_report(date, user)
+      FillWeeklyTeacherReport.call date: date,
+                                   workbook: @workbook,
+                                   user: user
+    end
   end
 end

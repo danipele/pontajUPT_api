@@ -52,7 +52,7 @@ class FillMonthlyTeacherReport
 
     def fill_title
       @worksheet.merge_cells 3, 0, 3, 20
-      @worksheet.row(3).concat [I18n.t('report.teacher_report.title')]
+      @worksheet.row(3).concat [I18n.t('report.teacher_report.monthly_title')]
     end
 
     def fill_date
@@ -173,7 +173,7 @@ class FillMonthlyTeacherReport
     def handle_week(end_of_week, row)
       fill_week_period end_of_week, row
 
-      events = user.events.filter do |event|
+      events = @user.events.filter do |event|
         start_date = event.start_date.to_date
         start_date.end_of_week == end_of_week && start_date.month == @date.month
       end

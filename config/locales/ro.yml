@@ -40,16 +40,17 @@ ro:
     university_name: 'Universitatea Politehnica Timișoara'
     signature: 'Semnatura'
     department: 'Departamentul de nume_departament'
+    total_working_hours: 'Total ore lucrate'
     project_report:
       sheet_name: 'Pontaj cercetare'
       project_title: 'Titlul proiectului'
       financing_contract: 'Contract de finantare'
       title: 'FOAIE INDIVIDUALĂ DE PREZENȚĂ - EVIDENȚA NUMĂRULUI DE ORE LUCRATE (PONTAJ)'
-      total_working_hours: 'Total ore lucrate'
       project_manager: 'Manager proiect'
       drafted: 'Intocmit'
     teacher_report:
-      title: 'PONTAJUL CADRELOR DIDACTICE'
+      monthly_title: 'PONTAJUL CADRELOR DIDACTICE'
+      weekly_title: 'EVIDENȚA NUMĂRULUI DE ORE LUCRATE DE CĂTRE CADRELE DIDACTICE TITULARE SAU CU CONTRACT DE MUNCĂ PE DURATĂ DETERMINATĂ'
       header:
         period: 'Zile/Saptamani'
         name: 'Nume si prenume cadru didactic'
@@ -57,8 +58,13 @@ ro:
         hours: 'ore'
         observations: 'Observatii'
         total_hours: 'TOTAL ore'
+        teacher_name: 'Nume si prenume cadru didactic'
+        working_schedule: 'Program de lucru'
+        performed_activities: 'Activitati desfasurate'
+        teacher_signature: 'Semnatura cadru didactic'
       period: 'Perioada'
       monthly_name: 'Pontaj_cadre_didactice'
+      weekly_worksheet_name: 'TCMDD-sapt-%{week}'
   other_activities:
     doctoralStudentsGuidance: 'Indrumare doctoranzi'
     researchDocumentation: 'Documentare pentru cercetare'
@@ -77,3 +83,4 @@ ro:
     unmotivatedAbsences: 'Absente nemotivate'
   date:
     month_names: [ '', 'Ianuarie', 'Februarie', 'Martie', 'Aprilie', 'Mai', 'Iunie', 'Iulie', 'August', 'Septembrie', 'Octombrie', 'Noiembrie', 'Decembrie' ]
+    abbr_month_names: [ '', 'Ian.', 'Feb.', 'Mar.', 'Apr.', 'Mai', 'Iun.', 'Iul.', 'Aug.', 'Sep.', 'Oct.', 'Noi.', 'Dec.' ]

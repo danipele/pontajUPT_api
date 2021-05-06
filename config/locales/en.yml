@@ -40,16 +40,17 @@ en:
     university_name: 'Politehnica University of Timișoara'
     signature: 'Signature'
     department: 'Department of nume_departament'
+    total_working_hours: 'Total working hours'
     project_report:
       sheet_name: 'Research timekeeping'
       project_title: 'Project title'
       financing_contract: 'Financing contract'
       title: 'INDIVIDUAL SHEET OF PRESENCE - EVIDENCE OF NUMBER OF WORKING HOURS (TIMEKEEPING)'
-      total_working_hours: 'Total working hours'
       project_manager: 'Project manager'
       drafted: 'Drafted'
     teacher_report:
-      title: 'TEACHER TIMEKEEPING'
+      monthly_title: 'TEACHER TIMEKEEPING'
+      weekly_title: 'EVIDENCE OF WORKING HOURS FOR TENURED TEACHERS OR WITH A WORK CONTRACT FOR A DETERMINED DURATION'
       header:
         period: 'Days/Weeks'
         name: 'Teacher last name and first name'
@@ -57,8 +58,13 @@ en:
         hours: 'hours'
         observations: 'Observations'
         total_hours: 'TOTAL hours'
+        teacher_name: 'Teacher last name and first name'
+        working_schedule: 'Working schedule'
+        performed_activities: 'Performed activities'
+        teacher_signature: 'Teacher signature'
       period: 'Period'
       monthly_name: 'Timekeeping_teachers'
+      weekly_worksheet_name: 'TCMDD-week-%{week}'
   other_activities:
     doctoralStudentsGuidance: 'Doctoral students guidance'
     researchDocumentation: 'Research documentation'

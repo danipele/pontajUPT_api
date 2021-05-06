@@ -85,7 +85,7 @@ class FillProjectReportExcel
       @worksheet.row(10).concat ["#{@user.first_name} #{@user.last_name}", '']
       @worksheet.rows[10][@end_of_month_day + 1] = I18n.t 'report.signature'
       @worksheet.row(11).concat ['', (1..@end_of_month_day).map do |date_idx|
-        "#{date_idx} #{@date.strftime('%b')}"
+        "#{date_idx} #{I18n.l(@date, format: '%b')}"
       end].flatten
     end
 
@@ -149,7 +149,7 @@ class FillProjectReportExcel
     def fill_total_hours(max_events, total_hours, total_hours_row)
       @worksheet.merge_cells 12, 0, total_hours_row - 1, 0
       @worksheet.merge_cells 12, @end_of_month_day + 1, total_hours_row - 1, @end_of_month_day + 1
-      @worksheet.row(total_hours_row).concat ["#{I18n.t 'report.project_report.total_working_hours'}:",
+      @worksheet.row(total_hours_row).concat ["#{I18n.t 'report.total_working_hours'}:",
                                               total_hours, total_hours.sum].flatten
       format_table_margins total_hours_row, max_events, total_hours
     end
