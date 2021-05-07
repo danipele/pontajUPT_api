@@ -92,7 +92,7 @@ class FillMonthlyTeacherReport
     def fill_table_header_course_activities
       @worksheet.row(6).concat [
         "ore #{I18n.t 'course.subactivities.course'}", "ore #{I18n.t 'course.subactivities.seminar'}",
-        "ore #{I18n.t 'course.subactivities.laboratory'}", "ore #{I18n.t 'course.subactivities.project'}",
+        "ore #{I18n.t 'course.subactivities.laboratory'}", "ore #{I18n.t 'course.subactivities.projectHour'}",
         "ore #{I18n.t 'other_activities.doctoralStudentsGuidance'}",
         "ore #{I18n.t 'course.subactivities.consultations'}",
         "ore #{I18n.t 'course.subactivities.evaluation'}",
@@ -134,7 +134,7 @@ class FillMonthlyTeacherReport
     def fill_period_cell
       @worksheet.merge_cells 7, 0, 7, 18
       @worksheet.row(7).concat [
-        "#{I18n.t 'report.teacher_report.period'} #{@date.beginning_of_month} - #{@date.end_of_month}"
+        "#{I18n.t 'report.period'} #{@date.beginning_of_month} - #{@date.end_of_month}"
       ]
       @worksheet.row(7).set_format 0, italic_format
       @worksheet.row(7).set_format 18, italic_format

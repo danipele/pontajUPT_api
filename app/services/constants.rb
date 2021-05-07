@@ -93,4 +93,5 @@ module Constants
   # Reports
   PROJECT_REPORT = 'projectReport'
   TEACHER_REPORT = 'teacherReport'
+  ONLINE_REPORT = 'onlineReport'
 end

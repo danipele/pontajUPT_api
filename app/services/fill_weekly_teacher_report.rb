@@ -123,7 +123,7 @@ class FillWeeklyTeacherReport
     end
 
     def week_events(end_of_week)
-      user.events.filter do |event|
+      @user.events.filter do |event|
         start_date = event.start_date.to_date
         start_date.end_of_week == end_of_week && start_date.month == @date.month && event.type != PROJECT_TYPE
       end

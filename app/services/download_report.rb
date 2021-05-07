@@ -9,7 +9,7 @@ class DownloadReport
 
       fill_report type, date.to_time.in_time_zone(LOCAL_TIMEZONE).to_date, project, period, user
 
-      workbook
+      @workbook
     end
 
     private
@@ -22,6 +22,8 @@ class DownloadReport
         call_project_service date, project, user
       when TEACHER_REPORT
         call_teacher_service period, date, user
+      when ONLINE_REPORT
+        call_online_report date, user
       end
     end
 
@@ -52,6 +54,12 @@ class DownloadReport
       FillWeeklyTeacherReport.call date: date,
                                    workbook: @workbook,
                                    user: user
+    end
+
+    def call_online_report(date, user)
+      FillOnlineReport.call date: date,
+                            workbook: @workbook,
+                            user: user
     end
   end
 end

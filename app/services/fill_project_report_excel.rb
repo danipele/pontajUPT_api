@@ -239,7 +239,7 @@ class FillProjectReportExcel
     end
 
     def fill_created_by_cells(total_hours_row)
-      @worksheet.rows[total_hours_row + 2][@end_of_month_day] = "#{I18n.t 'report.project_report.drafted'},"
+      @worksheet.rows[total_hours_row + 2][@end_of_month_day] = "#{I18n.t 'report.drafted'},"
       @worksheet.row(total_hours_row + 2).set_format(@end_of_month_day,
                                                      Spreadsheet::Format.new(horizontal_align: :left))
     end

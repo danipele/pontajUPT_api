@@ -151,9 +151,12 @@ module Api
         date = params[:date].to_time.in_time_zone(LOCAL_TIMEZONE)
         case params[:type]
         when PROJECT_REPORT
-          "#{current_user.last_name} #{current_user.first_name}_#{I18n.l(date, format: '%B')} #{date.year}"
+          "#{current_user.last_name} #{current_user.first_name}_#{I18n.l(date, format: '%B')} #{date.year}.xls"
         when TEACHER_REPORT
-          params[:period] == MONTHLY ? monthly_teacher_report_name(date) : weekly_teacher_report_name
+          params[:period] == MONTHLY ? monthly_teacher_report_name(date) : weekly_teacher_report_name(date)
+        when ONLINE_REPORT
+          "#{current_user.last_name}, #{current_user.first_name} #{I18n.t('report.online_report.annexes')} " \
+          "#{date.strftime('%Y-%m')}.xls"
         end
       end
 
@@ -162,7 +165,16 @@ module Api
           "1-#{date.end_of_month.day}_#{I18n.l(date, format: '%B')}-#{date.year}"
       end
 
-      def weekly_teacher_report_name; end
+      def weekly_teacher_report_name(date)
+        name = "#{I18n.t 'report.teacher_report.header.hours'}-#{date.strftime('%Y.%m')}-"
+        name += if current_user.type == EMPLOYEE_TYPE
+                  'TIT+CMDD-'
+                else
+                  'PO-extern-'
+                end
+
+        "#{name}#{current_user.last_name}-#{current_user.first_name}.xls"
+      end
     end
   end
 end
