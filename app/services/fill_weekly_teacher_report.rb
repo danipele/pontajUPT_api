@@ -165,7 +165,7 @@ class FillWeeklyTeacherReport
       events.each do |event|
         day_diff = calc_day_diff event, end_of_week
         if event.type == HOLIDAY_TYPE
-          fill_holiday_event_hours worksheet, day_diff, event
+          fill_holiday_event_hours worksheet, day_diff, event, start_hour
         else
           fill_other_event_hours event, worksheet, start_hour, day_diff
         end
@@ -185,8 +185,8 @@ class FillWeeklyTeacherReport
       (event_end_hour.zero? ? 24 : event_end_hour) - event_start_hour
     end
 
-    def fill_holiday_event_hours(worksheet, day_diff, event)
-      fill_event_hours worksheet, 8, 8, day_diff, event_code(event)
+    def fill_holiday_event_hours(worksheet, day_diff, event, start_hour)
+      fill_event_hours worksheet, 16 - start_hour, 8, day_diff, event_code(event)
     end
 
     def fill_other_event_hours(event, worksheet, start_hour, day_diff)

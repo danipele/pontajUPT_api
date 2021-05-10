@@ -82,7 +82,7 @@ class FillProjectReportExcel
     end
 
     def fill_table_header_cells
-      @worksheet.row(10).concat ["#{@user.first_name} #{@user.last_name}", '']
+      @worksheet.row(10).concat [I18n.t('report.project_report.user_name_header'), '']
       @worksheet.rows[10][@end_of_month_day + 1] = I18n.t 'report.signature'
       @worksheet.row(11).concat ['', (1..@end_of_month_day).map do |date_idx|
         "#{date_idx} #{I18n.l(@date, format: '%b')}"
@@ -91,7 +91,8 @@ class FillProjectReportExcel
 
     def format_table_header_cells
       (0..@end_of_month_day + 1).each do |col|
-        format = Spreadsheet::Format.new(border: :thin, bold: true, horizontal_align: :centre, vertical_align: :middle)
+        format = Spreadsheet::Format.new(border: :thin, bold: true, horizontal_align: :centre, vertical_align: :middle,
+                                         text_wrap: true)
         @worksheet.row(10).set_format col, format
         @worksheet.row(11).set_format col, format
       end
@@ -171,7 +172,7 @@ class FillProjectReportExcel
 
     def format_first_column(end_row)
       format = Spreadsheet::Format.new(border: :thin, bold: true, horizontal_align: :centre, vertical_align: :middle,
-                                       color: :red)
+                                       color: :red, text_wrap: true)
       (12...end_row).each do |row|
         @worksheet.row(row).set_format 0, format
       end

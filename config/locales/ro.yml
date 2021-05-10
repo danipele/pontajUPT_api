@@ -49,6 +49,7 @@ ro:
       financing_contract: 'Contract de finantare'
       title: 'FOAIE INDIVIDUALĂ DE PREZENȚĂ - EVIDENȚA NUMĂRULUI DE ORE LUCRATE (PONTAJ)'
       project_manager: 'Manager proiect'
+      user_name_header: 'Nume si prenume'
     teacher_report:
       monthly_title: 'PONTAJUL CADRELOR DIDACTICE'
       weekly_title: 'EVIDENȚA NUMĂRULUI DE ORE LUCRATE DE CĂTRE CADRELE DIDACTICE TITULARE SAU CU CONTRACT DE MUNCĂ PE DURATĂ DETERMINATĂ'

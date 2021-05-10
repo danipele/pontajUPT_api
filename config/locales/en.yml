@@ -49,6 +49,7 @@ en:
       financing_contract: 'Financing contract'
       title: 'INDIVIDUAL SHEET OF PRESENCE - EVIDENCE OF NUMBER OF WORKING HOURS (TIMEKEEPING)'
       project_manager: 'Project manager'
+      user_name_header: 'Last name and first name'
     teacher_report:
       monthly_title: 'TEACHER TIMEKEEPING'
       weekly_title: 'EVIDENCE OF WORKING HOURS FOR TENURED TEACHERS OR WITH A WORK CONTRACT FOR A DETERMINED DURATION'
