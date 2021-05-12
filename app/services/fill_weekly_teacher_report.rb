@@ -46,8 +46,7 @@ class FillWeeklyTeacherReport
     end
 
     def worksheet_format(worksheet)
-      worksheet.default_format = Spreadsheet::Format.new horizontal_align: :centre, vertical_align: :middle,
-                                                         text_wrap: true
+      worksheet.default_format = SIMPLE_FORMAT
 
       worksheet.row(3).height = 25
       worksheet.column(0).width = 40
@@ -61,12 +60,12 @@ class FillWeeklyTeacherReport
 
     def fill_university(worksheet)
       worksheet.row(0).concat [I18n.t('report.university_name')]
-      worksheet.row(0).default_format = Spreadsheet::Format.new horizontal_align: :left
+      worksheet.row(0).default_format = LEFT_ALIGN_FORMAT
     end
 
     def fill_department(worksheet)
       worksheet.row(1).concat [I18n.t('report.department')]
-      worksheet.row(1).default_format = Spreadsheet::Format.new horizontal_align: :left
+      worksheet.row(1).default_format = LEFT_ALIGN_FORMAT
     end
 
     def fill_title(worksheet)

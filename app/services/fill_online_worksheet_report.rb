@@ -32,17 +32,17 @@ class FillOnlineWorksheetReport
 
     def fill_university
       @worksheet.row(0).concat [I18n.t('report.university_name')]
-      @worksheet.row(0).default_format = Spreadsheet::Format.new horizontal_align: :left
+      @worksheet.row(0).default_format = LEFT_ALIGN_FORMAT
     end
 
     def fill_department
       @worksheet.row(1).concat [I18n.t('report.department')]
-      @worksheet.row(1).default_format = Spreadsheet::Format.new horizontal_align: :left
+      @worksheet.row(1).default_format = LEFT_ALIGN_FORMAT
     end
 
     def fill_annex
       @worksheet.rows[0][@type == BASIC_NORM ? 7 : 6] = "#{I18n.t('report.online_report.annex')} 1A"
-      @worksheet.row(1).default_format = Spreadsheet::Format.new horizontal_align: :left
+      @worksheet.row(1).default_format = LEFT_ALIGN_FORMAT
     end
 
     def fill_info

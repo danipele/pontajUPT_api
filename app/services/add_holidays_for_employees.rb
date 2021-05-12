@@ -31,7 +31,7 @@ class AddHolidaysForEmployees
 
     def remove_events_for(start_date, user)
       date = start_date.in_time_zone(LOCAL_TIMEZONE).to_date
-      user.events.should_delete_for_holiday(date).destroy_all
+      user.events.in_period(start_date, start_date + 1.day).destroy_all
       user.events.should_delete_holidays_for_holiday(start_date.to_date).destroy_all
     end
 

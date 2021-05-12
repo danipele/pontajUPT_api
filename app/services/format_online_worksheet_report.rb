@@ -23,18 +23,18 @@ class FormatOnlineWorksheetReport
     end
 
     def format_title
-      @worksheet.rows[5].set_format 0, big_font_format
-      @worksheet.rows[6].set_format 0, bold_format
+      @worksheet.rows[5].set_format 0, BIG_FONT_FORMAT
+      @worksheet.rows[6].set_format 0, CENTER_BOLD_FORMAT
     end
 
     def format_name
-      @worksheet.rows[8].set_format 0, bold_right_format
-      @worksheet.rows[8].set_format 2, bold_left_format
+      @worksheet.rows[8].set_format 0, RIGHT_BOLD_FORMAT
+      @worksheet.rows[8].set_format 2, LEFT_BOLD_FORMAT
     end
 
     def format_director
-      @worksheet.rows[@last_row + 2].set_format 0, left_format
-      @worksheet.rows[@last_row + 3].set_format 0, left_format
+      @worksheet.rows[@last_row + 2].set_format 0, LEFT_ALIGN_FORMAT
+      @worksheet.rows[@last_row + 3].set_format 0, LEFT_ALIGN_FORMAT
     end
 
     def format_table(type)
@@ -44,27 +44,6 @@ class FormatOnlineWorksheetReport
       when HOURLY_PAYMENT
         FormatOnlineHourlyPaymentReport.call worksheet: @worksheet, last_row: @last_row
       end
-    end
-
-    def left_format
-      Spreadsheet::Format.new horizontal_align: :left, vertical_align: :middle
-    end
-
-    def big_font_format
-      Spreadsheet::Format.new horizontal_align: :centre, vertical_align: :middle, text_wrap: true, bold: true,
-                              size: 14
-    end
-
-    def bold_format
-      Spreadsheet::Format.new horizontal_align: :centre, vertical_align: :middle, text_wrap: true, bold: true
-    end
-
-    def bold_right_format
-      Spreadsheet::Format.new horizontal_align: :right, vertical_align: :middle, text_wrap: true, bold: true
-    end
-
-    def bold_left_format
-      Spreadsheet::Format.new horizontal_align: :left, vertical_align: :middle, text_wrap: true, bold: true
     end
   end
 end

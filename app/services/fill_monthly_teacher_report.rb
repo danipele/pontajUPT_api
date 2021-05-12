@@ -25,8 +25,7 @@ class FillMonthlyTeacherReport
     end
 
     def worksheet_format
-      @worksheet.default_format = Spreadsheet::Format.new horizontal_align: :centre, vertical_align: :middle,
-                                                          text_wrap: true
+      @worksheet.default_format = SIMPLE_FORMAT
 
       @worksheet.column(1).width = 25
       @worksheet.column(17).width = 25
@@ -42,12 +41,12 @@ class FillMonthlyTeacherReport
 
     def fill_university
       @worksheet.row(0).concat [I18n.t('report.university_name')]
-      @worksheet.row(0).default_format = Spreadsheet::Format.new horizontal_align: :left
+      @worksheet.row(0).default_format = LEFT_ALIGN_FORMAT
     end
 
     def fill_department
       @worksheet.row(1).concat [I18n.t('report.department')]
-      @worksheet.row(1).default_format = Spreadsheet::Format.new horizontal_align: :left
+      @worksheet.row(1).default_format = LEFT_ALIGN_FORMAT
     end
 
     def fill_title
@@ -74,7 +73,7 @@ class FillMonthlyTeacherReport
       fill_table_header_total_hours
 
       (3..16).each do |col|
-        @worksheet.row(6).set_format col, rotate_format
+        @worksheet.row(6).set_format col, ROTATE_FORMAT
         @worksheet.column(col).width = 4
       end
     end
@@ -85,8 +84,8 @@ class FillMonthlyTeacherReport
         I18n.t('report.teacher_report.header.name'),
         I18n.t('report.teacher_report.header.didactic_degree')
       ]
-      @worksheet.row(6).set_format 0, rotate_format
-      (1..2).each { |col| @worksheet.row(6).set_format col, simple_format }
+      @worksheet.row(6).set_format 0, ROTATE_FORMAT
+      (1..2).each { |col| @worksheet.row(6).set_format col, BOLD_BORDER_FORMAT }
     end
 
     def fill_table_header_course_activities
@@ -118,12 +117,12 @@ class FillMonthlyTeacherReport
         ", #{I18n.t('holidays.maternityLeave')}, #{I18n.t('other_activities.departureWithScholarship')}" \
         ", #{I18n.t('holidays.unmotivatedAbsences')})"
 
-      @worksheet.row(6).set_format 17, simple_format
+      @worksheet.row(6).set_format 17, BOLD_BORDER_FORMAT
     end
 
     def fill_table_header_total_hours
       @worksheet.rows[6][18] = I18n.t('report.teacher_report.header.total_hours')
-      @worksheet.row(6).set_format 18, rotate_format
+      @worksheet.row(6).set_format 18, ROTATE_FORMAT
     end
 
     def fill_additional_rows
@@ -136,14 +135,14 @@ class FillMonthlyTeacherReport
       @worksheet.row(7).concat [
         "#{I18n.t 'report.period'} #{@date.beginning_of_month} - #{@date.end_of_month}"
       ]
-      @worksheet.row(7).set_format 0, italic_format
-      @worksheet.row(7).set_format 18, italic_format
+      @worksheet.row(7).set_format 0, ITALIC_FORMAT
+      @worksheet.row(7).set_format 18, ITALIC_FORMAT
     end
 
     def fill_index_cells
       (0..18).each do |col|
         @worksheet.row(8).concat [col + 1]
-        @worksheet.row(8).set_format col, italic_format
+        @worksheet.row(8).set_format col, ITALIC_FORMAT
       end
     end
 
@@ -165,8 +164,8 @@ class FillMonthlyTeacherReport
       @worksheet.merge_cells 9, 1, row, 1
       @worksheet.merge_cells 9, 2, row, 2
       (9..row).each do |row_idx|
-        @worksheet.row(row_idx).set_format 1, border_format
-        @worksheet.row(row_idx).set_format 2, border_format
+        @worksheet.row(row_idx).set_format 1, BORDER_FORMAT
+        @worksheet.row(row_idx).set_format 2, BORDER_FORMAT
       end
     end
 
@@ -191,7 +190,7 @@ class FillMonthlyTeacherReport
     def fill_week_period(end_of_week, row)
       @worksheet.row(row).concat ['']
       @worksheet.rows[row][0] = "#{end_of_week.beginning_of_week.strftime('%d')}...#{end_of_week.strftime('%d')}"
-      @worksheet.row(row).set_format 0, border_format
+      @worksheet.row(row).set_format 0, BORDER_FORMAT
     end
 
     def fill_hours(events, row)
@@ -212,43 +211,43 @@ class FillMonthlyTeacherReport
     def fill_course_hours(events, row)
       course_hours = calc_hours events_with_type(COURSE, events)
       @worksheet.rows[row][3] = course_hours unless course_hours.zero?
-      @worksheet.row(row).set_format 3, border_format
+      @worksheet.row(row).set_format 3, BORDER_FORMAT
     end
 
     def fill_seminar_hours(events, row)
       seminar_hours = calc_hours events_with_type(SEMINAR, events)
       @worksheet.rows[row][4] = seminar_hours unless seminar_hours.zero?
-      @worksheet.row(row).set_format 4, border_format
+      @worksheet.row(row).set_format 4, BORDER_FORMAT
     end
 
     def fill_laboratory_hours(events, row)
       laboratory_hours = calc_hours events_with_type(LABORATORY, events)
       @worksheet.rows[row][5] = laboratory_hours unless laboratory_hours.zero?
-      @worksheet.row(row).set_format 5, border_format
+      @worksheet.row(row).set_format 5, BORDER_FORMAT
     end
 
     def fill_project_hours(events, row)
       project_hours = calc_hours events_with_type(PROJECT_HOUR, events)
       @worksheet.rows[row][6] = project_hours unless project_hours.zero?
-      @worksheet.row(row).set_format 6, border_format
+      @worksheet.row(row).set_format 6, BORDER_FORMAT
     end
 
     def fill_consultations_hours(events, row)
       consultations_hours = calc_hours events_with_type(CONSULTATIONS, events)
       @worksheet.rows[row][8] = consultations_hours unless consultations_hours.zero?
-      @worksheet.row(row).set_format 8, border_format
+      @worksheet.row(row).set_format 8, BORDER_FORMAT
     end
 
     def fill_evaluation_hours(events, row)
       evaluation_hours = calc_hours events_with_type(EVALUATION, events)
       @worksheet.rows[row][9] = evaluation_hours unless evaluation_hours.zero?
-      @worksheet.row(row).set_format 9, border_format
+      @worksheet.row(row).set_format 9, BORDER_FORMAT
     end
 
     def fill_preparation_hours(events, row)
       preparation_hours = calc_hours events_with_type(TEACHING_ACTIVITY_PREPARATION, events)
       @worksheet.rows[row][10] = preparation_hours unless preparation_hours.zero?
-      @worksheet.row(row).set_format 10, border_format
+      @worksheet.row(row).set_format 10, BORDER_FORMAT
     end
 
     def fill_other_activity_hours(events, row)
@@ -264,44 +263,44 @@ class FillMonthlyTeacherReport
     def fill_doctoral_guidance_hours(events, row)
       doctoral_guidance_hours = calc_hours events_with_type(DOCTORAL_STUDENTS_GUIDANCE, events)
       @worksheet.rows[row][7] = doctoral_guidance_hours unless doctoral_guidance_hours.zero?
-      @worksheet.row(row).set_format 7, border_format
+      @worksheet.row(row).set_format 7, BORDER_FORMAT
     end
 
     def fill_research_hours(events, row)
       research_hours = calc_hours events_with_type(RESEARCH_DOCUMENTATION, events)
       @worksheet.rows[row][11] = research_hours unless research_hours.zero?
-      @worksheet.row(row).set_format 11, border_format
+      @worksheet.row(row).set_format 11, BORDER_FORMAT
     end
 
     def fill_financing_hours(events, row)
       financing_hours = calc_hours events_with_type(PROJECT_FINANCING_OPPORTUNITIES_DOCUMENTATION, events)
       @worksheet.rows[row][12] = financing_hours unless financing_hours.zero?
-      @worksheet.row(row).set_format 12, border_format
+      @worksheet.row(row).set_format 12, BORDER_FORMAT
     end
 
     def fill_elaboration_hours(events, row)
       elaboration_hours = calc_hours events_with_type(RESEARCH_PROJECTS_ELABORATION, events)
       @worksheet.rows[row][13] = elaboration_hours unless elaboration_hours.zero?
-      @worksheet.row(row).set_format 13, border_format
+      @worksheet.row(row).set_format 13, BORDER_FORMAT
     end
 
     def fill_cooperation_hours(events, row)
       cooperation_hours = calc_hours events_with_type(COOPERATION_MANAGEMENT, events)
       @worksheet.rows[row][14] = cooperation_hours unless cooperation_hours.zero?
-      @worksheet.row(row).set_format 14, border_format
+      @worksheet.row(row).set_format 14, BORDER_FORMAT
     end
 
     def fill_delegation_hours(events, row)
       fill_delegation_hours = calc_hours events_with_type(INTERNAL_DELEGATION_DAYS, events)
       fill_delegation_hours += calc_hours events_with_type(EXTERNAL_DELEGATION_DAYS, events)
       @worksheet.rows[row][15] = fill_delegation_hours unless fill_delegation_hours.zero?
-      @worksheet.row(row).set_format 15, border_format
+      @worksheet.row(row).set_format 15, BORDER_FORMAT
     end
 
     def fill_other_activities_hours(events, row)
       other_activities_hours = calc_hours events_with_type(OTHER_ACTIVITIES, events)
       @worksheet.rows[row][16] = other_activities_hours unless other_activities_hours.zero?
-      @worksheet.row(row).set_format 16, border_format
+      @worksheet.row(row).set_format 16, BORDER_FORMAT
     end
 
     def events_with_type(type, events)
@@ -324,7 +323,7 @@ class FillMonthlyTeacherReport
       end
 
       @worksheet.rows[row][17] = obs.join ', '
-      @worksheet.row(row).set_format 17, border_format
+      @worksheet.row(row).set_format 17, BORDER_FORMAT
     end
 
     def holidays_events(events)
@@ -339,14 +338,14 @@ class FillMonthlyTeacherReport
       end
 
       @worksheet.rows[row][18] = total_hours
-      @worksheet.row(row).set_format 18, border_format
+      @worksheet.row(row).set_format 18, BORDER_FORMAT
     end
 
     def fill_working_hours(row, end_of_week)
       working_hours = working_hours end_of_week
 
       @worksheet.rows[row][19] = working_hours
-      @worksheet.row(row).set_format 19, border_format
+      @worksheet.row(row).set_format 19, BORDER_FORMAT
     end
 
     def working_hours(end_of_week)
@@ -364,24 +363,6 @@ class FillMonthlyTeacherReport
 
     def days_on_last_week(end_of_week)
       @date.end_of_month.day - end_of_week.beginning_of_week.day + 1
-    end
-
-    def simple_format
-      Spreadsheet::Format.new horizontal_align: :centre, vertical_align: :middle, text_wrap: true, border: :thin,
-                              bold: true
-    end
-
-    def rotate_format
-      Spreadsheet::Format.new horizontal_align: :centre, vertical_align: :middle, text_wrap: true, border: :thin,
-                              bold: true, rotation: 90
-    end
-
-    def italic_format
-      Spreadsheet::Format.new horizontal_align: :centre, vertical_align: :middle, border: :thin, italic: true
-    end
-
-    def border_format
-      Spreadsheet::Format.new horizontal_align: :centre, vertical_align: :middle, border: :thin, text_wrap: true
     end
   end
 end

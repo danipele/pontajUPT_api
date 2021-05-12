@@ -2,6 +2,8 @@
 
 class FormatOnlineHourlyPaymentReport
   class << self
+    include Constants
+
     def call(worksheet:, last_row:)
       @worksheet = worksheet
       @last_row = last_row
@@ -15,14 +17,13 @@ class FormatOnlineHourlyPaymentReport
     private
 
     def worksheet_format
-      @worksheet.default_format = Spreadsheet::Format.new horizontal_align: :centre, vertical_align: :middle,
-                                                          text_wrap: true
+      @worksheet.default_format = SIMPLE_FORMAT
       @worksheet.row(5).height = 20
       (1..6).each { |col| @worksheet.column(col).width = 30 }
     end
 
     def format_annex
-      @worksheet.rows[0].set_format 6, right_format
+      @worksheet.rows[0].set_format 6, RIGHT_ALIGN_FORMAT
     end
 
     def format_table
@@ -32,40 +33,22 @@ class FormatOnlineHourlyPaymentReport
     end
 
     def format_table_header
-      (0..6).each { |col| @worksheet.rows[9].set_format col, bold_border_format }
+      (0..6).each { |col| @worksheet.rows[9].set_format col, LEFT_TOP_BOLD_BORDER_FORMAT }
     end
 
     def format_table_content
       (10..@last_row).each do |row|
-        (0..6).each { |col| @worksheet.rows[row].set_format col, border_format }
+        (0..6).each { |col| @worksheet.rows[row].set_format col, LEFT_TOP_BORDER_FORMAT }
       end
     end
 
     def format_footer
-      @worksheet.rows[@last_row + 2].set_format 6, right_format
-      @worksheet.rows[@last_row + 3].set_format 6, right_format
+      @worksheet.rows[@last_row + 2].set_format 6, RIGHT_ALIGN_FORMAT
+      @worksheet.rows[@last_row + 3].set_format 6, RIGHT_ALIGN_FORMAT
     end
 
     def format_validate_hours
-      (9..@last_row).each { |row| @worksheet.rows[row].set_format 6, grey_format }
-    end
-
-    def right_format
-      Spreadsheet::Format.new horizontal_align: :right, vertical_align: :middle
-    end
-
-    def bold_border_format
-      Spreadsheet::Format.new horizontal_align: :left, vertical_align: :top, text_wrap: true, border: :thin,
-                              bold: true
-    end
-
-    def border_format
-      Spreadsheet::Format.new horizontal_align: :left, vertical_align: :top, border: :thin, text_wrap: true
-    end
-
-    def grey_format
-      Spreadsheet::Format.new horizontal_align: :left, vertical_align: :top, border: :thin, text_wrap: true,
-                              pattern: 1, pattern_fg_color: :grey
+      (9..@last_row).each { |row| @worksheet.rows[row].set_format 6, GREY_FORMAT }
     end
   end
 end

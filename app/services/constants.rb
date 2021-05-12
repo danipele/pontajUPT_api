@@ -94,4 +94,47 @@ module Constants
   PROJECT_REPORT = 'projectReport'
   TEACHER_REPORT = 'teacherReport'
   ONLINE_REPORT = 'onlineReport'
+
+  # Formats
+  BOLD_FORMAT = Spreadsheet::Format.new weight: :bold
+  SIMPLE_FORMAT = Spreadsheet::Format.new horizontal_align: :centre, vertical_align: :middle, text_wrap: true
+  LEFT_ALIGN_FORMAT = Spreadsheet::Format.new horizontal_align: :left, vertical_align: :middle
+  RIGHT_ALIGN_FORMAT = Spreadsheet::Format.new horizontal_align: :right, vertical_align: :middle
+  TOP_BOLD_BORDER_FORMAT = Spreadsheet::Format.new horizontal_align: :centre, vertical_align: :top, text_wrap: true,
+                                                   border: :thin, bold: true
+  LEFT_TOP_BOLD_BORDER_FORMAT = Spreadsheet::Format.new horizontal_align: :left, vertical_align: :top, text_wrap: true,
+                                                        border: :thin, bold: true
+  BIG_FONT_FORMAT = Spreadsheet::Format.new horizontal_align: :centre, vertical_align: :middle, text_wrap: true,
+                                            bold: true, size: 14
+  ROTATE_FORMAT = Spreadsheet::Format.new horizontal_align: :centre, vertical_align: :middle, text_wrap: true,
+                                          border: :thin, bold: true, rotation: 90
+  CENTER_BOLD_FORMAT = Spreadsheet::Format.new horizontal_align: :centre, vertical_align: :middle, text_wrap: true,
+                                               bold: true
+  RIGHT_BOLD_FORMAT = Spreadsheet::Format.new horizontal_align: :right, vertical_align: :middle, text_wrap: true,
+                                              bold: true
+  BOLD_BORDER_FORMAT = Spreadsheet::Format.new horizontal_align: :centre, vertical_align: :middle, text_wrap: true,
+                                               border: :thin, bold: true
+  TOP_BORDER_FORMAT = Spreadsheet::Format.new horizontal_align: :centre, vertical_align: :top, border: :thin,
+                                              text_wrap: true
+  LEFT_TOP_BORDER_FORMAT = Spreadsheet::Format.new horizontal_align: :left, vertical_align: :top, border: :thin,
+                                                   text_wrap: true
+  GREY_FORMAT = Spreadsheet::Format.new horizontal_align: :left, vertical_align: :top, border: :thin, text_wrap: true,
+                                        pattern: 1, pattern_fg_color: :grey
+  LEFT_BOLD_FORMAT = Spreadsheet::Format.new horizontal_align: :left, vertical_align: :middle, text_wrap: true,
+                                             bold: true
+  ITALIC_FORMAT = Spreadsheet::Format.new horizontal_align: :centre, vertical_align: :middle, border: :thin,
+                                          italic: true
+  LEFT_BORDER_FORMAT = Spreadsheet::Format.new horizontal_align: :left, vertical_align: :middle, border: :thin,
+                                               text_wrap: true
+  BORDER_FORMAT = Spreadsheet::Format.new horizontal_align: :centre, vertical_align: :middle, border: :thin,
+                                          text_wrap: true
+  RED_BOLD_BORDER_FORMAT = Spreadsheet::Format.new border: :thin, bold: true, horizontal_align: :centre,
+                                                   vertical_align: :middle, color: :red, text_wrap: true
+  RED_FORMAT = Spreadsheet::Format.new color: :red, horizontal_align: :centre, vertical_align: :middle
+  RED_PATTERN_FORMAT = Spreadsheet::Format.new color: :red, horizontal_align: :centre, vertical_align: :middle,
+                                               pattern: 2, pattern_fg_color: :red
+  RIGHT_BORDER_BOLD_FORMAT = Spreadsheet::Format.new border: :thin, bold: true, horizontal_align: :right,
+                                                     vertical_align: :middle
+  RED_BOLD_FORMAT = Spreadsheet::Format.new bold: true, color: :red
+  JUST_BORDER_FORMAT = Spreadsheet::Format.new border: :thin
 end

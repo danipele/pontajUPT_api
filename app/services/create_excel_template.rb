@@ -2,13 +2,15 @@
 
 class CreateExcelTemplate
   class << self
+    include Constants
+
     def call(header:, sheet_name:)
       workbook = Spreadsheet::Workbook.new
       worksheet = workbook.create_worksheet name: sheet_name
       set_columns_width(worksheet, header.length)
 
       worksheet.row(0).concat header
-      header_format = Spreadsheet::Format.new weight: :bold
+      header_format = BOLD_FORMAT
       worksheet.row(0).default_format = header_format
 
       workbook

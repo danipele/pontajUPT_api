@@ -2,6 +2,8 @@
 
 class FillProjectReportExcel
   class << self
+    include Constants
+
     def call(date:, project_id:, worksheet:, user:)
       attributes worksheet, date, user, project_id
 
@@ -28,8 +30,7 @@ class FillProjectReportExcel
     end
 
     def worksheet_format
-      @worksheet.default_format = Spreadsheet::Format.new horizontal_align: :centre, vertical_align: :middle,
-                                                          text_wrap: true
+      @worksheet.default_format = SIMPLE_FORMAT
 
       @worksheet.column(0).width = 20
       @worksheet.column(@end_of_month_day + 1).width = 20
@@ -46,17 +47,17 @@ class FillProjectReportExcel
 
     def fill_university
       @worksheet.row(0).concat [I18n.t('report.university_name')]
-      @worksheet.row(0).default_format = Spreadsheet::Format.new horizontal_align: :left
+      @worksheet.row(0).default_format = LEFT_ALIGN_FORMAT
     end
 
     def fill_project_title
       @worksheet.row(1).concat ["#{I18n.t 'report.project_report.project_title'}: #{@project.name}"]
-      @worksheet.row(1).default_format = Spreadsheet::Format.new horizontal_align: :left
+      @worksheet.row(1).default_format = LEFT_ALIGN_FORMAT
     end
 
     def fill_financing_contract
       @worksheet.row(2).concat ["#{I18n.t 'report.project_report.financing_contract'}:"]
-      @worksheet.row(2).default_format = Spreadsheet::Format.new horizontal_align: :left
+      @worksheet.row(2).default_format = LEFT_ALIGN_FORMAT
     end
 
     def fill_title
@@ -91,8 +92,7 @@ class FillProjectReportExcel
 
     def format_table_header_cells
       (0..@end_of_month_day + 1).each do |col|
-        format = Spreadsheet::Format.new(border: :thin, bold: true, horizontal_align: :centre, vertical_align: :middle,
-                                         text_wrap: true)
+        format = BOLD_BORDER_FORMAT
         @worksheet.row(10).set_format col, format
         @worksheet.row(11).set_format col, format
       end
@@ -114,6 +114,7 @@ class FillProjectReportExcel
     def handle_table_day(day, total_hours, max_events)
       day_date = @date.dup.change day: day
       project_events = @user.events.where('start_date::Date = ?', day_date).where(activity: @project)
+                            .order(start_date: :ASC)
       fill_day project_events, total_hours, day
       project_events.length > max_events ? project_events.length : max_events
     end
@@ -171,28 +172,24 @@ class FillProjectReportExcel
     end
 
     def format_first_column(end_row)
-      format = Spreadsheet::Format.new(border: :thin, bold: true, horizontal_align: :centre, vertical_align: :middle,
-                                       color: :red, text_wrap: true)
+      format = RED_BOLD_BORDER_FORMAT
       (12...end_row).each do |row|
         @worksheet.row(row).set_format 0, format
       end
 
-      @worksheet.row(end_row).set_format 0, Spreadsheet::Format.new(border: :thin, bold: true, horizontal_align: :right)
+      @worksheet.row(end_row).set_format 0, RIGHT_BORDER_BOLD_FORMAT
     end
 
     def format_last_column(end_row)
       (12...end_row).each do |row|
-        @worksheet.row(row).set_format @end_of_month_day + 1, Spreadsheet::Format.new(border: :thin)
+        @worksheet.row(row).set_format @end_of_month_day + 1, JUST_BORDER_FORMAT
       end
 
-      @worksheet.row(end_row).set_format @end_of_month_day + 1, Spreadsheet::Format.new(border: :thin, bold: true,
-                                                                                        horizontal_align: :centre,
-                                                                                        vertical_align: :middle)
+      @worksheet.row(end_row).set_format @end_of_month_day + 1, BOLD_BORDER_FORMAT
     end
 
     def format_table_cell(col, row)
-      @worksheet.row(row).set_format col, Spreadsheet::Format.new(color: :red, horizontal_align: :centre,
-                                                                  vertical_align: :middle)
+      @worksheet.row(row).set_format col, RED_FORMAT
     end
 
     def format_weekend(total_hours_row)
@@ -207,15 +204,12 @@ class FillProjectReportExcel
     end
 
     def format_weekend_cell(row, col)
-      @worksheet.row(row).set_format col, Spreadsheet::Format.new(color: :red, horizontal_align: :centre,
-                                                                  vertical_align: :middle, pattern: 2,
-                                                                  pattern_fg_color: :red)
+      @worksheet.row(row).set_format col, RED_PATTERN_FORMAT
     end
 
     def format_total_hours(row, columns)
       (1..columns).each do |col|
-        @worksheet.row(row).set_format col, Spreadsheet::Format.new(border: :thin, bold: true,
-                                                                    horizontal_align: :centre)
+        @worksheet.row(row).set_format col, BOLD_BORDER_FORMAT
       end
     end
 
@@ -235,21 +229,19 @@ class FillProjectReportExcel
 
     def fill_manager_cells(total_hours_row)
       @worksheet.row(total_hours_row + 2).concat ['', "#{I18n.t 'report.project_report.project_manager'},"]
-      @worksheet.row(total_hours_row + 2).set_format(1, Spreadsheet::Format.new(horizontal_align: :left))
-      @worksheet.row(total_hours_row + 3).set_format(1, Spreadsheet::Format.new(horizontal_align: :left))
+      @worksheet.row(total_hours_row + 2).set_format 1, LEFT_ALIGN_FORMAT
+      @worksheet.row(total_hours_row + 3).set_format 1, LEFT_ALIGN_FORMAT
     end
 
     def fill_created_by_cells(total_hours_row)
       @worksheet.rows[total_hours_row + 2][@end_of_month_day] = "#{I18n.t 'report.drafted'},"
-      @worksheet.row(total_hours_row + 2).set_format(@end_of_month_day,
-                                                     Spreadsheet::Format.new(horizontal_align: :left))
+      @worksheet.row(total_hours_row + 2).set_format @end_of_month_day, LEFT_ALIGN_FORMAT
     end
 
     def fill_bottom_name_cell(total_hours_row)
       @worksheet.row(total_hours_row + 3).concat ['']
       @worksheet.rows[total_hours_row + 3][@end_of_month_day] = "#{@user.first_name} #{@user.last_name}"
-      @worksheet.row(total_hours_row + 3).set_format(@end_of_month_day,
-                                                     Spreadsheet::Format.new(bold: true, color: :red))
+      @worksheet.row(total_hours_row + 3).set_format @end_of_month_day, RED_BOLD_FORMAT
     end
   end
 end
