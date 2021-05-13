@@ -6,6 +6,8 @@ class CreateUsersTable < ActiveRecord::Migration[6.0]
       t.string :first_name, null: false
       t.string :last_name, null: false
       t.string :type, null: false
+      t.string :department
+      t.string :didactic_degree
 
       t.timestamps null: false
     end

@@ -39,7 +39,7 @@ en:
   report:
     university_name: 'Politehnica University of Timișoara'
     signature: 'Signature'
-    department: 'Department of nume_departament'
+    department: 'Department of %{department}'
     total_working_hours: 'Total working hours'
     period: 'Period'
     drafted: 'Drafted'
@@ -101,3 +101,10 @@ en:
     childGrowthLeave: 'Child growth leave'
     maternityLeave: 'maternity leave'
     unmotivatedAbsences: 'Unmotivated absences'
+  user:
+    didacticDegrees:
+      phd: "PhD"
+      assistant: "Assistant"
+      lecturer: "Lecturer"
+      associate: "Associate"
+      professor: "Professor"

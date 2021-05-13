@@ -45,7 +45,7 @@ class FillMonthlyTeacherReport
     end
 
     def fill_department
-      @worksheet.row(1).concat [I18n.t('report.department')]
+      @worksheet.row(1).concat [I18n.t('report.department', department: @user.department)]
       @worksheet.row(1).default_format = LEFT_ALIGN_FORMAT
     end
 
@@ -146,6 +146,11 @@ class FillMonthlyTeacherReport
       end
     end
 
+    def fill_info
+      @worksheet.rows[9][1] = "#{@user.first_name} #{@user.last_name}"
+      @worksheet.rows[9][2] = I18n.t "user.didacticDegrees.#{@user.didactic_degree}"
+    end
+
     def fill_table_cells
       end_of_week = @date.end_of_week
       row = 9
@@ -174,10 +179,11 @@ class FillMonthlyTeacherReport
 
       events = @user.events.filter do |event|
         start_date = event.start_date.to_date
-        start_date.end_of_week == end_of_week && start_date.month == @date.month
+        start_date.end_of_week == end_of_week && start_date.month == @date.month && event.type == BASIC_NORM
       end
 
       fill_week events, row, end_of_week
+      fill_info
     end
 
     def fill_week(events, row, end_of_week)

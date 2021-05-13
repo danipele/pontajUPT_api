@@ -77,6 +77,8 @@ ActiveRecord::Schema.define(version: 2021_03_17_170714) do
     t.string "first_name", null: false
     t.string "last_name", null: false
     t.string "type", null: false
+    t.string "department"
+    t.string "didactic_degree"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end

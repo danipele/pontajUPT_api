@@ -36,7 +36,7 @@ class FillOnlineWorksheetReport
     end
 
     def fill_department
-      @worksheet.row(1).concat [I18n.t('report.department')]
+      @worksheet.row(1).concat [I18n.t('report.department', department: @user.department)]
       @worksheet.row(1).default_format = LEFT_ALIGN_FORMAT
     end
 

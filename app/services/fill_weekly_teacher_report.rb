@@ -64,7 +64,7 @@ class FillWeeklyTeacherReport
     end
 
     def fill_department(worksheet)
-      worksheet.row(1).concat [I18n.t('report.department')]
+      worksheet.row(1).concat [I18n.t('report.department', department: @user.department)]
       worksheet.row(1).default_format = LEFT_ALIGN_FORMAT
     end
 
@@ -88,6 +88,7 @@ class FillWeeklyTeacherReport
       max_end_hour = end_hour < 22 ? 22 : end_hour
 
       fill_table_content events, min_start_hour, max_end_hour, end_of_week, worksheet
+      worksheet.rows[8][0] = "#{@user.first_name} #{@user.last_name}"
       FormatWeeklyTeacherWorksheet.call worksheet: worksheet, total_hours_row: 8 + max_end_hour - min_start_hour
     end
 
@@ -124,7 +125,7 @@ class FillWeeklyTeacherReport
     def week_events(end_of_week)
       @user.events.filter do |event|
         start_date = event.start_date.to_date
-        start_date.end_of_week == end_of_week && start_date.month == @date.month && event.type != PROJECT_TYPE
+        start_date.end_of_week == end_of_week && start_date.month == @date.month && event.type == BASIC_NORM
       end
     end
 

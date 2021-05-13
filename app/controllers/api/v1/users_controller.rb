@@ -21,7 +21,9 @@ module Api
 
       def update
         current_user.update first_name: params[:user][:first_name],
-                            last_name: params[:user][:last_name]
+                            last_name: params[:user][:last_name],
+                            department: params[:user][:department],
+                            didactic_degree: params[:user][:didactic_degree]
 
         render json: current_user
       end
@@ -37,7 +39,8 @@ module Api
       private
 
       def user_params
-        params.require(:user).permit :email, :password, :first_name, :last_name, :type
+        params.require(:user).permit :email, :password, :first_name, :last_name, :type, :department,
+                                     :didactic_degree
       end
     end
   end

@@ -18,8 +18,8 @@ Holiday.create name: Constants::MATERNITY_LEAVE
 Holiday.create name: Constants::UNMOTIVATED_ABSENCES
 
 User.create email: 'angajat@email.com', password: 'wertyuio', first_name: 'dani', last_name: 'pele',
-            type: 'employee'
+            type: 'employee', department: 'Automatica si Calculatoare', didactic_degree: 'profesor'
 User.create email: 'colaborator@email.com', password: 'wertyuio', first_name: 'dani', last_name: 'pele',
-            type: 'collaborator'
+            type: 'collaborator', department: 'Electrotehnica'
 User.create email: 'admin@email.com', password: 'wertyuio', first_name: 'dani', last_name: 'pele',
             type: 'admin'
