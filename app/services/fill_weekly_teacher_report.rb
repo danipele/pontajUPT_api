@@ -4,8 +4,8 @@ class FillWeeklyTeacherReport
   class << self
     include Constants
 
-    def call(date:, workbook:, user:)
-      attributes date, workbook, user
+    def call(params:, workbook:)
+      attributes params, workbook
 
       create_worksheets
     end
@@ -14,10 +14,10 @@ class FillWeeklyTeacherReport
 
     attr_reader :date, :user, :workbook
 
-    def attributes(date, workbook, user)
-      @date = date
+    def attributes(params, workbook)
+      @date = params[:date]
       @workbook = workbook
-      @user = user
+      @user = params[:user]
     end
 
     def create_worksheets
@@ -125,7 +125,8 @@ class FillWeeklyTeacherReport
     def week_events(end_of_week)
       @user.events.filter do |event|
         start_date = event.start_date.to_date
-        start_date.end_of_week == end_of_week && start_date.month == @date.month && event.type == BASIC_NORM
+        start_date.end_of_week == end_of_week && start_date.month == @date.month &&
+          (event.type == BASIC_NORM || @user.type == COLLABORATOR_TYPE)
       end
     end
 

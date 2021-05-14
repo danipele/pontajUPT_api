@@ -15,6 +15,7 @@ module Constants
 
   # Users
   EMPLOYEE_TYPE = 'employee'
+  COLLABORATOR_TYPE = 'collaborator'
   USER_TYPES = %w[employee collaborator].freeze
 
   # Events

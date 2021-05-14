@@ -5,8 +5,8 @@ class FillOnlineWorksheetReport
   class << self
     include Constants
 
-    def call(date:, worksheet:, user:, type:)
-      attributes date, worksheet, user, type
+    def call(params:, worksheet:, type:)
+      attributes params, worksheet, type
 
       fill_headers
       fill_info
@@ -15,13 +15,14 @@ class FillOnlineWorksheetReport
 
     private
 
-    attr_reader :date, :user, :worksheet, :type
+    attr_reader :date, :user, :worksheet, :type, :department_director
 
-    def attributes(date, worksheet, user, type)
-      @date = date
+    def attributes(params, worksheet, type)
+      @date = params[:date]
       @worksheet = worksheet
-      @user = user
+      @user = params[:user]
       @type = type
+      @department_director = params[:department_director]
     end
 
     def fill_headers
@@ -95,7 +96,7 @@ class FillOnlineWorksheetReport
 
     def fill_director(row)
       @worksheet.row(row).concat [I18n.t('report.online_report.department_director')]
-      @worksheet.row(row + 1).concat ['']
+      @worksheet.row(row + 1).concat [@department_director]
     end
 
     def fill_drafted(row)

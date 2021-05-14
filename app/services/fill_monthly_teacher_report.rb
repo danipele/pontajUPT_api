@@ -4,8 +4,8 @@ class FillMonthlyTeacherReport
   class << self
     include Constants
 
-    def call(date:, worksheet:, user:)
-      attributes date, worksheet, user
+    def call(params:, worksheet:)
+      attributes params, worksheet
 
       worksheet_format
       fill_headers
@@ -18,10 +18,10 @@ class FillMonthlyTeacherReport
 
     attr_reader :date, :user, :worksheet
 
-    def attributes(date, worksheet, user)
-      @date = date
+    def attributes(params, worksheet)
+      @date = params[:date]
       @worksheet = worksheet
-      @user = user
+      @user = params[:user]
     end
 
     def worksheet_format

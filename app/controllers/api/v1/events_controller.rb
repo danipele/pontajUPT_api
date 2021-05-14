@@ -140,11 +140,21 @@ module Api
       end
 
       def download_report_service
-        DownloadReport.call(type: params[:type],
-                            date: params[:date],
-                            project: params[:project].to_i,
-                            period: params[:period],
-                            user: current_user)
+        service_params = { type: params[:type], date: params[:date], user: current_user }
+        extra_report_params service_params
+        DownloadReport.call params: service_params
+      end
+
+      def extra_report_params(service_params)
+        extra_project_report_params service_params if params[:type] == PROJECT_REPORT
+        service_params[:period] = params[:period] if params[:type] == TEACHER_REPORT
+        service_params[:department_director] = params[:department_director] if params[:type] == ONLINE_REPORT
+      end
+
+      def extra_project_report_params(service_params)
+        service_params[:project] = params[:project].to_i
+        service_params[:financing_contract] = params[:financing_contract]
+        service_params[:project_manager] = params[:project_manager]
       end
 
       def report_name

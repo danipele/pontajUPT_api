@@ -4,8 +4,8 @@ class FillProjectReportExcel
   class << self
     include Constants
 
-    def call(date:, project_id:, worksheet:, user:)
-      attributes worksheet, date, user, project_id
+    def call(params:, worksheet:)
+      attributes worksheet, params
 
       worksheet_format
       fill_headers
@@ -19,14 +19,16 @@ class FillProjectReportExcel
 
     private
 
-    attr_reader :worksheet, :end_of_month_day, :user, :date, :project
+    attr_reader :worksheet, :end_of_month_day, :user, :date, :project, :financing_contract, :project_manager
 
-    def attributes(worksheet, date, user, project_id)
+    def attributes(worksheet, params)
       @worksheet = worksheet
-      @end_of_month_day = date.end_of_month.day
-      @user = user
-      @date = date
-      @project = user.projects.find(project_id)
+      @end_of_month_day = params[:date].end_of_month.day
+      @user = params[:user]
+      @date = params[:date]
+      @project = @user.projects.find(params[:project])
+      @financing_contract = params[:financing_contract]
+      @project_manager = params[:project_manager]
     end
 
     def worksheet_format
@@ -56,7 +58,7 @@ class FillProjectReportExcel
     end
 
     def fill_financing_contract
-      @worksheet.row(2).concat ["#{I18n.t 'report.project_report.financing_contract'}:"]
+      @worksheet.row(2).concat ["#{I18n.t 'report.project_report.financing_contract'}: #{@financing_contract}"]
       @worksheet.row(2).default_format = LEFT_ALIGN_FORMAT
     end
 
@@ -103,12 +105,21 @@ class FillProjectReportExcel
       max_events = fill_table_cells total_hours
       total_hours_row = 12 + (max_events < 4 ? 4 : max_events)
       format_weekend total_hours_row
+      fill_name max_events
 
-      @worksheet.rows[12][0] = "#{@user.first_name} #{@user.last_name}" unless max_events.zero?
-
-      fill_total_hours max_events, total_hours, total_hours_row
+      fill_total_hours total_hours, total_hours_row
 
       total_hours_row
+    end
+
+    def fill_name(max_events)
+      user_name = "#{@user.first_name} #{@user.last_name}"
+
+      if max_events.zero?
+        @worksheet.row(12).concat [user_name]
+      else
+        @worksheet.rows[12][0] = user_name
+      end
     end
 
     def handle_table_day(day, total_hours, max_events)
@@ -148,18 +159,18 @@ class FillProjectReportExcel
       total_hours[day - 1] += (end_hour.zero? ? 24 : end_hour) - start_hour
     end
 
-    def fill_total_hours(max_events, total_hours, total_hours_row)
+    def fill_total_hours(total_hours, total_hours_row)
       @worksheet.merge_cells 12, 0, total_hours_row - 1, 0
       @worksheet.merge_cells 12, @end_of_month_day + 1, total_hours_row - 1, @end_of_month_day + 1
       @worksheet.row(total_hours_row).concat ["#{I18n.t 'report.total_working_hours'}:",
                                               total_hours, total_hours.sum].flatten
-      format_table_margins total_hours_row, max_events, total_hours
+      format_table_margins total_hours_row, total_hours
     end
 
-    def format_table_margins(total_hours_row, max_events, total_hours)
+    def format_table_margins(total_hours_row, total_hours)
       initialize_rows total_hours_row
-      format_first_column total_hours_row unless max_events.zero?
-      format_last_column total_hours_row unless max_events.zero?
+      format_first_column total_hours_row
+      format_last_column total_hours_row
       format_total_hours total_hours_row, total_hours.length
     end
 
@@ -229,6 +240,7 @@ class FillProjectReportExcel
 
     def fill_manager_cells(total_hours_row)
       @worksheet.row(total_hours_row + 2).concat ['', "#{I18n.t 'report.project_report.project_manager'},"]
+      @worksheet.row(total_hours_row + 3).concat ['', @project_manager]
       @worksheet.row(total_hours_row + 2).set_format 1, LEFT_ALIGN_FORMAT
       @worksheet.row(total_hours_row + 3).set_format 1, LEFT_ALIGN_FORMAT
     end

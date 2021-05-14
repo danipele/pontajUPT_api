@@ -4,23 +4,23 @@ class FillOnlineReport
   class << self
     include Constants
 
-    def call(date:, workbook:, user:)
-      if user.type == EMPLOYEE_TYPE
+    def call(params:, workbook:)
+      if params[:user].type == EMPLOYEE_TYPE
         worksheet_title = workbook.create_worksheet(name: I18n.t('report.online_report.basic_norm'))
-        fill_basic_norm_report date, worksheet_title, user
+        fill_basic_norm_report params, worksheet_title
       end
       worksheet_title = workbook.create_worksheet(name: I18n.t('report.online_report.hourly_payment'))
-      fill_hourly_payment_report date, worksheet_title, user
+      fill_hourly_payment_report params, worksheet_title
     end
 
     private
 
-    def fill_basic_norm_report(date, worksheet, user)
-      FillOnlineWorksheetReport.call date: date, worksheet: worksheet, user: user, type: BASIC_NORM
+    def fill_basic_norm_report(params, worksheet)
+      FillOnlineWorksheetReport.call params: params, worksheet: worksheet, type: BASIC_NORM
     end
 
-    def fill_hourly_payment_report(date, worksheet, user)
-      FillOnlineWorksheetReport.call date: date, worksheet: worksheet, user: user, type: HOURLY_PAYMENT
+    def fill_hourly_payment_report(params, worksheet)
+      FillOnlineWorksheetReport.call params: params, worksheet: worksheet, type: HOURLY_PAYMENT
     end
   end
 end
