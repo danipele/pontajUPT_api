@@ -74,6 +74,13 @@ module Api
         send_file file, filename: report_name, type: XLS_TYPE
       end
 
+      def weekly_report_status
+        warning_days = WeeklyReportStatus.call date: params[:date].to_time.in_time_zone(LOCAL_TIMEZONE).to_date,
+                                               user: current_user
+
+        render json: warning_days
+      end
+
       private
 
       def event_params

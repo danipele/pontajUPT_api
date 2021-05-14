@@ -46,7 +46,6 @@
     <orderEntry type="library" scope="PROVIDED" name="builder (v3.2.4, rbenv: 2.7.2) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="bundler (v2.1.4, rbenv: 2.7.2) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="byebug (v11.1.3, rbenv: 2.7.2) [gem]" level="application" />
-    <orderEntry type="library" scope="PROVIDED" name="childprocess (v4.0.0, rbenv: 2.7.2) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="coderay (v1.1.3, rbenv: 2.7.2) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="concurrent-ruby (v1.1.8, rbenv: 2.7.2) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="crass (v1.0.6, rbenv: 2.7.2) [gem]" level="application" />
@@ -59,7 +58,6 @@
     <orderEntry type="library" scope="PROVIDED" name="ffi (v1.15.0, rbenv: 2.7.2) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="globalid (v0.4.2, rbenv: 2.7.2) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="i18n (v1.8.9, rbenv: 2.7.2) [gem]" level="application" />
-    <orderEntry type="library" scope="PROVIDED" name="iniparse (v1.5.0, rbenv: 2.7.2) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="jwt (v2.2.2, rbenv: 2.7.2) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="listen (v3.4.1, rbenv: 2.7.2) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="loofah (v2.9.0, rbenv: 2.7.2) [gem]" level="application" />
@@ -73,7 +71,6 @@
     <orderEntry type="library" scope="PROVIDED" name="msgpack (v1.4.2, rbenv: 2.7.2) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="nio4r (v2.5.7, rbenv: 2.7.2) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="nokogiri (v1.11.2, rbenv: 2.7.2) [gem]" level="application" />
-    <orderEntry type="library" scope="PROVIDED" name="overcommit (v0.57.0, rbenv: 2.7.2) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="parallel (v1.20.1, rbenv: 2.7.2) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="parser (v3.0.0.0, rbenv: 2.7.2) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="pg (v1.2.3, rbenv: 2.7.2) [gem]" level="application" />
