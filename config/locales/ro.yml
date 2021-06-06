@@ -72,6 +72,7 @@ ro:
       annex: 'Anexa'
       title: 'FIȘĂ INDIVIDUALĂ DE RAPORTARE A ACTIVITĂȚILOR DIDACTICE DESFĂȘURATE ON-LINE'
       title_basic_norm: 'AFERENTE NORMEI DE BAZĂ'
+      title_hourly_payment: 'AFERENTE REGIMULUI DE PLATA CU ORA'
       name: 'Nume si prenume:'
       headers:
         nr: 'Nr. crt.'

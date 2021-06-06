@@ -57,7 +57,9 @@ class FillOnlineWorksheetReport
       @worksheet.merge_cells 4, 0, 4, col
       @worksheet.merge_cells 5, 0, 5, col
       @worksheet.row(4).concat [I18n.t('report.online_report.title')]
-      @worksheet.row(5).concat [I18n.t('report.online_report.title_basic_norm')]
+      @worksheet.row(5).concat [
+        I18n.t("report.online_report.title_#{@type == BASIC_NORM ? 'basic_norm' : 'hourly_payment'}")
+      ]
     end
 
     def fill_period

@@ -72,6 +72,7 @@ en:
       annex: 'Annex'
       title: 'INDIVIDUAL REPORTING SHEET OF PERFORMED ONLINE TEACHING ACTIVITIES'
       title_basic_norm: 'AFFERENT TO BASIC NORM'
+      title_hourly_payment: 'AFFERENT TO HOURLY PAYMENT REGIME'
       name: 'Last name and first name:'
       headers:
         nr: 'No.'
